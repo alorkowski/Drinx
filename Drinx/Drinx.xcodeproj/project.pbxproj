@@ -33,6 +33,8 @@
 		A8297B761E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B751E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift */; };
 		A8297B781E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */; };
 		A8297B7A1E9E850E000D30A5 /* CocktailDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */; };
+		C39A9FB01E9EA05200EA5F30 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */; };
+		C39A9FB21E9EA06700EA5F30 /* Cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		A8297B751E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailInstructionTableViewCell.swift; sourceTree = "<group>"; };
 		A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailTableViewController.swift; sourceTree = "<group>"; };
+		C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cabinet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				5CA46BC01E9D968D00245AD9 /* Cocktail.swift */,
+				C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */,
+				C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -312,12 +318,14 @@
 			files = (
 				5CA46BDE1E9D97D000245AD9 /* MyDrinksTableViewController.swift in Sources */,
 				5CA46BC71E9D96B900245AD9 /* ImageController.swift in Sources */,
+				C39A9FB01E9EA05200EA5F30 /* Ingredient.swift in Sources */,
 				5CA46BC51E9D96AD00245AD9 /* NetworkController.swift in Sources */,
 				A8297B701E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift in Sources */,
 				5CA46BD41E9D977D00245AD9 /* CocktailTableViewCell.swift in Sources */,
 				A8297B721E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift in Sources */,
 				5CA46BDA1E9D97B700245AD9 /* SuggestedDrinksTableViewController.swift in Sources */,
 				A8297B741E9E847B000D30A5 /* CockailDetailImageTableViewCell.swift in Sources */,
+				C39A9FB21E9EA06700EA5F30 /* Cabinet.swift in Sources */,
 				5CA46BC91E9D96C600245AD9 /* CloudKitManager.swift in Sources */,
 				5CA46BC31E9D969D00245AD9 /* CocktailController.swift in Sources */,
 				A8297B7A1E9E850E000D30A5 /* CocktailDetailTableViewController.swift in Sources */,
