@@ -263,7 +263,7 @@
 				TargetAttributes = {
 					5CA46BAA1E9D963200245AD9 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 33GW7EC95V;
+						DevelopmentTeam = 3RM38WGD7H;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -443,7 +443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 33GW7EC95V;
+				DEVELOPMENT_TEAM = 3RM38WGD7H;
 				INFOPLIST_FILE = Drinx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahHawks.Drinx;
@@ -456,7 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 33GW7EC95V;
+				DEVELOPMENT_TEAM = 3RM38WGD7H;
 				INFOPLIST_FILE = Drinx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahHawks.Drinx;
