@@ -43,14 +43,24 @@ struct Cocktail {
     //=======================================================
     // Failable Initializer
     
-//    init?(record: CKRecord) {
-//        
-//        
-//        
-//        
-//        
-//        
-//    }
+    init?(record: CKRecord) {
+        
+        guard let name = record["name"] as? String,
+        let instructions = record["instructions"] as? String,
+        let ingredients = record["ingredients"] as? [String],
+        let ingredientProportions = record["ingredientProportions"] as? [String],
+        let imageURLs = record["imageURLs"] as? [String],
+        let isAlcoholic = record["alcoholic"] as? Bool
+            else { return nil }
+
+        self.name = name
+        self.instructions = instructions
+        self.ingredients = ingredients
+        self.ingredientProportions = ingredientProportions
+        self.imageURLs = imageURLs
+        self.isAlcoholic = isAlcoholic
+        
+    }
     
     // Failable Initializer for pulling Cockatils from the API to turn into Model Objects
     
@@ -113,7 +123,6 @@ extension CKRecord {
         self.setValue(cocktail.imageURLs, forKey: "imageURLs")
         self.setValue(cocktail.isAlcoholic, forKey: "alcoholic")
     }
-    
     
 }
 
