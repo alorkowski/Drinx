@@ -12,13 +12,13 @@ import Foundation
 class IngredientController {
 
     static let share = IngredientController()
-    var ingredints = [Ingredient]()
+    var ingredients = [Ingredient]()
     
     func create(item: String){
-    let ingredent =  Ingredient(name: item)
-       ingredints.append(ingredent)
+    let ingredient =  Ingredient(name: item)
+       ingredients.append(ingredient)
     
     }
 
 
-}
+}git 
