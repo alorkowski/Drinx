@@ -11,4 +11,14 @@ import Foundation
 class Cabinet {
     
     
+    
+    var myIngredients: [Ingredient] = []
+    var ingredientIDs: [String] {
+        var ckRecordList: [String] = []
+        for ingredient in myIngredients {
+            ckRecordList.append(ingredient.name)
+        }
+        return ckRecordList
+    }
+    
 }
