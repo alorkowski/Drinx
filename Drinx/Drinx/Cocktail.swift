@@ -18,6 +18,7 @@ struct Cocktail {
     fileprivate let ingredientProportionsKey = "ingredientProportions"
     fileprivate let imageURLsKey = "strDrinkThumb"
     fileprivate let isAlcoholicKey = "strAlcoholic"
+    fileprivate let apiIDKey = "idDrink"
     
     let name: String
     let instructions: String
@@ -26,6 +27,7 @@ struct Cocktail {
     let imageURLs: [String]
     let isAlcoholic: Bool
     var recordID: CKRecordID? = nil
+    var apiID: String?
     
     init(name: String, instructions: String, ingredients: [String], ingredientProportions: [String], imageURLs: [String], isAlcoholic: Bool) {
         
@@ -46,19 +48,21 @@ struct Cocktail {
     init?(record: CKRecord) {
         
         guard let name = record["name"] as? String,
-        let instructions = record["instructions"] as? String,
-        let ingredients = record["ingredients"] as? [String],
-        let ingredientProportions = record["ingredientProportions"] as? [String],
-        let imageURLs = record["imageURLs"] as? [String],
-        let isAlcoholic = record["alcoholic"] as? Bool
+            let instructions = record["instructions"] as? String,
+            let ingredients = record["ingredients"] as? [String],
+            let ingredientProportions = record["ingredientProportions"] as? [String],
+            let imageURLs = record["imageURLs"] as? [String],
+            let isAlcoholic = record["alcoholic"] as? Bool,
+            let apiID = record["apiID"] as? String
             else { return nil }
-
+        
         self.name = name
         self.instructions = instructions
         self.ingredients = ingredients
         self.ingredientProportions = ingredientProportions
         self.imageURLs = imageURLs
         self.isAlcoholic = isAlcoholic
+        self.apiID = apiID
         
     }
     
@@ -68,8 +72,8 @@ struct Cocktail {
         
         guard let name = cocktailDictionary[nameKey] as? String,
             let instructions = cocktailDictionary[instructionsKey] as? String,
-            let imageURL = cocktailDictionary[imageURLsKey] as? String,
-            let alcoholicString = cocktailDictionary[isAlcoholicKey] as? String
+            let alcoholicString = cocktailDictionary[isAlcoholicKey] as? String,
+            let apiID = cocktailDictionary[apiIDKey] as? String
             else { return nil }
         
         var alcoholicBool: Bool = false
@@ -85,18 +89,21 @@ struct Cocktail {
         
         var ingredientsStrings: [String] = []
         var measurementStrings: [String] = []
-        var imageURLStrings: [String] = []
-        imageURLStrings.append(imageURL)
         
         for n in 1...15 {
             guard let ingredientString = cocktailDictionary["strIngredient\(n)"] as? String,
-                let measurementString = cocktailDictionary["strMeasure\(n)"] as? String
-            else { break }
+                let measurementString = cocktailDictionary["strMeasure\(n)"] as? String,
+                ingredientString != "",
+                measurementString != ""
+                else { break }
             
             ingredientsStrings.append(ingredientString)
             measurementStrings.append(measurementString)
-            
         }
+        
+        let imageURL = cocktailDictionary[imageURLsKey] as? String ?? ""
+        var imageURLStrings: [String] = []
+        imageURLStrings.append(imageURL)
         
         self.name = name
         self.instructions = instructions
@@ -104,12 +111,13 @@ struct Cocktail {
         self.ingredientProportions = measurementStrings
         self.imageURLs = imageURLStrings
         self.isAlcoholic = alcoholicBool
-
+        self.apiID = apiID
+        
     }
 }
-    //=======================================================
-    // MARK: - Model Object -> CKRecord
-    //=======================================================
+//=======================================================
+// MARK: - Model Object -> CKRecord
+//=======================================================
 
 extension CKRecord {
     
@@ -122,13 +130,10 @@ extension CKRecord {
         self.setValue(cocktail.ingredientProportions, forKey: "ingredientProportions")
         self.setValue(cocktail.imageURLs, forKey: "imageURLs")
         self.setValue(cocktail.isAlcoholic, forKey: "alcoholic")
+        self.setValue(cocktail.apiID, forKey: "apiID")
     }
     
 }
-
-
-
-
 
 
 
