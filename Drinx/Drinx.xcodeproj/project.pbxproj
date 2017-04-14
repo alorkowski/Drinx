@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A3E7A731EA12C530035F8B9 /* CocktailTestRecipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */; };
+		5C46EF541EA126E600378487 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C46EF531EA126E600378487 /* CloudKit.framework */; };
+		5C46EF561EA1709300378487 /* CocktailRecipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C46EF551EA1709300378487 /* CocktailRecipes.json */; };
 		5CA46BAF1E9D963200245AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */; };
 		5CA46BB61E9D963200245AD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CA46BB51E9D963200245AD9 /* Assets.xcassets */; };
 		5CA46BB91E9D963200245AD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA46BB71E9D963200245AD9 /* LaunchScreen.storyboard */; };
@@ -43,6 +46,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailTestRecipes.json; sourceTree = "<group>"; };
+		5C46EF511EA126DE00378487 /* Drinx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Drinx.entitlements; sourceTree = "<group>"; };
+		5C46EF531EA126E600378487 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5C46EF551EA1709300378487 /* CocktailRecipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailRecipes.json; sourceTree = "<group>"; };
 		5CA46BAB1E9D963200245AD9 /* Drinx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CA46BB51E9D963200245AD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,17 +92,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C46EF541EA126E600378487 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C46EF521EA126E600378487 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C46EF531EA126E600378487 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5CA46BA21E9D963200245AD9 = {
 			isa = PBXGroup;
 			children = (
 				5CA46BAD1E9D963200245AD9 /* Drinx */,
 				5CA46BAC1E9D963200245AD9 /* Products */,
+				5C46EF521EA126E600378487 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +127,7 @@
 		5CA46BAD1E9D963200245AD9 /* Drinx */ = {
 			isa = PBXGroup;
 			children = (
+				5C46EF511EA126DE00378487 /* Drinx.entitlements */,
 				5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */,
 				5CA46BCA1E9D96D300245AD9 /* Models */,
 				5CA46BCD1E9D970400245AD9 /* ModelControllers */,
@@ -149,6 +167,8 @@
 				5CA46BB71E9D963200245AD9 /* LaunchScreen.storyboard */,
 				5CA46BBA1E9D963200245AD9 /* Info.plist */,
 				5CAB298C1E9FD004000E2B34 /* ingredients.json */,
+				4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */,
+				5C46EF551EA1709300378487 /* CocktailRecipes.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -284,8 +304,16 @@
 				TargetAttributes = {
 					5CA46BAA1E9D963200245AD9 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 3RM38WGD7H;
+						DevelopmentTeam = 33GW7EC95V;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -313,11 +341,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8297B6E1E9E7F65000D30A5 /* TabBarController.storyboard in Resources */,
+				5C46EF561EA1709300378487 /* CocktailRecipes.json in Resources */,
 				A8297B631E9E7D65000D30A5 /* CockailDetail.storyboard in Resources */,
 				5CA46BB91E9D963200245AD9 /* LaunchScreen.storyboard in Resources */,
 				A8297B591E9E7CE8000D30A5 /* MyCabinet.storyboard in Resources */,
 				A8297B611E9E7D4B000D30A5 /* SaveDrink.storyboard in Resources */,
 				5CA46BB61E9D963200245AD9 /* Assets.xcassets in Resources */,
+				4A3E7A731EA12C530035F8B9 /* CocktailTestRecipes.json in Resources */,
 				A8297B5D1E9E7D21000D30A5 /* SearchDrink.storyboard in Resources */,
 				A8297B5B1E9E7D08000D30A5 /* SuggestedDrink.storyboard in Resources */,
 				5CAB298D1E9FD004000E2B34 /* ingredients.json in Resources */,
@@ -471,10 +501,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3RM38WGD7H;
+				CODE_SIGN_ENTITLEMENTS = Drinx/Drinx.entitlements;
+				DEVELOPMENT_TEAM = 33GW7EC95V;
 				INFOPLIST_FILE = Drinx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahHawks.Drinx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahHawks.DrinxApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -484,10 +515,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3RM38WGD7H;
+				CODE_SIGN_ENTITLEMENTS = Drinx/Drinx.entitlements;
+				DEVELOPMENT_TEAM = 33GW7EC95V;
 				INFOPLIST_FILE = Drinx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahHawks.Drinx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JeremiahHawks.DrinxApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
