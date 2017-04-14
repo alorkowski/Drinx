@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+
+class IngredientController {
+
+    static let share = IngredientController()
+    var ingredients = [Ingredient]()
+    
+    func create(item: String){
+    let ingredient =  Ingredient(name: item)
+       ingredients.append(ingredient)
+    
+    }
+
+
+}
