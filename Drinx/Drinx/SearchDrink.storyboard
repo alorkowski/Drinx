@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="tZG-cS-Gwp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="200" id="tZG-cS-Gwp" customClass="SearchTableViewCell" customModule="Drinx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tZG-cS-Gwp" id="BrO-Ao-7PV">
@@ -48,6 +48,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="ImageView" destination="zbm-oZ-jfo" id="RBV-js-9SS"/>
                                     <segue destination="sze-Ql-07U" kind="show" id="Hz3-sW-8LD"/>
                                 </connections>
                             </tableViewCell>
@@ -60,7 +61,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbQ-bX-OPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2" y="207"/>
+            <point key="canvasLocation" x="124" y="148"/>
         </scene>
     </scenes>
     <resources>

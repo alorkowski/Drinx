@@ -36,6 +36,8 @@
 		A8297B761E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B751E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift */; };
 		A8297B781E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */; };
 		A8297B7A1E9E850E000D30A5 /* CocktailDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */; };
+		A8297B7E1EA01F6C000D30A5 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B7D1EA01F6C000D30A5 /* SearchTableViewCell.swift */; };
+		A8297B821EA15D90000D30A5 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B811EA15D90000D30A5 /* SearchableRecord.swift */; };
 		C39A9FB01E9EA05200EA5F30 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */; };
 		C39A9FB21E9EA06700EA5F30 /* Cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +74,8 @@
 		A8297B751E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailInstructionTableViewCell.swift; sourceTree = "<group>"; };
 		A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailTableViewController.swift; sourceTree = "<group>"; };
+		A8297B7D1EA01F6C000D30A5 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		A8297B811EA15D90000D30A5 /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 		C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cabinet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,6 +216,8 @@
 			children = (
 				A8297B5C1E9E7D21000D30A5 /* SearchDrink.storyboard */,
 				5CA46BDB1E9D97C300245AD9 /* SearchTableViewController.swift */,
+				A8297B7D1EA01F6C000D30A5 /* SearchTableViewCell.swift */,
+				A8297B811EA15D90000D30A5 /* SearchableRecord.swift */,
 			);
 			name = SearchDrink;
 			sourceTree = "<group>";
@@ -334,6 +340,8 @@
 				A8297B701E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift in Sources */,
 				5CA46BD41E9D977D00245AD9 /* CocktailTableViewCell.swift in Sources */,
 				A8297B721E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift in Sources */,
+				A8297B7E1EA01F6C000D30A5 /* SearchTableViewCell.swift in Sources */,
+				A8297B821EA15D90000D30A5 /* SearchableRecord.swift in Sources */,
 				5CA46BDA1E9D97B700245AD9 /* SuggestedDrinksTableViewController.swift in Sources */,
 				A8297B741E9E847B000D30A5 /* CockailDetailImageTableViewCell.swift in Sources */,
 				C39A9FB21E9EA06700EA5F30 /* Cabinet.swift in Sources */,
