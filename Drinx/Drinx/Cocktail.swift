@@ -19,12 +19,20 @@ struct Cocktail {
     fileprivate let imageURLsKey = "strDrinkThumb"
     fileprivate let isAlcoholicKey = "strAlcoholic"
     fileprivate let apiIDKey = "idDrink"
+    fileprivate let photoDataKey = "photoData"
     
     let name: String
     let instructions: String
     let ingredients: [String]
     let ingredientProportions: [String]
-    let imageURLs: [String]
+    var imageURLs: [String]
+    var photoData: Data? {
+        guard let tempImage = image else { return nil }
+        
+        guard let data = UIImageJPEGRepresentation(tempImage, 1.0 ) else { return nil }
+        return data
+    }
+    var image: UIImage? = nil
     let isAlcoholic: Bool
     var recordID: CKRecordID? = nil
     var apiID: String?
@@ -114,6 +122,19 @@ struct Cocktail {
         self.apiID = apiID
         
     }
+    
+    fileprivate var temporaryPhotoURL: URL {
+        
+        // Must write to temporary directory to be able to pass image file path url to CKAsset
+        
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+        
+        try? photoData?.write(to: fileURL, options: [.atomic])
+        print(fileURL)
+        return fileURL
+    }
 }
 //=======================================================
 // MARK: - Model Object -> CKRecord
@@ -131,6 +152,13 @@ extension CKRecord {
         self.setValue(cocktail.imageURLs, forKey: "imageURLs")
         self.setValue(cocktail.isAlcoholic, forKey: "alcoholic")
         self.setValue(cocktail.apiID, forKey: "apiID")
+        
+        if cocktail.image != nil {
+            
+            let asset = CKAsset(fileURL: cocktail.temporaryPhotoURL)
+            self["photoData"] = asset
+//            self.setValue(asset, forKey: cocktail.photoDataKey)
+        }
     }
     
 }

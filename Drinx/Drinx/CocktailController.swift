@@ -25,6 +25,12 @@ class CocktailController {
     func createCocktail(dictionary: [String: Any]) {
         guard let cocktail = Cocktail(cocktailDictionary: dictionary)
             else { return }
+        
+        
+        
+        
+        
+        
         cocktails.append(cocktail)
         
         saveCocktailToCloudKit(cocktail: cocktail) { (success) in
@@ -35,6 +41,13 @@ class CocktailController {
             }
         }
     }
+    
+    func saveRecordsToCloudKit() {
+        
+//        for cocktail in 
+        
+    }
+    
     
     // Save a cocktail to cloudkit
     func saveCocktailToCloudKit(cocktail: Cocktail, completion: @escaping(Bool) -> Void) {
