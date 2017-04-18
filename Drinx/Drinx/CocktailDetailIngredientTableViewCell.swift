@@ -10,15 +10,17 @@ import UIKit
 
 class CocktailDetailIngredientTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var ingredientsCell: UILabel!
+    
+    var cocktail: Cocktail? {
+        didSet {
+            updateCell()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func updateCell() {
+        guard let cocktail = cocktail else { return }
+        
+        ingredientsCell.text = cocktail.ingredients.joined(separator: ", ")
     }
-
 }
