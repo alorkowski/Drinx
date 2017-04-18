@@ -10,4 +10,9 @@ import UIKit
 
 class MyCabinetCollectionViewCell: UICollectionViewCell {
     
+    var ingredient: Ingredient?
+    
+    func updateViews(){
+        
+    }
 }
