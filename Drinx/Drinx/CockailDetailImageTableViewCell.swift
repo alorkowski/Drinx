@@ -9,16 +9,23 @@
 import UIKit
 
 class CockailDetailImageTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    @IBOutlet weak var imageCell: UIImageView!
+    
+    var cocktail: Cocktail? {
+        didSet {
+            updateCell()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func updateCell() {
+        guard let cocktail = cocktail,
+            let imageURLs = cocktail.imageURLs.first else { return }
+        
+        DispatchQueue.main.async {
+            ImageController.getImage(forURL: imageURLs, completion: { (image) in
+                self.imageCell.image = image
+            })
+        }
     }
-
 }
