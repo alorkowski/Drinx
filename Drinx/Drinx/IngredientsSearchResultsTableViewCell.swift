@@ -21,6 +21,11 @@ class IngredientsSearchResultsTableViewCell: UITableViewCell {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateViews()
+    }
+    
 //    override func did
     
     func updateViews() {

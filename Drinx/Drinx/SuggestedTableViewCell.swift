@@ -16,9 +16,9 @@ class SuggestedTableViewCell: UITableViewCell {
     
     func update(cocktail: Cocktail){
         if let image = cocktail.image {
-        ImageView.image = image
+            ImageView.image = image
         } else {
-        ImageView.image = UIImage(named: cocktail.ingredients[0])
+            ImageView.image = UIImage(named: cocktail.ingredients[0])
         }
         drinkLabelView.text = cocktail.name
         
@@ -30,5 +30,5 @@ class SuggestedTableViewCell: UITableViewCell {
             update(cocktail: cocktail)
         }
     }
-
+    
 }

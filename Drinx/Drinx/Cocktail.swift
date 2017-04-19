@@ -63,6 +63,12 @@ struct Cocktail {
             let isAlcoholic = record["alcoholic"] as? Bool,
             let apiID = record["apiID"] as? String
             else { return nil }
+        if let imageAsset = record["photoData"] as? CKAsset {
+            if let data = try? (Data(contentsOf: imageAsset.fileURL)) {
+                let image = UIImage(data: data)
+                self.image = image
+            }
+        }
         
         self.name = name
         self.instructions = instructions

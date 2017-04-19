@@ -25,7 +25,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jWF-L3-3tO">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jWF-L3-3tO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBD-g7-HNo">
@@ -53,6 +53,7 @@
                                 <connections>
                                     <outlet property="ImageView" destination="jWF-L3-3tO" id="zuG-b2-7NO"/>
                                     <outlet property="drinkLabelView" destination="HBD-g7-HNo" id="6Hd-65-VE4"/>
+                                    <segue destination="b3r-le-YsS" kind="show" id="t04-eo-7hN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -67,6 +68,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t9U-KQ-CHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="296.80000000000001" y="-229.83508245877064"/>
+        </scene>
+        <!--CockailDetail-->
+        <scene sceneID="tBo-OG-a4T">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CockailDetail" id="b3r-le-YsS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FyP-hj-GV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1036" y="-199"/>
         </scene>
     </scenes>
     <resources>

@@ -59,6 +59,12 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        searchIngredients(searchController: searchController) { (resultsViewController) in
+            resultsViewController.tableView.reloadData()
+        }
+    }
+    
+    func searchIngredients(searchController: UISearchController, completion: (_ resultsViewController: UITableViewController ) -> Void) {
         if let resultsViewController = searchController.searchResultsController as? ingredentSearchResultsTVC,
             let searchTerm = searchController.searchBar.text?.lowercased() {
             let ingredients = IngredientController.share.ingredientStrings
@@ -76,6 +82,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
             CabinetController.shared.myCabinet.myIngredients = IngredientController.share.ingredients
             CabinetController.shared.saveMyCabinetToUserDefaults()
         }
+        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
