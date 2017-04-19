@@ -10,9 +10,20 @@ import UIKit
 
 class MyCabinetCollectionViewCell: UICollectionViewCell {
     
-    var ingredient: Ingredient?
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var ingredientLabel: UILabel!
     
-    func updateViews(){
-        
+    var ingredient: Ingredient? {
+        didSet {
+            self.updateViews()
+        }
+    }
+    
+    func updateViews() {
+        if let ingredient = ingredient {
+            self.imageView.image = ingredient.photoImage
+            self.ingredientLabel.text = ingredient.name
+        }
+//        self.reloadInputViews()
     }
 }
