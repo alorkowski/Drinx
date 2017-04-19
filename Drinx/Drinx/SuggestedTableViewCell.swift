@@ -14,16 +14,20 @@ class SuggestedTableViewCell: UITableViewCell {
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var drinkLabelView: UILabel!
     
-    func update(ingredient: Ingredient){
-        ImageView.image = ingredient.photoImage
-        drinkLabelView.text = ingredient.namegit 
+    func update(cocktail: Cocktail){
+        if let image = cocktail.image {
+        ImageView.image = image
+        } else {
+        ImageView.image = UIImage(named: cocktail.ingredients[0])
+        }
+        drinkLabelView.text = cocktail.name
         
     }
     
-    var ingredient: Ingredient? {
+    var cocktail: Cocktail? {
         didSet {
-            guard let ingredient = ingredient else { return }
-            update(ingredient: ingredient)
+            guard let cocktail = cocktail else { return }
+            update(cocktail: cocktail)
         }
     }
 

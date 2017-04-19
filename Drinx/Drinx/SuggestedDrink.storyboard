@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="suggestCell" rowHeight="205" id="TFj-RO-9vZ" customClass="SuggestedTableViewCell" customModule="Drinx" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="suggestCell" rowHeight="205" id="TFj-RO-9vZ" customClass="SuggestedTableViewCell" customModule="Drinx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="205"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TFj-RO-9vZ" id="83h-nL-ZzC">
@@ -26,10 +26,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jWF-L3-3tO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="194.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBD-g7-HNo">
-                                            <rect key="frame" x="0.0" y="154" width="375" height="41"/>
+                                            <rect key="frame" x="0.0" y="163.5" width="375" height="41"/>
                                             <color key="backgroundColor" red="0.21710421954314718" green="0.21710421954314718" blue="0.21710421954314718" alpha="0.60611087328767121" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="41" id="2VY-u2-ZNe"/>
@@ -41,14 +41,15 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="jWF-L3-3tO" firstAttribute="top" secondItem="83h-nL-ZzC" secondAttribute="top" id="0Sl-Yi-Z4O"/>
-                                        <constraint firstAttribute="bottom" secondItem="HBD-g7-HNo" secondAttribute="bottom" constant="10" id="Iyh-0U-H8L"/>
-                                        <constraint firstAttribute="bottom" secondItem="jWF-L3-3tO" secondAttribute="bottom" constant="10" id="JY0-wN-LsY"/>
+                                        <constraint firstAttribute="bottom" secondItem="HBD-g7-HNo" secondAttribute="bottom" id="Iyh-0U-H8L"/>
+                                        <constraint firstAttribute="bottom" secondItem="jWF-L3-3tO" secondAttribute="bottom" id="JY0-wN-LsY"/>
                                         <constraint firstItem="HBD-g7-HNo" firstAttribute="leading" secondItem="83h-nL-ZzC" secondAttribute="leading" id="QCc-al-5Rb"/>
                                         <constraint firstAttribute="trailing" secondItem="HBD-g7-HNo" secondAttribute="trailing" id="bfn-mr-Tuf"/>
                                         <constraint firstItem="jWF-L3-3tO" firstAttribute="leading" secondItem="83h-nL-ZzC" secondAttribute="leading" id="nKk-n7-0HH"/>
                                         <constraint firstAttribute="trailing" secondItem="jWF-L3-3tO" secondAttribute="trailing" id="rFE-ld-CCy"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.55381503807106602" green="0.55381503807106602" blue="0.55381503807106602" alpha="0.60611087328767121" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="ImageView" destination="jWF-L3-3tO" id="zuG-b2-7NO"/>
                                     <outlet property="drinkLabelView" destination="HBD-g7-HNo" id="6Hd-65-VE4"/>

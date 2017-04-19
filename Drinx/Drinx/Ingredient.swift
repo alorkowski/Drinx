@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import CloudKit
 
-class Ingredient {
+class Ingredient: Equatable {
     
     static let photoImageKey = "photoImage"
     
@@ -28,5 +28,11 @@ class Ingredient {
     }
     
     
+}
+
+extension Ingredient {
+    static func ==(lhs: Ingredient, rhs: Ingredient) -> Bool {
+        return lhs.name == rhs.name
+    }
 }
 
