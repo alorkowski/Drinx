@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="231"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rrY-5n-fQI" id="OYX-hh-VHa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="230.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="231"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKC-8o-o39">
@@ -46,10 +46,10 @@
                                         <rect key="frame" x="0.0" y="231" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I2a-jK-qGK" id="F3F-b3-0ez">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAE-E5-4o8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAE-E5-4o8">
                                                     <rect key="frame" x="8" y="8" width="359" height="183.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -71,10 +71,10 @@
                                         <rect key="frame" x="0.0" y="431" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="98F-Ou-Nx0" id="dSm-mj-YJg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJo-44-rbt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJo-44-rbt">
                                                     <rect key="frame" x="8" y="8" width="359" height="183.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -100,6 +100,11 @@
                             <outlet property="delegate" destination="pa3-fr-qIW" id="gDi-NA-7ax"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="cocktailImageView" destination="nKC-8o-o39" id="MZr-Id-DF4"/>
+                        <outlet property="cocktailIngredientsLabel" destination="kAE-E5-4o8" id="c0S-Yx-6Pz"/>
+                        <outlet property="cocktailInstructionsLabel" destination="ZJo-44-rbt" id="nPr-sl-jqH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7c-zw-vvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
