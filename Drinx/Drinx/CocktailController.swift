@@ -21,6 +21,8 @@ class CocktailController {
     
     var suggestedCocktails: [Cocktail] = []
     
+    var mockIngredients: [String] = ["Vodka", "Ice", "Orange juice", "Gin", "Schnapps" , "Cider" , "Aftershock" , "Sprite" , "Rumple Minze", "Peach Vodka" , "Ouzo" , "Coffee" , "Spiced rum" , "Water" , "Espresso" , "Angelica root" , "Condensed milk" , "Honey" , "Whipping cream"]
+    
     // Create a cocktail
     func createCocktail(dictionary: [String: Any]) {
         guard let cocktail = Cocktail(cocktailDictionary: dictionary)
