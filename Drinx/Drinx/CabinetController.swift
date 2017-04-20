@@ -14,6 +14,7 @@ class CabinetController {
     
     static let shared = CabinetController()
     var myCabinet = Cabinet()
+    var cabinetHasBeenUpdated: Bool = false
     
     func saveMyCabinetToUserDefaults() {
         UserDefaults.standard.set(myCabinet.ingredientIDs, forKey: ingredientIDsKey)
