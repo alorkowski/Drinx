@@ -89,7 +89,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
             var groupCount = 0
             group.enter()
             groupCount += 1
-            print(groupCount)
+//            print(groupCount)
             if cocktailIngredients.isSubset(of: IngredientController.share.myCabinetIngredientStrings) {
                 if cocktail.imageURLs[0] != "" {
                     let ckm = CloudKitManager()
@@ -104,7 +104,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
                                 }
                                 group.leave()
                                 groupCount -= 1
-                                print(groupCount)
+//                                print(groupCount)
                                 
                             }
                         }
@@ -116,7 +116,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
                         }
                         group.leave()
                         groupCount -= 1
-                        print(groupCount)
+//                        print(groupCount)
                         
                         
                     }
@@ -126,16 +126,16 @@ class SuggestedDrinksTableViewController: UITableViewController {
                     }
                     group.leave()
                     groupCount -= 1
-                    print(groupCount)
+//                    print(groupCount)
                     
                     
                 }
                 group.notify(queue: DispatchQueue.main, execute: {
                     self.suggestedCocktails = self.tempCocktails
                     self.tableView.reloadData()
-                    print(cocktail.name)
-                    print(self.tempCocktails.count)
-                    print(self.suggestedCocktails.count)
+//                    print(cocktail.name)
+//                    print(self.tempCocktails.count)
+//                    print(self.suggestedCocktails.count)
                 })
             }
             completion()
@@ -151,14 +151,29 @@ class SuggestedDrinksTableViewController: UITableViewController {
             guard let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }
             let cocktailsArray = jsonArray.flatMap( { Cocktail(cocktailDictionary: $0)} )
             self.cocktails = cocktailsArray
-            findMatches {
-                print(suggestedCocktails.count)
-            }
             completion()
         } catch {
             print(error.localizedDescription)
             completion()
         }
+    }
+    
+    func searchCocktails(for searchTerm: String, completion: () -> Void) {
+        
+//        let cocktails = CocktailController.shared.cocktails
+        
+        var matchingCocktails: [Cocktail] = []
+        
+        for cocktail in self.cocktails {
+            let lowercasedCocktailIngredients = cocktail.ingredients.flatMap( {$0.lowercased() })
+            if cocktail.name.lowercased().contains(searchTerm.lowercased()) {
+                matchingCocktails.append(cocktail)
+            } else if lowercasedCocktailIngredients.contains(searchTerm.lowercased()) {
+                matchingCocktails.append(cocktail)
+            }
+        }
+        print("\(matchingCocktails.count)")
+        completion()
     }
 }
 
