@@ -13,7 +13,7 @@
         <scene sceneID="gJ5-1Z-Onf">
             <objects>
                 <tableViewController id="fj4-Pf-TKs" customClass="SearchTableViewController" customModule="Drinx" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xxw-5Q-rwY">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="28" sectionFooterHeight="28" id="xxw-5Q-rwY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,11 +26,11 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zLu-YZ-B2d">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="59" id="zLu-YZ-B2d">
+                                <rect key="frame" x="0.0" y="72" width="375" height="59"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zLu-YZ-B2d" id="S41-96-xWD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -46,6 +46,7 @@
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="WIO-9b-DlX"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="searchBar" destination="pl1-8g-2oa" id="g0Z-xb-teJ"/>
                         <outlet property="searchDisplayController" destination="IOZ-Rf-oUE" id="a9c-dr-vEZ"/>
                     </connections>
                 </tableViewController>
@@ -60,7 +61,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="297" y="441"/>
+            <point key="canvasLocation" x="296.80000000000001" y="440.32983508245883"/>
         </scene>
         <!--CockailDetail-->
         <scene sceneID="nn4-wt-5yR">
