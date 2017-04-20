@@ -30,6 +30,10 @@ class SuggestedDrinksTableViewController: UITableViewController {
             }
         }
         
+        self.searchCocktails(for: "screw") {
+            print("done")
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,8 +72,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
     // MARK: - Navigation
     
     
-    
-    //     In a storyboard-based application, you will often want to do a little preparation before navigation
+//     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? CocktailDetailTableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -81,8 +84,6 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     
     func findMatches(completion: () -> Void) {
-        
-        
         for cocktail in cocktails {
             let cocktailIngredients: Set = Set(cocktail.ingredients)
             let group = DispatchGroup()
