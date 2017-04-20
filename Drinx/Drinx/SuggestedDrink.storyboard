@@ -53,7 +53,7 @@
                                 <connections>
                                     <outlet property="ImageView" destination="jWF-L3-3tO" id="zuG-b2-7NO"/>
                                     <outlet property="drinkLabelView" destination="HBD-g7-HNo" id="6Hd-65-VE4"/>
-                                    <segue destination="b3r-le-YsS" kind="show" id="t04-eo-7hN"/>
+                                    <segue destination="b3r-le-YsS" kind="presentation" identifier="toDetail" trigger="accessoryAction" id="Gw3-Ap-h2H"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

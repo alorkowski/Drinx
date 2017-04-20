@@ -18,7 +18,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
     var suggestedCocktails: [Cocktail] = []
     var suggestedCocktail = [String]()
     var tempCocktails: [Cocktail] = []
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,14 +57,23 @@ class SuggestedDrinksTableViewController: UITableViewController {
         
         return cell
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toDetail", sender: indexPath)
+    }
     
     
     // MARK: - Navigation
+
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+//     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let dvc = segue.destination as? CocktailDetailTableViewController {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let cocktail = suggestedCocktails[indexPath.row]
+                dvc.cocktail = cocktail
+            }
+        }
     }
     
     
@@ -85,30 +94,36 @@ class SuggestedDrinksTableViewController: UITableViewController {
                         let queryOperation = CKQueryOperation(query: query)
                         queryOperation.recordFetchedBlock = { (record) -> Void in
                             if let tempCocktail = Cocktail(record: record) {
-                                self.tempCocktails.insert(tempCocktail, at: 0)
+                                if !self.tempCocktails.contains(tempCocktail) {
+                                    self.tempCocktails.insert(tempCocktail, at: 0)
+                                }
                                 group.leave()
                                 groupCount -= 1
                                 print(groupCount)
-
+                                
                             }
                         }
                         ckm.publicDatabase.add(queryOperation)
                         
                     } else {
-                        self.tempCocktails.append(cocktail)
+                        if !self.tempCocktails.contains(cocktail) {
+                            self.tempCocktails.append(cocktail)
+                        }
                         group.leave()
                         groupCount -= 1
                         print(groupCount)
-
-
+                        
+                        
                     }
                 } else {
-                    self.tempCocktails.append(cocktail)
+                    if !self.tempCocktails.contains(cocktail) {
+                        self.tempCocktails.append(cocktail)
+                    }
                     group.leave()
                     groupCount -= 1
                     print(groupCount)
-
-
+                    
+                    
                 }
                 group.notify(queue: DispatchQueue.main, execute: {
                     self.suggestedCocktails = self.tempCocktails
@@ -122,24 +137,24 @@ class SuggestedDrinksTableViewController: UITableViewController {
         }
     }
     
-        func getCocktailDictionaryArray(completion: () -> Void) {
+    func getCocktailDictionaryArray(completion: () -> Void) {
+        
+        guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else {return}
+        do {
             
-            guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else {return}
-            do {
-                
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-                guard let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }
-                let cocktailsArray = jsonArray.flatMap( { Cocktail(cocktailDictionary: $0)} )
-                self.cocktails = cocktailsArray
-                findMatches {
-                    print(suggestedCocktails.count)
-                }
-                completion()
-            } catch {
-                print(error.localizedDescription)
-                completion()
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+            guard let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }
+            let cocktailsArray = jsonArray.flatMap( { Cocktail(cocktailDictionary: $0)} )
+            self.cocktails = cocktailsArray
+            findMatches {
+                print(suggestedCocktails.count)
             }
+            completion()
+        } catch {
+            print(error.localizedDescription)
+            completion()
         }
+    }
 }
 
 

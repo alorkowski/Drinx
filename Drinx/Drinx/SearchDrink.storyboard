@@ -17,14 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="pl1-8g-2oa">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="fj4-Pf-TKs" id="b75-3o-hHI"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zLu-YZ-B2d">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zLu-YZ-B2d" id="S41-96-xWD">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Ngf-ig-z9d" kind="presentation" trigger="accessoryAction" id="JsT-9r-Fse"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -34,10 +45,30 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="WIO-9b-DlX"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="IOZ-Rf-oUE" id="a9c-dr-vEZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tJh-Ek-Lp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="IOZ-Rf-oUE">
+                    <connections>
+                        <outlet property="delegate" destination="fj4-Pf-TKs" id="sOV-Gk-BdD"/>
+                        <outlet property="searchBar" destination="pl1-8g-2oa" id="k6t-A2-8Vx"/>
+                        <outlet property="searchContentsController" destination="fj4-Pf-TKs" id="7KF-pd-94O"/>
+                        <outlet property="searchResultsDataSource" destination="fj4-Pf-TKs" id="fe7-tQ-Yey"/>
+                        <outlet property="searchResultsDelegate" destination="fj4-Pf-TKs" id="YGz-gI-v4a"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="297" y="441"/>
+        </scene>
+        <!--CockailDetail-->
+        <scene sceneID="nn4-wt-5yR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CockailDetail" id="Ngf-ig-z9d" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Vu-RE-fIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="854" y="526"/>
         </scene>
     </scenes>
     <resources>

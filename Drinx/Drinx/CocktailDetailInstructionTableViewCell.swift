@@ -10,17 +10,16 @@ import UIKit
 
 class CocktailDetailInstructionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var instructionsCell: UILabel!
     
     var cocktail: Cocktail? {
         didSet {
-            updateCell()
+//            updateCell()
         }
     }
-    
-    func updateCell() {
-        guard let cocktail = cocktail else { return }
-        
-        instructionsCell.text = cocktail.instructions
-    }
+//
+//    func updateCell() {
+//        guard let cocktail = cocktail else { return }
+//        
+//        instructionsCell.text = cocktail.instructions
+//    }
 }

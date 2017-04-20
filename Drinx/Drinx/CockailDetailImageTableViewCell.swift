@@ -19,13 +19,11 @@ class CockailDetailImageTableViewCell: UITableViewCell {
     }
     
     func updateCell() {
-        guard let cocktail = cocktail,
-            let imageURLs = cocktail.imageURLs.first else { return }
-        
-        DispatchQueue.main.async {
-            ImageController.getImage(forURL: imageURLs, completion: { (image) in
-                self.imageCell.image = image
-            })
+        guard let cocktail = cocktail, let _ = imageView else { updateCell(); return }
+        if let image = cocktail.image {
+            self.imageView?.image = image
+        } else {
+            self.imageView?.image = UIImage(named: cocktail.ingredients[0])
         }
     }
 }

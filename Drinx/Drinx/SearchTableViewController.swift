@@ -13,7 +13,7 @@ class SearchTableViewController: UITableViewController {
     
     
     
-    var resultsArray: [SearchableRecord] = []
+    var resultsArray: [Cocktail] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,11 @@ class SearchTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchRCell", for: indexPath) as? SearchTableViewCell,
-            let result = resultsArray[indexPath.row] as? Ingredient else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchRCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+            let result = resultsArray[indexPath.row]
         
         
-        cell.ingredient = result
+//        cell.ingredient = result
         return cell
     }
     

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CloudKit
 
-struct Cocktail {
+struct Cocktail: Equatable {
     
     fileprivate let nameKey = "strDrink"
     fileprivate let instructionsKey = "strInstructions"
@@ -167,6 +167,12 @@ extension CKRecord {
         }
     }
     
+}
+
+extension Cocktail {
+    static func ==(lhs: Cocktail, rhs: Cocktail) -> Bool {
+        return lhs.name == rhs.name
+    }
 }
 
 
