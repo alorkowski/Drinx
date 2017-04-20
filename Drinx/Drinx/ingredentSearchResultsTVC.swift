@@ -41,6 +41,7 @@ class ingredentSearchResultsTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ingredientString = resultsArray[indexPath.row].name
         IngredientController.share.add(item: ingredientString)
+        CabinetController.shared.cabinetHasBeenUpdated = true
         self.dismiss(animated: true, completion: nil)
     }
     

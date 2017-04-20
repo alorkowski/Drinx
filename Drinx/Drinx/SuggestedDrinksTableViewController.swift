@@ -22,20 +22,23 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let myCabinet = CabinetController.shared.getMyIngredientsFromUserDefaults()
+        IngredientController.share.ingredients = myCabinet
         getCocktailDictionaryArray {
             findMatches {
                 tableView.reloadData()
             }
         }
-        let myCabinet = CabinetController.shared.getMyIngredientsFromUserDefaults()
-        IngredientController.share.ingredients = myCabinet
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        findMatches {
-            tableView.reloadData()
+        if CabinetController.shared.cabinetHasBeenUpdated{
+            findMatches {
+                tableView.reloadData()
+                CabinetController.shared.cabinetHasBeenUpdated = false
+            }
         }
         
     }
@@ -63,10 +66,10 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     
     // MARK: - Navigation
-
     
     
-//     In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    //     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? CocktailDetailTableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -78,6 +81,8 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     
     func findMatches(completion: () -> Void) {
+        
+        
         for cocktail in cocktails {
             let cocktailIngredients: Set = Set(cocktail.ingredients)
             let group = DispatchGroup()
