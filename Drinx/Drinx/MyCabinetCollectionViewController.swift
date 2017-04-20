@@ -184,6 +184,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
             IngredientController.share.delete(ingredient: ingredient)
             self.collectionView?.reloadData()
             self.collectionView?.reloadInputViews()
+            CabinetController.shared.cabinetHasBeenUpdated = true
         }
         alertControler.addAction(cancelAction)
         alertControler.addAction(deleteAction)

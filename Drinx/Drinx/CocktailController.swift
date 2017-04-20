@@ -44,15 +44,16 @@ class CocktailController {
         guard let cocktailDictionaries = JSONController.shared.getCocktailDictionaryArray() else { return [] }
         var cocktails: [Cocktail] = []
         let group = DispatchGroup()
+        var groupCount = 0
         for id in cocktailIDStrings {
-            group.enter()
             for cocktail in cocktailDictionaries {
-                guard let drinkID = cocktail["idDrink"] as? String else { group.leave(); break }
+                guard let drinkID = cocktail["idDrink"] as? String else { break }
                 if drinkID == id {
-                    guard let ct = Cocktail(cocktailDictionary: cocktail) else { group.leave(); break }
+                    guard let ct = Cocktail(cocktailDictionary: cocktail) else { break }
                     if ct.imageURLs[0] != "" {
                         let ckm = CloudKitManager()
                         if let apiID = ct.apiID {
+                            group.enter()
                             let predicate = NSPredicate(format: "%@ = apiID", apiID)
                             let query = CKQuery(recordType: "Cocktail", predicate: predicate)
                             let queryOperation = CKQueryOperation(query: query)
@@ -62,8 +63,8 @@ class CocktailController {
                                         cocktails.insert(tempCocktail, at: 0)
                                     }
                                     group.leave()
-//                                    groupCount -= 1
-//                                    print(groupCount)
+                                    groupCount -= 1
+                                    print(groupCount)
                                     
                                 }
                             }
@@ -72,7 +73,7 @@ class CocktailController {
                             if !cocktails.contains(ct) {
                                 cocktails.append(ct)
                             }
-                            group.leave()
+//                            group.leave()
 //                            groupCount -= 1
 //                            print(groupCount)
                         }
