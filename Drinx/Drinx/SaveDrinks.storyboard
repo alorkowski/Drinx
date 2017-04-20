@@ -53,6 +53,7 @@
                                 <connections>
                                     <outlet property="drinkImageView" destination="kVm-ZQ-hP8" id="D9k-x7-a0z"/>
                                     <outlet property="drinkLabel" destination="Mbt-Gr-gaG" id="6vu-lO-aSn"/>
+                                    <segue destination="L1R-Lq-u2C" kind="presentation" id="V1j-Nr-b17"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -67,6 +68,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w9M-S8-Iqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-878" y="1048"/>
+        </scene>
+        <!--CockailDetail-->
+        <scene sceneID="fdl-eq-IJR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CockailDetail" id="L1R-Lq-u2C" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="atJ-Zq-HTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-225" y="1010"/>
         </scene>
     </scenes>
     <resources>

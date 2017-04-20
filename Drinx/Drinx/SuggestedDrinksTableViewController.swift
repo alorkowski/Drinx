@@ -24,14 +24,11 @@ class SuggestedDrinksTableViewController: UITableViewController {
         super.viewDidLoad()
         let myCabinet = CabinetController.shared.getMyIngredientsFromUserDefaults()
         IngredientController.share.ingredients = myCabinet
-        getCocktailDictionaryArray {
+        
+        CocktailController.shared.getCocktailDictionaryArray {
             findMatches {
                 tableView.reloadData()
             }
-        }
-        
-        self.searchCocktails(for: "screw") {
-            print("done")
         }
         
     }
@@ -58,7 +55,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell", for: indexPath) as? SuggestedTableViewCell else {return UITableViewCell() }
         
         let cocktail = suggestedCocktails[indexPath.row]
-        cell.cocktail = cocktail
+        cell.update(cocktail: cocktail)
         
         
         
@@ -143,39 +140,6 @@ class SuggestedDrinksTableViewController: UITableViewController {
         }
     }
     
-    func getCocktailDictionaryArray(completion: () -> Void) {
-        
-        guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else {return}
-        do {
-            
-            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-            guard let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }
-            let cocktailsArray = jsonArray.flatMap( { Cocktail(cocktailDictionary: $0)} )
-            self.cocktails = cocktailsArray
-            completion()
-        } catch {
-            print(error.localizedDescription)
-            completion()
-        }
-    }
-    
-    func searchCocktails(for searchTerm: String, completion: () -> Void) {
-        
-//        let cocktails = CocktailController.shared.cocktails
-        
-        var matchingCocktails: [Cocktail] = []
-        
-        for cocktail in self.cocktails {
-            let lowercasedCocktailIngredients = cocktail.ingredients.flatMap( {$0.lowercased() })
-            if cocktail.name.lowercased().contains(searchTerm.lowercased()) {
-                matchingCocktails.append(cocktail)
-            } else if lowercasedCocktailIngredients.contains(searchTerm.lowercased()) {
-                matchingCocktails.append(cocktail)
-            }
-        }
-        print("\(matchingCocktails.count)")
-        completion()
-    }
 }
 
 

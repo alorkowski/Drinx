@@ -11,17 +11,20 @@ import UIKit
 class SearchTableViewCell: UITableViewCell {
     
     
-    @IBOutlet weak var ImageView: UIImageView!
+//    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var drinkNameText: UILabel!
     
-    func update(ingredient: Ingredient){
-        ImageView.image = ingredient.photoImage
+    
+    func update(cocktail: Cocktail){
+//        ImageView.image = cocktail.image
+        drinkNameText.text = cocktail.name
         
     }
     
-    var ingredient: Ingredient? {
+    var cocktail: Cocktail? {
         didSet {
-            guard let ingredient = ingredient else { return }
-            update(ingredient: ingredient)
+            guard let cocktail = cocktail else { return }
+            update(cocktail: cocktail)
         }
     }
 }
