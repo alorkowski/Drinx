@@ -31,9 +31,21 @@ class CocktailDetailTableViewController: UITableViewController {
             navItem.title = cocktail.name
         }
         let backItem = UIBarButtonItem(title: "Back", style: .done, target: nil, action: #selector(done))
+        let favoriteItem = UIBarButtonItem(title: "Save", style: .plain, target: nil, action: #selector(saveCocktailToFavorites))
         navItem.leftBarButtonItem = backItem
+        navItem.rightBarButtonItem = favoriteItem
         navBar.setItems([navItem], animated: false)
         self.view.addSubview(navBar)
+    }
+    
+    func saveCocktailToFavorites() {
+        if let cocktail = cocktail {
+            CocktailController.shared.savedCocktails.append(cocktail)
+            CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
+        }
+        self.tabBarController?.selectedIndex = 2
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     func done() {

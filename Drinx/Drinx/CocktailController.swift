@@ -11,6 +11,8 @@ import CloudKit
 
 class CocktailController {
     
+    private let savedCocktailsKey = "savedCocktails"
+    
     static let shared = CocktailController()
     
     var suggestedResultsCursor: CKQueryCursor?
@@ -19,35 +21,71 @@ class CocktailController {
     
     var cocktails: [Cocktail] = []
     
+    var savedCocktails: [Cocktail] = []
+    
     var suggestedCocktails: [Cocktail] = []
     
     var mockIngredients: [String] = ["Vodka", "Ice", "Orange juice", "Gin", "Schnapps" , "Cider" , "Aftershock" , "Sprite" , "Rumple Minze", "Peach Vodka" , "Ouzo" , "Coffee" , "Spiced rum" , "Water" , "Espresso" , "Angelica root" , "Condensed milk" , "Honey" , "Whipping cream"]
     
-    // Create a cocktail
-    func createCocktail(dictionary: [String: Any]) {
-        guard let cocktail = Cocktail(cocktailDictionary: dictionary)
-            else { return }
-        
-        
-        
-        
-        
-        
-        cocktails.append(cocktail)
-        
-        saveCocktailToCloudKit(cocktail: cocktail) { (success) in
-            if success {
-                print("success")
-            } else {
-                print("crap")
-            }
+    
+    // MARK: - UserDefaults
+    
+    func saveMyFavoriteCocktailsToUserDefaults() {
+        var cocktailIDStrings: [String] = []
+        for cocktail in savedCocktails {
+            guard let idString = cocktail.apiID else { break }
+            cocktailIDStrings.append(idString)
         }
+        UserDefaults.standard.set(cocktailIDStrings, forKey: savedCocktailsKey)
     }
     
-    func saveRecordsToCloudKit() {
-        
-//        for cocktail in 
-        
+    func fetchMyFavoriteCocktailsFromUserDefaults() -> [Cocktail] {
+        guard let cocktailIDStrings = UserDefaults.standard.value(forKey: savedCocktailsKey) as? [String] else { return [] }
+        guard let cocktailDictionaries = JSONController.shared.getCocktailDictionaryArray() else { return [] }
+        var cocktails: [Cocktail] = []
+        let group = DispatchGroup()
+        for id in cocktailIDStrings {
+            group.enter()
+            for cocktail in cocktailDictionaries {
+                guard let drinkID = cocktail["idDrink"] as? String else { group.leave(); break }
+                if drinkID == id {
+                    guard let ct = Cocktail(cocktailDictionary: cocktail) else { group.leave(); break }
+                    if ct.imageURLs[0] != "" {
+                        let ckm = CloudKitManager()
+                        if let apiID = ct.apiID {
+                            let predicate = NSPredicate(format: "%@ = apiID", apiID)
+                            let query = CKQuery(recordType: "Cocktail", predicate: predicate)
+                            let queryOperation = CKQueryOperation(query: query)
+                            queryOperation.recordFetchedBlock = { (record) -> Void in
+                                if let tempCocktail = Cocktail(record: record) {
+                                    if !cocktails.contains(tempCocktail) {
+                                        cocktails.insert(tempCocktail, at: 0)
+                                    }
+                                    group.leave()
+//                                    groupCount -= 1
+//                                    print(groupCount)
+                                    
+                                }
+                            }
+                            ckm.publicDatabase.add(queryOperation)
+                        } else {
+                            if !cocktails.contains(ct) {
+                                cocktails.append(ct)
+                            }
+                            group.leave()
+//                            groupCount -= 1
+//                            print(groupCount)
+                        }
+                    } else {
+                        if !cocktails.contains(ct) {
+                        cocktails.append(ct)
+                        }
+                    }
+                }
+            }
+        }
+        group.wait()
+        return cocktails
     }
     
     
