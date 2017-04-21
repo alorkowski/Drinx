@@ -30,6 +30,13 @@ class SearchTableViewController: UITableViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.superview!.backgroundColor = UIColor.white
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+    }
+    
 //    func getCocktailDictionaryArray(completion: () -> Void) {
 //        
 //        guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else {return}

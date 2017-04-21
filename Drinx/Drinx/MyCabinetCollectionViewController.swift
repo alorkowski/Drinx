@@ -24,6 +24,13 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
 
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.superview!.backgroundColor = UIColor.white
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if let layout = self.collectionViewLayout as? UICollectionViewFlowLayout {
