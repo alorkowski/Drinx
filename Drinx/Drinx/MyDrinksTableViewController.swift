@@ -19,6 +19,13 @@ class MyDrinksTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.superview!.backgroundColor = UIColor.white
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
