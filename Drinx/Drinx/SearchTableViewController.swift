@@ -74,11 +74,30 @@ class SearchTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         self.presentingViewController?.performSegue(withIdentifier: "toCoktailDetail", sender: cell)
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow,
+            let dvc = segue.destination as? CocktailDetailTableViewController else { return }
+        let cocktail = self.cocktails[indexPath.row]
+        dvc.cocktail = cocktail
+    }
 }
+
+
 
 
 extension SearchTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let searchTerm = searchBar.text else { return }
+        
+        CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
+            self.cocktails = cocktails
+        }
+    }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }

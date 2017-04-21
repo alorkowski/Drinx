@@ -14,7 +14,9 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     let cocktail = [String]()
     var cocktailDictionaries: [[String:Any]] = [[:]]
-    var cocktails: [Cocktail] = []
+    var cocktails: [Cocktail] {
+        return CocktailController.shared.cocktails
+    }
     var suggestedCocktails: [Cocktail] = []
     var suggestedCocktail = [String]()
     var tempCocktails: [Cocktail] = []
@@ -27,7 +29,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
         
         CocktailController.shared.getCocktailDictionaryArray {
             findMatches {
-                tableView.reloadData()
+                self.tableView.reloadData()
             }
         }
         
@@ -37,7 +39,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         if CabinetController.shared.cabinetHasBeenUpdated{
             findMatches {
-                tableView.reloadData()
+                self.tableView.reloadData()
                 CabinetController.shared.cabinetHasBeenUpdated = false
             }
         }
@@ -80,7 +82,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
     }
     
     
-    func findMatches(completion: () -> Void) {
+    func findMatches(completion: @escaping () -> Void) {
         for cocktail in cocktails {
             let cocktailIngredients: Set = Set(cocktail.ingredients)
             let group = DispatchGroup()
@@ -134,9 +136,9 @@ class SuggestedDrinksTableViewController: UITableViewController {
 //                    print(cocktail.name)
 //                    print(self.tempCocktails.count)
 //                    print(self.suggestedCocktails.count)
+                    completion()
                 })
             }
-            completion()
         }
     }
     

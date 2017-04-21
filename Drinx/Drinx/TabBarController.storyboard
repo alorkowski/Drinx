@@ -21,7 +21,7 @@
                     <connections>
                         <segue destination="1ZY-FX-5ga" kind="relationship" relationship="viewControllers" id="Fpn-oq-knx"/>
                         <segue destination="g4G-O0-UnQ" kind="relationship" relationship="viewControllers" id="0dI-YU-3oS"/>
-                        <segue destination="dGg-Au-kvb" kind="relationship" relationship="viewControllers" id="kQk-y3-aoo"/>
+                        <segue destination="YiV-1h-Z7f" kind="relationship" relationship="viewControllers" id="iJT-dk-QDA"/>
                         <segue destination="0Yq-Dj-d7b" kind="relationship" relationship="viewControllers" id="Yjq-ty-h7v"/>
                     </connections>
                 </tabBarController>
@@ -37,17 +37,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vw9-Qt-UND" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="-229"/>
-        </scene>
-        <!--SearchDrink-->
-        <scene sceneID="eVx-ne-T9H">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SearchDrink" id="dGg-Au-kvb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="4YB-WO-QOn"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pk2-Ql-Gt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="297" y="441"/>
+            <point key="canvasLocation" x="-928" y="685"/>
         </scene>
         <!--MyCabinet-->
         <scene sceneID="uOk-Qy-wAj">
@@ -57,7 +47,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5iF-pz-BXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="297" y="1128"/>
+            <point key="canvasLocation" x="-54" y="685"/>
         </scene>
         <!--SaveDrinks-->
         <scene sceneID="uo7-nJ-yyT">
@@ -67,7 +57,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QD9-l1-F8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-878" y="1048"/>
+            <point key="canvasLocation" x="-666" y="685"/>
+        </scene>
+        <!--SearchDrinks-->
+        <scene sceneID="Vc5-gk-Y5q">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchDrinks" id="YiV-1h-Z7f" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="McC-OH-Mrr"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="naq-PB-8TK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-358" y="685"/>
         </scene>
     </scenes>
 </document>

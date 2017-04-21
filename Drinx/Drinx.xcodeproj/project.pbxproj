@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A3E7A731EA12C530035F8B9 /* CocktailTestRecipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */; };
+		5C3FCF9D1EA9931400C0A5F6 /* SearchDrinks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3FCF9C1EA9931400C0A5F6 /* SearchDrinks.storyboard */; };
 		5C46EF541EA126E600378487 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C46EF531EA126E600378487 /* CloudKit.framework */; };
 		5C46EF561EA1709300378487 /* CocktailRecipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C46EF551EA1709300378487 /* CocktailRecipes.json */; };
 		5CA46BAF1E9D963200245AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */; };
@@ -41,7 +42,6 @@
 		A8297B821EA15D90000D30A5 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B811EA15D90000D30A5 /* SearchableRecord.swift */; };
 		A85216E21EA7F51B0064404D /* SuggestedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85216E11EA7F51B0064404D /* SuggestedTableViewCell.swift */; };
 		C336DEA71EA67EFF00E3B3B4 /* SuggestedDrink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C336DEA61EA67EFF00E3B3B4 /* SuggestedDrink.storyboard */; };
-		C336DEA91EA67F3500E3B3B4 /* SearchDrink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C336DEA81EA67F3500E3B3B4 /* SearchDrink.storyboard */; };
 		C336DEAB1EA67F6200E3B3B4 /* MyCabinet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C336DEAA1EA67F6200E3B3B4 /* MyCabinet.storyboard */; };
 		C336DEB11EA7BC6A00E3B3B4 /* ingredentSearchResultsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C336DEB01EA7BC6A00E3B3B4 /* ingredentSearchResultsTVC.swift */; };
 		C336DEB31EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */; };
@@ -51,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailTestRecipes.json; sourceTree = "<group>"; };
+		5C3FCF9C1EA9931400C0A5F6 /* SearchDrinks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchDrinks.storyboard; sourceTree = "<group>"; };
 		5C46EF511EA126DE00378487 /* Drinx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Drinx.entitlements; sourceTree = "<group>"; };
 		5C46EF531EA126E600378487 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5C46EF551EA1709300378487 /* CocktailRecipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailRecipes.json; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		A8297B811EA15D90000D30A5 /* SearchableRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 		A85216E11EA7F51B0064404D /* SuggestedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestedTableViewCell.swift; sourceTree = "<group>"; };
 		C336DEA61EA67EFF00E3B3B4 /* SuggestedDrink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SuggestedDrink.storyboard; sourceTree = "<group>"; };
-		C336DEA81EA67F3500E3B3B4 /* SearchDrink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchDrink.storyboard; sourceTree = "<group>"; };
 		C336DEAA1EA67F6200E3B3B4 /* MyCabinet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyCabinet.storyboard; sourceTree = "<group>"; };
 		C336DEB01EA7BC6A00E3B3B4 /* ingredentSearchResultsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ingredentSearchResultsTVC.swift; sourceTree = "<group>"; };
 		C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsSearchResultsTableViewCell.swift; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 		A8297B681E9E7ECB000D30A5 /* SearchDrink */ = {
 			isa = PBXGroup;
 			children = (
-				C336DEA81EA67F3500E3B3B4 /* SearchDrink.storyboard */,
+				5C3FCF9C1EA9931400C0A5F6 /* SearchDrinks.storyboard */,
 				5CA46BDB1E9D97C300245AD9 /* SearchTableViewController.swift */,
 				A8297B7D1EA01F6C000D30A5 /* SearchTableViewCell.swift */,
 				A8297B811EA15D90000D30A5 /* SearchableRecord.swift */,
@@ -356,11 +356,11 @@
 				5C46EF561EA1709300378487 /* CocktailRecipes.json in Resources */,
 				A8297B631E9E7D65000D30A5 /* CockailDetail.storyboard in Resources */,
 				5CBDED7A1EA9104900680547 /* SaveDrinks.storyboard in Resources */,
-				C336DEA91EA67F3500E3B3B4 /* SearchDrink.storyboard in Resources */,
 				C336DEA71EA67EFF00E3B3B4 /* SuggestedDrink.storyboard in Resources */,
 				C336DEAB1EA67F6200E3B3B4 /* MyCabinet.storyboard in Resources */,
 				5CA46BB91E9D963200245AD9 /* LaunchScreen.storyboard in Resources */,
 				5CA46BB61E9D963200245AD9 /* Assets.xcassets in Resources */,
+				5C3FCF9D1EA9931400C0A5F6 /* SearchDrinks.storyboard in Resources */,
 				4A3E7A731EA12C530035F8B9 /* CocktailTestRecipes.json in Resources */,
 				5CAB298D1E9FD004000E2B34 /* ingredients.json in Resources */,
 			);

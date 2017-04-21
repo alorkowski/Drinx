@@ -12,10 +12,7 @@ class SavedDrinksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        CocktailController.shared.savedCocktails =  CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
-        
-//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "savedDrinkCell")
-
+        CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
     }
     
     // MARK: - Table view data source
@@ -25,22 +22,24 @@ class SavedDrinksTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
 
-
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CocktailController.shared.savedCocktails.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "savedDrinkCell", for: indexPath) as? SavedDrinksTableViewCell else { return UITableViewCell() }
         cell.cocktail = CocktailController.shared.savedCocktails[indexPath.row]
         return cell
     }
     
-
-   
-
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow,
+            let dvc = segue.destination as? CocktailDetailTableViewController else { return }
+        let cocktail = CocktailController.shared.savedCocktails[indexPath.row]
+        dvc.cocktail = cocktail
+    }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -51,31 +50,4 @@ class SavedDrinksTableViewController: UITableViewController {
             CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
         }
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -39,11 +39,11 @@ class CocktailController {
         UserDefaults.standard.set(cocktailIDStrings, forKey: savedCocktailsKey)
     }
     
-    func fetchMyFavoriteCocktailsFromUserDefaults() -> [Cocktail] {
-        guard let cocktailIDStrings = UserDefaults.standard.value(forKey: savedCocktailsKey) as? [String] else { return [] }
-        guard let cocktailDictionaries = JSONController.shared.getCocktailDictionaryArray() else { return [] }
+    func fetchMyFavoriteCocktailsFromUserDefaults() {
+        guard let cocktailIDStrings = UserDefaults.standard.value(forKey: savedCocktailsKey) as? [String] else { return }
+        guard let cocktailDictionaries = JSONController.shared.getCocktailDictionaryArray() else { return }
         var cocktails: [Cocktail] = []
-        let group = DispatchGroup()
+        //        let group = DispatchGroup()
         var groupCount = 0
         for id in cocktailIDStrings {
             for cocktail in cocktailDictionaries {
@@ -53,42 +53,46 @@ class CocktailController {
                     if ct.imageURLs[0] != "" {
                         let ckm = CloudKitManager()
                         if let apiID = ct.apiID {
-                            group.enter()
+                            //                            group.enter()
+                            groupCount += 1
                             let predicate = NSPredicate(format: "%@ = apiID", apiID)
                             let query = CKQuery(recordType: "Cocktail", predicate: predicate)
                             let queryOperation = CKQueryOperation(query: query)
                             queryOperation.recordFetchedBlock = { (record) -> Void in
                                 if let tempCocktail = Cocktail(record: record) {
-                                    if !cocktails.contains(tempCocktail) {
-                                        cocktails.insert(tempCocktail, at: 0)
+                                    if !self.savedCocktails.contains(tempCocktail) {
+                                        self.savedCocktails.append(tempCocktail)
                                     }
-                                    group.leave()
+                                    //                                    group.leave()
                                     groupCount -= 1
                                     print(groupCount)
                                     
                                 }
                             }
+                            queryOperation.queryCompletionBlock = { (cursor, error) -> Void in
+                                if (error != nil) {
+                                    //                                    group.leave()
+                                    if !self.savedCocktails.contains(ct) {
+                                        self.savedCocktails.append(ct)
+                                    }
+                                }
+                            }
                             ckm.publicDatabase.add(queryOperation)
                         } else {
-                            if !cocktails.contains(ct) {
-                                cocktails.append(ct)
+                            if !self.savedCocktails.contains(ct) {
+                                self.savedCocktails.append(ct)
                             }
-//                            group.leave()
-//                            groupCount -= 1
-//                            print(groupCount)
                         }
                     } else {
-                        if !cocktails.contains(ct) {
-                        cocktails.append(ct)
+                        if !self.savedCocktails.contains(ct) {
+                            self.savedCocktails.append(ct)
                         }
                     }
                 }
             }
         }
-        group.wait()
-        return cocktails
-    }
-    
+        //        group.wait()
+    }    
     
     // Save a cocktail to cloudkit
     func saveCocktailToCloudKit(cocktail: Cocktail, completion: @escaping(Bool) -> Void) {
