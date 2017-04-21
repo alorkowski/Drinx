@@ -43,56 +43,17 @@ class CocktailController {
         guard let cocktailIDStrings = UserDefaults.standard.value(forKey: savedCocktailsKey) as? [String] else { return }
         guard let cocktailDictionaries = JSONController.shared.getCocktailDictionaryArray() else { return }
         var cocktails: [Cocktail] = []
-        //        let group = DispatchGroup()
-        var groupCount = 0
         for id in cocktailIDStrings {
             for cocktail in cocktailDictionaries {
                 guard let drinkID = cocktail["idDrink"] as? String else { break }
                 if drinkID == id {
                     guard let ct = Cocktail(cocktailDictionary: cocktail) else { break }
-                    if ct.imageURLs[0] != "" {
-                        let ckm = CloudKitManager()
-                        if let apiID = ct.apiID {
-                            //                            group.enter()
-                            groupCount += 1
-                            let predicate = NSPredicate(format: "%@ = apiID", apiID)
-                            let query = CKQuery(recordType: "Cocktail", predicate: predicate)
-                            let queryOperation = CKQueryOperation(query: query)
-                            queryOperation.recordFetchedBlock = { (record) -> Void in
-                                if let tempCocktail = Cocktail(record: record) {
-                                    if !self.savedCocktails.contains(tempCocktail) {
-                                        self.savedCocktails.append(tempCocktail)
-                                    }
-                                    //                                    group.leave()
-                                    groupCount -= 1
-                                    print(groupCount)
-                                    
-                                }
-                            }
-                            queryOperation.queryCompletionBlock = { (cursor, error) -> Void in
-                                if (error != nil) {
-                                    //                                    group.leave()
-                                    if !self.savedCocktails.contains(ct) {
-                                        self.savedCocktails.append(ct)
-                                    }
-                                }
-                            }
-                            ckm.publicDatabase.add(queryOperation)
-                        } else {
-                            if !self.savedCocktails.contains(ct) {
-                                self.savedCocktails.append(ct)
-                            }
-                        }
-                    } else {
-                        if !self.savedCocktails.contains(ct) {
-                            self.savedCocktails.append(ct)
-                        }
-                    }
+                    cocktails.append(ct)
                 }
             }
         }
-        //        group.wait()
-    }    
+        self.savedCocktails = cocktails
+    }
     
     // Save a cocktail to cloudkit
     func saveCocktailToCloudKit(cocktail: Cocktail, completion: @escaping(Bool) -> Void) {

@@ -20,6 +20,8 @@ class CloudKitManager {
     let publicDatabase = CKContainer.default().publicCloudDatabase
     let privateDatabase = CKContainer.default().privateCloudDatabase
     
+    static let shared = CloudKitManager()
+    
     init() {
         checkCloudKitAvailability()
     }
