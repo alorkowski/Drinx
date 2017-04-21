@@ -71,9 +71,11 @@ class SearchTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
         let cocktail = self.cocktails[indexPath.row]
-        cell.textLabel?.text = cocktail.name
+        
+        cell.cocktail = cocktail
+        
         return cell
     }
     

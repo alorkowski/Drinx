@@ -11,13 +11,22 @@ import UIKit
 class SearchTableViewCell: UITableViewCell {
     
     
-//    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var drinkNameText: UILabel!
     
     
     func update(cocktail: Cocktail){
-//        ImageView.image = cocktail.image
+
         drinkNameText.text = cocktail.name
+        
+        if cocktail.image != nil {
+            ImageView.image = cocktail.image
+        } else {
+            if let firstIngredientName = cocktail.ingredients.first {
+                ImageView.image = UIImage(named: firstIngredientName)
+            }
+        }
+        
         
     }
     
