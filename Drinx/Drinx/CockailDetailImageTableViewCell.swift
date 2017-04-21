@@ -19,11 +19,15 @@ class CockailDetailImageTableViewCell: UITableViewCell {
     }
     
     func updateCell() {
-        guard let cocktail = cocktail, let _ = imageView else { updateCell(); return }
+        guard let cocktail = cocktail else { updateCell(); return }
         if let image = cocktail.image {
-            self.imageView?.image = image
+            self.imageCell?.image = image
         } else {
-            self.imageView?.image = UIImage(named: cocktail.ingredients[0])
+            if let image = UIImage(named: cocktail.ingredients[0]) {
+                self.imageCell?.image = image
+            } else if let image = UIImage(named: cocktail.ingredients[1]) {
+                self.imageCell?.image = image
+            }
         }
     }
 }

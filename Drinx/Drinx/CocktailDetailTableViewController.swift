@@ -17,10 +17,13 @@ class CocktailDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
 //        self.cocktail = Cocktail(cocktailDictionary: mockCocktail)
 //        updateViews()
 
     }
+    
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -29,6 +32,7 @@ class CocktailDetailTableViewController: UITableViewController {
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
     }
     
+    
     func setNavigationBar() {
         
         let screenSize: CGRect = UIScreen.main.bounds
@@ -36,7 +40,10 @@ class CocktailDetailTableViewController: UITableViewController {
         let navItem = UINavigationItem(title: "")
         if let cocktail = cocktail {
             navItem.title = cocktail.name
+
         }
+        navBar.backgroundColor =  UIColor(red: 141/255, green: 162/255, blue: 110/255, alpha: 1.0)
+        navBar.tintColor = UIColor(red: 141/255, green: 162/255, blue: 110/255, alpha: 1.0)
         let backItem = UIBarButtonItem(title: "Back", style: .done, target: nil, action: #selector(done))
         let favoriteItem = UIBarButtonItem(title: "Save", style: .plain, target: nil, action: #selector(saveCocktailToFavorites))
         navItem.leftBarButtonItem = backItem
@@ -78,33 +85,51 @@ class CocktailDetailTableViewController: UITableViewController {
         case 2:
             return 1
         default:
-            return 0
+            break
         }
+        return 0
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             return 0
         case 1:
-            return 10
-        case 2:
-            return 10
-        default:
             return 0
+        case 2:
+            return 0
+        default:
+            break
         }
+        return 0
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return self.view.frame.width + 20
+            //            return self.view.frame.width
+            return self.view.frame.size.width
         case 1:
             return 30
         case 2:
             return 200
         default:
-            return 30
+            break
         }
+        return 30
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+//            return self.view.frame.width
+            return self.view.frame.size.width
+        case 1:
+            return 30
+        case 2:
+            return UITableViewAutomaticDimension
+        default:
+            break
+        }
+        return 30
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,9 +156,9 @@ class CocktailDetailTableViewController: UITableViewController {
             cell.textLabel?.sizeToFit()
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath)
-            return cell
+            break
         }
+        return UITableViewCell()
     }
     
 //    func updateViews() {

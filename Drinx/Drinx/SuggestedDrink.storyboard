@@ -22,15 +22,16 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="205"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TFj-RO-9vZ" id="83h-nL-ZzC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jWF-L3-3tO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
+                                            <color key="backgroundColor" red="0.55116540189999996" green="0.63459283109999998" blue="0.43022382260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBD-g7-HNo">
                                             <rect key="frame" x="0.0" y="163.5" width="375" height="41"/>
-                                            <color key="backgroundColor" red="0.21710421954314718" green="0.21710421954314718" blue="0.21710421954314718" alpha="0.60611087328767121" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.81598984770000005" green="0.81598984770000005" blue="0.81598984770000005" alpha="0.49745826198630139" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="41" id="2VY-u2-ZNe"/>
                                             </constraints>
