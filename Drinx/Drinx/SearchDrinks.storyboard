@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,26 +23,21 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="84" id="swM-7c-304">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" textLabel="KsX-59-2CL" rowHeight="84" style="IBUITableViewCellStyleDefault" id="swM-7c-304">
                                 <rect key="frame" x="0.0" y="72" width="375" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="swM-7c-304" id="hIP-vr-HAQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kj7-kJ-I6y">
-                                            <rect key="frame" x="13" y="26" width="349" height="30"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KsX-59-2CL">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="83.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="centerY" secondItem="hIP-vr-HAQ" secondAttribute="centerY" id="G7X-Xr-6IX"/>
-                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="top" secondItem="hIP-vr-HAQ" secondAttribute="topMargin" constant="18" id="QUy-5D-nZ9"/>
-                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="leading" secondItem="hIP-vr-HAQ" secondAttribute="leadingMargin" constant="5" id="g6N-FR-0bo"/>
-                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="centerX" secondItem="hIP-vr-HAQ" secondAttribute="centerX" id="pq3-vb-bPG"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="t9z-Uo-Ivs" kind="presentation" id="9B4-j7-2dq"/>

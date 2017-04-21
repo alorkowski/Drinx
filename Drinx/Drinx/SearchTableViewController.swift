@@ -71,10 +71,18 @@ class SearchTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
         let cocktail = self.cocktails[indexPath.row]
         
-        cell.cocktail = cocktail
+        cell.textLabel?.text = cocktail.name
+        
+        if cocktail.image != nil {
+            cell.imageView?.image = cocktail.image
+        } else {
+            if let firstIngredientName = cocktail.ingredients.first {
+                cell.imageView?.image = UIImage(named: firstIngredientName)
+            }
+        }
         
         return cell
     }
@@ -94,9 +102,6 @@ class SearchTableViewController: UITableViewController {
     }
 }
 
-
-
-
 extension SearchTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     
@@ -113,6 +118,15 @@ extension SearchTableViewController: UISearchBarDelegate {
         
         CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
             self.cocktails = cocktails
+            ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
+                
+                guard let cocktail = cocktail else { return }
+                if let index = self.cocktails.index(of: cocktail) {
+                    self.cocktails.remove(at: index)
+                    self.cocktails.insert(cocktail, at: index)
+                    self.tableView.reloadData()
+                }
+            })
         }
         
     }
