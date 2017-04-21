@@ -13,6 +13,21 @@ class SavedDrinksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
+        DispatchQueue.global(qos: .background).async {
+            ImageController.fetchAvailableImagesFromCloudKit(forCocktails: CocktailController.shared.savedCocktails, perRecordCompletion: { (cocktail) in
+                
+                guard let cocktail = cocktail else { return }
+                if let index = CocktailController.shared.savedCocktails.index(of: cocktail) {
+                    CocktailController.shared.savedCocktails.remove(at: index)
+                    CocktailController.shared.savedCocktails.insert(cocktail, at: index)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        //                    let indexPath = IndexPath(row: index, section: 0)
+                        //                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+        }
     }
     
     override func viewDidLayoutSubviews() {

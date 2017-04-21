@@ -79,8 +79,10 @@ class SearchTableViewController: UITableViewController {
         if cocktail.image != nil {
             cell.imageView?.image = cocktail.image
         } else {
-            if let firstIngredientName = cocktail.ingredients.first {
-                cell.imageView?.image = UIImage(named: firstIngredientName)
+            if let image = UIImage(named: cocktail.ingredients[0]) {
+                cell.imageView?.image = image
+            } else if let image = UIImage(named: cocktail.ingredients[1]) {
+                cell.imageView?.image = image
             }
         }
         
@@ -110,25 +112,64 @@ extension SearchTableViewController: UISearchBarDelegate {
         
         CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
             self.cocktails = cocktails
+            DispatchQueue.global(qos: .background).async {
+            for cocktail in CocktailController.shared.cocktails {
+                for ingredient in cocktail.ingredients {
+                    if ingredient.lowercased().contains(searchTerm.lowercased()) {
+                        if !self.cocktails.contains(cocktail) {
+                            self.cocktails.append(cocktail)
+                        }
+                    }
+                }
+            }
+                ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
+                    
+                    guard let cocktail = cocktail else { return }
+                    if let index = self.cocktails.index(of: cocktail) {
+                        self.cocktails.remove(at: index)
+                        self.cocktails.insert(cocktail, at: index)
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            //                    let indexPath = IndexPath(row: index, section: 0)
+                            //                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                    }
+                })
+            }
         }
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        resignFirstResponder()
         guard let searchTerm = searchBar.text else { return }
         
         CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
             self.cocktails = cocktails
-            ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
-                
-                guard let cocktail = cocktail else { return }
-                if let index = self.cocktails.index(of: cocktail) {
-                    self.cocktails.remove(at: index)
-                    self.cocktails.insert(cocktail, at: index)
-                    self.tableView.reloadData()
+            DispatchQueue.global(qos: .background).async {
+            for cocktail in CocktailController.shared.cocktails {
+                for ingredient in cocktail.ingredients {
+                    if ingredient.lowercased().contains(searchTerm.lowercased()) {
+                        if !self.cocktails.contains(cocktail) {
+                            self.cocktails.append(cocktail)
+                        }
+                    }
                 }
-            })
+            }
+                ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
+                    
+                    guard let cocktail = cocktail else { return }
+                    if let index = self.cocktails.index(of: cocktail) {
+                        self.cocktails.remove(at: index)
+                        self.cocktails.insert(cocktail, at: index)
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            //                    let indexPath = IndexPath(row: index, section: 0)
+                            //                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                    }
+                })
+            }
         }
-        
     }
 }
 

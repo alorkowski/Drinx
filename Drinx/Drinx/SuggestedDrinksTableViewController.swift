@@ -30,9 +30,23 @@ class SuggestedDrinksTableViewController: UITableViewController {
         CocktailController.shared.getCocktailDictionaryArray {
             findMatches {
                 self.tableView.reloadData()
+                DispatchQueue.global(qos: .background).async {
+                    ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.suggestedCocktails, perRecordCompletion: { (cocktail) in
+                        
+                        guard let cocktail = cocktail else { return }
+                        if let index = self.suggestedCocktails.index(of: cocktail) {
+                            self.suggestedCocktails.remove(at: index)
+                            self.suggestedCocktails.insert(cocktail, at: index)
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                //                    let indexPath = IndexPath(row: index, section: 0)
+                                //                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
+                        }
+                    })
+                }
             }
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,13 +58,27 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if CabinetController.shared.cabinetHasBeenUpdated{
+        if CabinetController.shared.cabinetHasBeenUpdated {
             findMatches {
-                self.tableView.reloadData()
                 CabinetController.shared.cabinetHasBeenUpdated = false
+                self.tableView.reloadData()
+                DispatchQueue.global(qos: .background).async {
+                    ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.suggestedCocktails, perRecordCompletion: { (cocktail) in
+                        
+                        guard let cocktail = cocktail else { return }
+                        if let index = self.suggestedCocktails.index(of: cocktail) {
+                            self.suggestedCocktails.remove(at: index)
+                            self.suggestedCocktails.insert(cocktail, at: index)
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                //                    let indexPath = IndexPath(row: index, section: 0)
+                                //                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
+                        }
+                    })
+                }
             }
         }
-        
     }
     
     // MARK: - Tableview Data
@@ -78,7 +106,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
     // MARK: - Navigation
     
     
-//     In a storyboard-based application, you will often want to do a little preparation before navigation
+    //     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? CocktailDetailTableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -92,63 +120,11 @@ class SuggestedDrinksTableViewController: UITableViewController {
     func findMatches(completion: @escaping () -> Void) {
         for cocktail in cocktails {
             let cocktailIngredients: Set = Set(cocktail.ingredients)
-            let group = DispatchGroup()
-            var groupCount = 0
-            group.enter()
-            groupCount += 1
-//            print(groupCount)
             if cocktailIngredients.isSubset(of: IngredientController.share.myCabinetIngredientStrings) {
-                if cocktail.imageURLs[0] != "" {
-                    let ckm = CloudKitManager()
-                    if let apiID = cocktail.apiID {
-                        let predicate = NSPredicate(format: "%@ = apiID", apiID)
-                        let query = CKQuery(recordType: "Cocktail", predicate: predicate)
-                        let queryOperation = CKQueryOperation(query: query)
-                        queryOperation.recordFetchedBlock = { (record) -> Void in
-                            if let tempCocktail = Cocktail(record: record) {
-                                if !self.tempCocktails.contains(tempCocktail) {
-                                    self.tempCocktails.insert(tempCocktail, at: 0)
-                                }
-                                group.leave()
-                                groupCount -= 1
-//                                print(groupCount)
-                                
-                            }
-                        }
-                        ckm.publicDatabase.add(queryOperation)
-                        
-                    } else {
-                        if !self.tempCocktails.contains(cocktail) {
-                            self.tempCocktails.append(cocktail)
-                        }
-                        group.leave()
-                        groupCount -= 1
-//                        print(groupCount)
-                        
-                        
-                    }
-                } else {
-                    if !self.tempCocktails.contains(cocktail) {
-                        self.tempCocktails.append(cocktail)
-                    }
-                    group.leave()
-                    groupCount -= 1
-//                    print(groupCount)
-                    
-                    
-                }
-                group.notify(queue: DispatchQueue.main, execute: {
-                    self.suggestedCocktails = self.tempCocktails
-                    self.tableView.reloadData()
-//                    print(cocktail.name)
-//                    print(self.tempCocktails.count)
-//                    print(self.suggestedCocktails.count)
-                    completion()
-                })
+                self.suggestedCocktails.append(cocktail)
             }
         }
     }
-    
 }
 
 
