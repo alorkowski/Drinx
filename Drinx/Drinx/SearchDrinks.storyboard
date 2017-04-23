@@ -69,6 +69,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Search" width="55" height="53"/>
+        <image name="Search" width="50" height="48"/>
     </resources>
 </document>

@@ -71,7 +71,7 @@
                             <outlet property="delegate" destination="yxk-Q2-ZD2" id="AGg-QY-914"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="" image="Wine Rack" id="O7p-bF-ehp"/>
+                    <tabBarItem key="tabBarItem" title="" image="myShot" id="O7p-bF-ehp"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZV-vV-DIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -137,6 +137,6 @@
     </scenes>
     <resources>
         <image name="151 proof rum" width="350" height="350"/>
-        <image name="Wine Rack" width="28" height="50"/>
+        <image name="myShot" width="15" height="43"/>
     </resources>
 </document>

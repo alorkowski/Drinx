@@ -79,6 +79,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Save" width="28" height="50"/>
+        <image name="Save" width="27" height="43"/>
     </resources>
 </document>
