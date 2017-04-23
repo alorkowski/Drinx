@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nu2-ut-Tcg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nu2-ut-Tcg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Suggested-->
+        <!--Suggested Drinks Table View Controller-->
         <scene sceneID="drO-7B-z0F">
             <objects>
                 <tableViewController id="nu2-ut-Tcg" customClass="SuggestedDrinksTableViewController" customModule="Drinx" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
                             <outlet property="delegate" destination="nu2-ut-Tcg" id="Pe8-4g-tb7"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Suggested" image="idea" id="CTN-xA-Btb"/>
+                    <tabBarItem key="tabBarItem" title="" image="Cocktail" id="CTN-xA-Btb"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t9U-KQ-CHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -80,6 +80,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="idea" width="22" height="36"/>
+        <image name="Cocktail" width="26" height="49"/>
     </resources>
 </document>
