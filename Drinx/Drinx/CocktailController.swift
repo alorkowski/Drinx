@@ -123,24 +123,22 @@ class CocktailController {
         }
     }
     
-    func searchCocktails(for searchTerm: String, completion: ([Cocktail]) -> Void) {
-        
-        var matchingCocktails: [Cocktail] = []
+    func searchCocktails(for searchTerm: String, perRecordCompletion: @escaping (Cocktail) -> Void, completion: (() -> Void)) {
+    
         
         for cocktail in self.cocktails {
-            let lowercasedCocktailIngredients = cocktail.ingredients.flatMap( {$0.lowercased() }).joined(separator: " ")
+            let lowercasedCocktailIngredients = cocktail.ingredients.joined(separator: " ")
             if cocktail.name.lowercased().contains(searchTerm.lowercased()) {
-                if !matchingCocktails.contains(cocktail) {
-                    matchingCocktails.append(cocktail)
+                DispatchQueue.main.async {
+                    perRecordCompletion(cocktail)
                 }
-            }
-            if lowercasedCocktailIngredients.contains(searchTerm.lowercased()) {
-                if !matchingCocktails.contains(cocktail) {
-                    matchingCocktails.append(cocktail)
+            } else if lowercasedCocktailIngredients.contains(searchTerm.lowercased()) {
+                DispatchQueue.main.async {
+                    perRecordCompletion(cocktail)
                 }
             }
         }
-        completion(matchingCocktails)
+    completion()
     }
 }
 

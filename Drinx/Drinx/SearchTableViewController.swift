@@ -122,56 +122,33 @@ extension SearchTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let searchTerm = searchBar.text else { return }
-        
-        CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
-            self.cocktails = cocktails
-            self.tableView.reloadData()
-//            DispatchQueue.global(qos: .background).async {
-//                for cocktail in CocktailController.shared.cocktails {
-//                    for ingredient in cocktail.ingredients {
-//                        if ingredient.lowercased().contains(searchTerm.lowercased()) {
-//                            if !self.cocktails.contains(cocktail) {
-//                                self.cocktails.append(cocktail)
-//                            }
-//                        }
-//                    }
-//                }
-//                self.tableView.reloadData()
-//                ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
-//                    
-//                    guard let cocktail = cocktail else { return }
-//                    if let index = self.cocktails.index(of: cocktail) {
-//                        self.cocktails.remove(at: index)
-//                        self.cocktails.insert(cocktail, at: index)
-//                        DispatchQueue.main.async {
-//                            self.tableView.reloadData()
-//                            //                    let indexPath = IndexPath(row: index, section: 0)
-//                            //                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
-//                        }
-//                    }
-//                })
-//            }
+        guard searchTerm.characters.count >= 3 else { return }
+        self.cocktails = []
+        self.tableView.reloadData()
+        CocktailController.shared.searchCocktails(for: searchTerm, perRecordCompletion: { cocktail in
+            if !self.cocktails.contains(cocktail) {
+                self.cocktails.append(cocktail)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }) { (_) in
+//
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.resignFirstResponder()
         guard let searchTerm = searchBar.text else { return }
-        
-        CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
-            self.cocktails = cocktails
-            self.tableView.reloadData()
+        self.cocktails = []
+        CocktailController.shared.searchCocktails(for: searchTerm, perRecordCompletion: { cocktail in
+            if !self.cocktails.contains(cocktail) {
+                self.cocktails.append(cocktail)
+                self.tableView.reloadData()
+            }
+        }) { (_) in
             DispatchQueue.global(qos: .background).async {
-//                for cocktail in CocktailController.shared.cocktails {
-//                    for ingredient in cocktail.ingredients {
-//                        if ingredient.lowercased().contains(searchTerm.lowercased()) {
-//                            if !self.cocktails.contains(cocktail) {
-//                                self.cocktails.append(cocktail)
-//                            }
-//                        }
-//                    }
-//                }
-//                self.tableView.reloadData()
                 ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
                     
                     guard let cocktail = cocktail else { return }
