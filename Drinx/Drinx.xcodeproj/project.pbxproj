@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A3E7A731EA12C530035F8B9 /* CocktailTestRecipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */; };
 		5C3FCF9D1EA9931400C0A5F6 /* SearchDrinks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3FCF9C1EA9931400C0A5F6 /* SearchDrinks.storyboard */; };
+		5C3FCF9F1EAD935100C0A5F6 /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3FCF9E1EAD935100C0A5F6 /* TutorialController.swift */; };
 		5C46EF541EA126E600378487 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C46EF531EA126E600378487 /* CloudKit.framework */; };
 		5C46EF561EA1709300378487 /* CocktailRecipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C46EF551EA1709300378487 /* CocktailRecipes.json */; };
 		5CA46BAF1E9D963200245AD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailTestRecipes.json; sourceTree = "<group>"; };
 		5C3FCF9C1EA9931400C0A5F6 /* SearchDrinks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchDrinks.storyboard; sourceTree = "<group>"; };
+		5C3FCF9E1EAD935100C0A5F6 /* TutorialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
 		5C46EF511EA126DE00378487 /* Drinx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Drinx.entitlements; sourceTree = "<group>"; };
 		5C46EF531EA126E600378487 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5C46EF551EA1709300378487 /* CocktailRecipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailRecipes.json; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				5CA46BC61E9D96B900245AD9 /* ImageController.swift */,
 				5CA46BC81E9D96C600245AD9 /* CloudKitManager.swift */,
 				5CBDED7B1EA915CB00680547 /* JSONController.swift */,
+				5C3FCF9E1EAD935100C0A5F6 /* TutorialController.swift */,
 			);
 			name = OtherControllers;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				5CAB298B1E9FCD91000E2B34 /* CabinetController.swift in Sources */,
 				5CA46BC91E9D96C600245AD9 /* CloudKitManager.swift in Sources */,
 				5CA46BC31E9D969D00245AD9 /* CocktailController.swift in Sources */,
+				5C3FCF9F1EAD935100C0A5F6 /* TutorialController.swift in Sources */,
 				A8297B7A1E9E850E000D30A5 /* CocktailDetailTableViewController.swift in Sources */,
 				5CA46BE01E9D97E100245AD9 /* SavedDrinksTableViewController.swift in Sources */,
 				5CA46BDC1E9D97C300245AD9 /* SearchTableViewController.swift in Sources */,

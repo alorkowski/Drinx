@@ -12,6 +12,8 @@ class SearchTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var showTutorial = true
+    
     var cocktails: [Cocktail] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -27,40 +29,35 @@ class SearchTableViewController: UITableViewController {
         super.viewDidLoad()
         
         searchBar.delegate = self
+        if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialSearch") as? Bool {
+            self.showTutorial = showTutorial
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSearch")
+        } else {
+            self.showTutorial = true
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSearch")
+        }
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.view.superview!.backgroundColor = UIColor.white
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 45, right: 0)
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
     }
     
-//    func getCocktailDictionaryArray(completion: () -> Void) {
-//        
-//        guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else {return}
-//        do {
-//            
-//            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
-//            guard let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }
-//            let cocktailsArray = jsonArray.flatMap( { Cocktail(cocktailDictionary: $0)} )
-//            self.cocktails = cocktailsArray
-//            completion()
-//        } catch {
-//            print(error.localizedDescription)
-//            completion()
-//        }
-//    }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.showTutorial {
+            self.searchBar.text = "Rum"
+            self.searchBarSearchButtonClicked(self.searchBar)
+            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.searchDrinksTitle, message: TutorialController.shared.searchDrinksMessage, alertActionTitle: "OK!", completion: { 
+                self.showTutorial = false
+                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSearch")
+            })
+        }
+    }
     
-    
-//    func filterContentForSearchText(_ searchText: String) {
-//        filterCocktail = cocktails.filter({( cocktail : Cocktail) -> Bool in
-//            return cocktail.name.lowercased().contains(searchText.lowercased())
-//        })
-//        tableView.reloadData()
-//    }
     
       // MARK: - Table view data source
     

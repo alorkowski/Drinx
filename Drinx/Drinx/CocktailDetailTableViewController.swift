@@ -10,6 +10,7 @@ import UIKit
 
 class CocktailDetailTableViewController: UITableViewController {
     
+    var showTutorial = true
     
     let mockCocktail = ["idDrink":"15112","strDrink":"Alamo Splash","strCategory":"Ordinary Drink","strAlcoholic":"Alcoholic","strGlass":"Collins glass","strInstructions":"Mix with cracked ice and strain into collins glass.","strDrinkThumb":"","strIngredient1":"Tequila","strIngredient2":"Orange juice","strIngredient3":"Pineapple juice","strIngredient4":"Lemon-lime soda","strIngredient5":"","strIngredient6":"","strIngredient7":"","strIngredient8":"","strIngredient9":"","strIngredient10":"","strIngredient11":"","strIngredient12":"","strIngredient13":"","strIngredient14":"","strIngredient15":"","strMeasure1":"1 1/2 oz ","strMeasure2":"1 oz ","strMeasure3":"1/2 oz ","strMeasure4":"1 splash ","strMeasure5":" ","strMeasure6":" ","strMeasure7":" ","strMeasure8":" ","strMeasure9":" ","strMeasure10":"","strMeasure11":"","strMeasure12":"","strMeasure13":"","strMeasure14":"","strMeasure15":"","dateModified":""]
 
@@ -18,8 +19,13 @@ class CocktailDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
-//        self.cocktail = Cocktail(cocktailDictionary: mockCocktail)
-//        updateViews()
+        if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialCocktailDetail") as? Bool {
+            self.showTutorial = showTutorial
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialCocktailDetail")
+        } else {
+            self.showTutorial = true
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialCocktailDetail")
+        }
 
     }
     
@@ -30,6 +36,20 @@ class CocktailDetailTableViewController: UITableViewController {
         self.view.superview!.backgroundColor = UIColor.white
         let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.showTutorial {
+            TutorialController.shared.drinksTutorial(viewController: self,
+                                                     title: TutorialController.shared.cocktailDetailTitle,
+                                                     message: TutorialController.shared.cocktailDetailMessage,
+                                                     alertActionTitle: "OK!",
+                                                     completion: {
+                self.showTutorial = false
+                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialCocktailDetail")
+            })
+        }
     }
     
     

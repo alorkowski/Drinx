@@ -23,6 +23,10 @@ class CocktailController {
     
     var savedCocktails: [Cocktail] = []
     
+    var sampleSavedCocktails: [Cocktail] {
+        return CocktailController.getRandomCocktails(numberOfCocktailsToGet: 2)
+    }
+    
     var suggestedCocktails: [Cocktail] = []
     
     var mockIngredients: [String] = ["Vodka", "Ice", "Orange juice", "Gin", "Schnapps" , "Cider" , "Aftershock" , "Sprite" , "Rumple Minze", "Peach Vodka" , "Ouzo" , "Coffee" , "Spiced rum" , "Water" , "Espresso" , "Angelica root" , "Condensed milk" , "Honey" , "Whipping cream"]
@@ -133,5 +137,16 @@ class CocktailController {
         }
         completion(matchingCocktails)
     }
+}
 
+extension CocktailController {
+    static func getRandomCocktails(numberOfCocktailsToGet: Int) -> [Cocktail] {
+        var randomCocktails: [Cocktail] = []
+        for number in 1...numberOfCocktailsToGet {
+            let randomNumber = Int(arc4random_uniform(UInt32(CocktailController.shared.cocktails.count)))
+            let cocktail = CocktailController.shared.cocktails[randomNumber]
+            randomCocktails.append(cocktail)
+        }
+        return randomCocktails
+    }    
 }

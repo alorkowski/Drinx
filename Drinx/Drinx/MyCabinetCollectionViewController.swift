@@ -13,12 +13,29 @@ private let reuseIdentifier = "Cell"
 class MyCabinetCollectionViewController: UICollectionViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     var searchController: UISearchController?
+    
+    var showTutorial = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let myIngredients = CabinetController.shared.getMyIngredientsFromUserDefaults()
-        IngredientController.share.ingredients = myIngredients
+        if myIngredients.count != 0 {
+            CabinetController.shared.myCabinet.myIngredients = myIngredients
+            IngredientController.share.ingredients = myIngredients
+            CabinetController.shared.saveMyCabinetToUserDefaults()
+        } else {
+            CabinetController.shared.myCabinet.myIngredients = CabinetController.shared.myCabinet.sampleIngredients
+            IngredientController.share.ingredients = CabinetController.shared.myCabinet.sampleIngredients
+            CabinetController.shared.saveMyCabinetToUserDefaults()
+        }
         setUpSearchController()
+        if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialMyCabinet") as? Bool {
+            self.showTutorial = showTutorial
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
+        } else {
+            self.showTutorial = true
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
+        }
 
 //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -39,15 +56,18 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
             cellSize.height = cellSize.width + 30
             layout.itemSize = cellSize
         }
-//        searchController?.searchBar.text = ""
     }
     
-    
-    
-//    override func didMove(toParentViewController parent: UIViewController?) {
-//        searchController?.searchBar.text = ""
-//    }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.showTutorial {
+            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.myCabinetTitle, message: TutorialController.shared.myCabinetMessage, alertActionTitle: "OK!", completion: { 
+                self.showTutorial = false
+                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
+            })
+        }
+    }
+        
     //=======================================================
     // MARK: - Setup SearchController
     //=======================================================
@@ -102,21 +122,6 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
 
 
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -155,21 +160,6 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         deleteAlertController(indexPath: indexPath, ingredient: IngredientController.share.ingredients[indexPath.row])
     }
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
     
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
@@ -192,6 +182,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
             self.collectionView?.reloadData()
             self.collectionView?.reloadInputViews()
             CabinetController.shared.cabinetHasBeenUpdated = true
+            CabinetController.shared.saveMyCabinetToUserDefaults()
         }
         alertControler.addAction(cancelAction)
         alertControler.addAction(deleteAction)

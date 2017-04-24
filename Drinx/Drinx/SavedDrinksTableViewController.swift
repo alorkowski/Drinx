@@ -9,6 +9,8 @@
 import UIKit
 
 class SavedDrinksTableViewController: UITableViewController {
+    
+    var showTutorial = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,16 @@ class SavedDrinksTableViewController: UITableViewController {
                 }
             })
         }
+        if CocktailController.shared.savedCocktails.isEmpty {
+            CocktailController.shared.savedCocktails = CocktailController.shared.sampleSavedCocktails
+        }
+        if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialSaved") as? Bool {
+            self.showTutorial = showTutorial
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
+        } else {
+            self.showTutorial = true
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,6 +54,17 @@ class SavedDrinksTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.showTutorial {
+            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.favoriteDrinksTitle, message: TutorialController.shared.favoriteDrinksMessage, alertActionTitle: "OK!") {
+                self.showTutorial = false
+                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
+            }
+        }
+        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

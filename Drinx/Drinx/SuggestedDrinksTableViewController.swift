@@ -11,7 +11,7 @@ import CloudKit
 
 class SuggestedDrinksTableViewController: UITableViewController {
     
-    
+    var showTutorial = true
     let cocktail = [String]()
     var cocktailDictionaries: [[String:Any]] = [[:]]
     var cocktails: [Cocktail] {
@@ -47,17 +47,28 @@ class SuggestedDrinksTableViewController: UITableViewController {
                 }
             }
         }
+        if suggestedCocktails.count == 0 {
+            self.suggestedCocktails = CocktailController.getRandomCocktails(numberOfCocktailsToGet: 10)
+        }
+        if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialSuggested") as? Bool {
+            self.showTutorial = showTutorial
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSuggested")
+        } else {
+            self.showTutorial = true
+            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSuggested")
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.view.superview!.backgroundColor = UIColor.white
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 45, right: 0)
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         if CabinetController.shared.cabinetHasBeenUpdated {
             findMatches {
                 CabinetController.shared.cabinetHasBeenUpdated = false
@@ -81,11 +92,20 @@ class SuggestedDrinksTableViewController: UITableViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if self.showTutorial {
+            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.suggestedDrinksTitle, message: TutorialController.shared.suggestedDrinksMessage, alertActionTitle: "OK!", completion: {
+                self.showTutorial = false
+                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSuggested")
+            })
+        }
+    }
+    
     // MARK: - Tableview Data
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return suggestedCocktails.count
+        
+        return self.suggestedCocktails.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,12 +138,18 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     
     func findMatches(completion: @escaping () -> Void) {
+        var count = 0
+        var sugCocktails: [Cocktail] = []
         for cocktail in cocktails {
             let cocktailIngredients: Set = Set(cocktail.ingredients)
             if cocktailIngredients.isSubset(of: IngredientController.share.myCabinetIngredientStrings) {
-                self.suggestedCocktails.append(cocktail)
+                sugCocktails.append(cocktail)
             }
+            count += 1
+            print(count)
         }
+        self.suggestedCocktails = sugCocktails
+        self.tableView.reloadData()
     }
 }
 

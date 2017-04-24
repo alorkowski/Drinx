@@ -16,7 +16,7 @@ class IngredientController {
 
     static let share = IngredientController()
     
-    var ingredients = [Ingredient]()
+    var ingredients = CabinetController.shared.myCabinet.myIngredients
     
     var myCabinetIngredientStrings: [String] {
         var strings: [String] = []
@@ -36,6 +36,11 @@ class IngredientController {
         for (index, ingredientObj) in ingredients.enumerated() {
             if ingredient.name == ingredientObj.name {
                 ingredients.remove(at: index)
+            }
+        }
+        for (index, ingredientObj) in CabinetController.shared.myCabinet.myIngredients.enumerated() {
+            if ingredient.name == ingredientObj.name {
+                CabinetController.shared.myCabinet.myIngredients.remove(at: index)
             }
         }
     }
