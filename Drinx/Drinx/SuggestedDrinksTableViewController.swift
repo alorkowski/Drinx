@@ -26,6 +26,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
         super.viewDidLoad()
         let myCabinet = CabinetController.shared.getMyIngredientsFromUserDefaults()
         IngredientController.share.ingredients = myCabinet
+        tableView.separatorStyle = .none
         
         CocktailController.shared.getCocktailDictionaryArray {
             findMatches {

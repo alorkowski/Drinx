@@ -26,10 +26,9 @@ class CocktailDetailTableViewController: UITableViewController {
             self.showTutorial = true
             UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialCocktailDetail")
         }
+        tableView.allowsSelection = false
 
     }
-    
-
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
