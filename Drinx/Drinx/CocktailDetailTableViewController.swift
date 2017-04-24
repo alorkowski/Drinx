@@ -82,7 +82,7 @@ class CocktailDetailTableViewController: UITableViewController {
     }
     
     func done() {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
