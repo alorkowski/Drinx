@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KUo-vb-MEs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KUo-vb-MEs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,8 +26,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kVm-ZQ-hP8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
+                                            <color key="backgroundColor" red="0.00062328041530000005" green="0.6547486186" blue="0.61754077669999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mbt-Gr-gaG">
-                                            <rect key="frame" x="0.0" y="163.5" width="375" height="41"/>
+                                            <rect key="frame" x="0.0" y="163" width="375" height="41"/>
                                             <color key="backgroundColor" red="0.2171042195" green="0.2171042195" blue="0.2171042195" alpha="0.60611087330000002" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="41" id="ZQE-il-Gzt"/>
@@ -36,10 +40,6 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kVm-ZQ-hP8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
-                                            <color key="backgroundColor" red="0.00062328041530000005" green="0.6547486186" blue="0.61754077669999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.65683054919999995" blue="0.61769950389999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>

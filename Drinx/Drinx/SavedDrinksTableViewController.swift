@@ -14,6 +14,7 @@ class SavedDrinksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorStyle = .none
         CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
         DispatchQueue.global(qos: .background).async {
             ImageController.fetchAvailableImagesFromCloudKit(forCocktails: CocktailController.shared.savedCocktails, perRecordCompletion: { (cocktail) in
