@@ -62,8 +62,8 @@ class CocktailDetailTableViewController: UITableViewController {
             navItem.title = cocktail.name
 
         }
-        navBar.backgroundColor =  UIColor(red: 141/255, green: 162/255, blue: 110/255, alpha: 1.0)
-        navBar.tintColor = UIColor(red: 141/255, green: 162/255, blue: 110/255, alpha: 1.0)
+        navBar.backgroundColor =  UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
+        navBar.tintColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
         let backItem = UIBarButtonItem(title: "Back", style: .done, target: nil, action: #selector(done))
         let favoriteItem = UIBarButtonItem(title: "Save", style: .plain, target: nil, action: #selector(saveCocktailToFavorites))
         navItem.leftBarButtonItem = backItem

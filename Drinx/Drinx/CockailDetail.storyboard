@@ -17,18 +17,19 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="203" sectionHeaderHeight="28" sectionFooterHeight="28" id="lBq-GB-pbQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.55116540189999996" green="0.63459283109999998" blue="0.43022382260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.00062328041531145573" green="0.65474861860275269" blue="0.61754077672958374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.00062328041530000005" green="0.6547486186" blue="0.61754077669999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="375" id="rrY-5n-fQI" customClass="CockailDetailImageTableViewCell" customModule="Drinx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="375"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rrY-5n-fQI" id="OYX-hh-VHa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKC-8o-o39">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
-                                            <color key="backgroundColor" red="0.55116540189999996" green="0.63459283109999998" blue="0.43022382260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.00062328041531145573" green="0.65474861860275269" blue="0.61754077672958374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="nKC-8o-o39" secondAttribute="height" multiplier="1:1" id="ug1-PV-LNH"/>
                                             </constraints>
@@ -61,9 +62,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.55116540189999996" green="0.63459283109999998" blue="0.43022382260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.00062328041531145573" green="0.65474861860275269" blue="0.61754077672958374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.55116540189999996" green="0.63459283109999998" blue="0.43022382260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.00059519312340000001" green="0.64735341069999996" blue="0.61005461220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="none" indentationWidth="10" reuseIdentifier="instructionCell" textLabel="ILV-ix-4dT" rowHeight="40" style="IBUITableViewCellStyleDefault" id="98F-Ou-Nx0" customClass="CocktailDetailInstructionTableViewCell" customModule="Drinx" customModuleProvider="target">
@@ -82,7 +83,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.55116540189999996" green="0.63459283109999998" blue="0.43022382260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.00062328041531145573" green="0.65474861860275269" blue="0.61754077672958374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
