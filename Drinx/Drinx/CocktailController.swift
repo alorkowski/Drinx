@@ -130,9 +130,13 @@ class CocktailController {
         for cocktail in self.cocktails {
             let lowercasedCocktailIngredients = cocktail.ingredients.flatMap( {$0.lowercased() })
             if cocktail.name.lowercased().contains(searchTerm.lowercased()) {
-                matchingCocktails.append(cocktail)
+                if !matchingCocktails.contains(cocktail) {
+                    matchingCocktails.append(cocktail)
+                }
             } else if lowercasedCocktailIngredients.contains(searchTerm.lowercased()) {
-                matchingCocktails.append(cocktail)
+                if !matchingCocktails.contains(cocktail) {
+                    matchingCocktails.append(cocktail)
+                }
             }
         }
         completion(matchingCocktails)

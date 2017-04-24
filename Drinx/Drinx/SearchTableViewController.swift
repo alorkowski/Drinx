@@ -29,6 +29,7 @@ class SearchTableViewController: UITableViewController {
         super.viewDidLoad()
         
         searchBar.delegate = self
+        self.searchBar.showsCancelButton = true
         if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialSearch") as? Bool {
             self.showTutorial = showTutorial
             UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSearch")
@@ -37,12 +38,17 @@ class SearchTableViewController: UITableViewController {
             UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSearch")
         }
         
+        //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.searchResignFirstResponer))
+        //        let scrollGesture = UIPanGestureRecognizer(target: self, action: #selector(self.searchResignFirstResponer))
+        //        view.addGestureRecognizer(tapGesture)
+        //        view.addGestureRecognizer(scrollGesture)
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.view.superview!.backgroundColor = UIColor.white
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 45, right: 0)
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0)
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
     }
     
@@ -51,7 +57,7 @@ class SearchTableViewController: UITableViewController {
         if self.showTutorial {
             self.searchBar.text = "Rum"
             self.searchBarSearchButtonClicked(self.searchBar)
-            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.searchDrinksTitle, message: TutorialController.shared.searchDrinksMessage, alertActionTitle: "OK!", completion: { 
+            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.searchDrinksTitle, message: TutorialController.shared.searchDrinksMessage, alertActionTitle: "OK!", completion: {
                 self.showTutorial = false
                 UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSearch")
             })
@@ -59,10 +65,10 @@ class SearchTableViewController: UITableViewController {
     }
     
     
-      // MARK: - Table view data source
+    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         return cocktails.count
     }
     
@@ -99,26 +105,38 @@ class SearchTableViewController: UITableViewController {
         let cocktail = self.cocktails[indexPath.row]
         dvc.cocktail = cocktail
     }
+    
+    // MARK: - TextFieldDelegate
+    func searchResignFirstResponer() {
+        self.searchBar.resignFirstResponder()
+    }
 }
+
 
 extension SearchTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let searchTerm = searchBar.text else { return }
         
         CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
             self.cocktails = cocktails
+            self.tableView.reloadData()
             DispatchQueue.global(qos: .background).async {
-            for cocktail in CocktailController.shared.cocktails {
-                for ingredient in cocktail.ingredients {
-                    if ingredient.lowercased().contains(searchTerm.lowercased()) {
-                        if !self.cocktails.contains(cocktail) {
-                            self.cocktails.append(cocktail)
+                for cocktail in CocktailController.shared.cocktails {
+                    for ingredient in cocktail.ingredients {
+                        if ingredient.lowercased().contains(searchTerm.lowercased()) {
+                            if !self.cocktails.contains(cocktail) {
+                                self.cocktails.append(cocktail)
+                            }
                         }
                     }
                 }
-            }
+                self.tableView.reloadData()
                 ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
                     
                     guard let cocktail = cocktail else { return }
@@ -135,23 +153,25 @@ extension SearchTableViewController: UISearchBarDelegate {
             }
         }
     }
-
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         guard let searchTerm = searchBar.text else { return }
         
         CocktailController.shared.searchCocktails(for: searchTerm) { (cocktails) in
             self.cocktails = cocktails
+            self.tableView.reloadData()
             DispatchQueue.global(qos: .background).async {
-            for cocktail in CocktailController.shared.cocktails {
-                for ingredient in cocktail.ingredients {
-                    if ingredient.lowercased().contains(searchTerm.lowercased()) {
-                        if !self.cocktails.contains(cocktail) {
-                            self.cocktails.append(cocktail)
+                for cocktail in CocktailController.shared.cocktails {
+                    for ingredient in cocktail.ingredients {
+                        if ingredient.lowercased().contains(searchTerm.lowercased()) {
+                            if !self.cocktails.contains(cocktail) {
+                                self.cocktails.append(cocktail)
+                            }
                         }
                     }
                 }
-            }
+                self.tableView.reloadData()
                 ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails, perRecordCompletion: { (cocktail) in
                     
                     guard let cocktail = cocktail else { return }
