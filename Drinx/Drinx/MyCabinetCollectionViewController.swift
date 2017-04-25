@@ -96,11 +96,11 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     func searchIngredients(searchController: UISearchController, completion: (_ resultsViewController: UITableViewController ) -> Void) {
         if let resultsViewController = searchController.searchResultsController as? ingredentSearchResultsTVC,
             let searchTerm = searchController.searchBar.text?.lowercased() {
-            let ingredients = IngredientController.share.ingredientDictionaries.keys
+            let ingredients = IngredientController.share.ingredientDictionary.keys
             var matchingIngredients: [Ingredient] = []
             for ingredient in ingredients {
                 if ingredient.lowercased().contains(searchTerm) {
-                    guard let ingArray = IngredientController.share.ingredientDictionaries[ingredient] else { return }
+                    guard let ingArray = IngredientController.share.ingredientDictionary[ingredient] else { return }
                     for ing in ingArray {
                         let ingObj = Ingredient(name: ing)
                         if !IngredientController.share.ingredients.contains(ingObj) {

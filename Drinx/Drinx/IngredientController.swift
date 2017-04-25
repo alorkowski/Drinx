@@ -45,7 +45,7 @@ class IngredientController {
         }
     }
     
-    let ingredientDictionaries = ["151 proof rum" : ["151 proof rum"],
+    let ingredientDictionary = ["151 proof rum" : ["151 proof rum"],
                                   "7-Up" : ["7-Up"],
                                   "Absinthe" : ["Absinthe"],
                                   "Absolut Citron" : ["Absolut Citron"],
