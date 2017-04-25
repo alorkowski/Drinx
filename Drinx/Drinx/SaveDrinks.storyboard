@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="205"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dms-Kg-ObG" id="c3c-uW-i6u">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="204.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kVm-ZQ-hP8">
@@ -65,7 +65,9 @@
                             <outlet property="delegate" destination="KUo-vb-MEs" id="3Lq-Gd-t3b"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="" image="Save" id="ynd-9J-uyP"/>
+                    <tabBarItem key="tabBarItem" title="" image="Save" selectedImage="Save" id="ynd-9J-uyP">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w9M-S8-Iqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
