@@ -18,8 +18,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        self.title = nil
+        
         let myIngredients = CabinetController.shared.getMyIngredientsFromUserDefaults()
         if myIngredients.count != 0 {
             CabinetController.shared.myCabinet.myIngredients = myIngredients

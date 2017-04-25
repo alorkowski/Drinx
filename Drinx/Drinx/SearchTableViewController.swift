@@ -27,8 +27,7 @@ class SearchTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        self.title = nil
+        
         searchBar.delegate = self
         self.searchBar.showsCancelButton = true
         if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialSearch") as? Bool {

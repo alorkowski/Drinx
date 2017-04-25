@@ -14,8 +14,7 @@ class SavedDrinksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        self.title = nil
+        
         tableView.separatorStyle = .none
         CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
         DispatchQueue.global(qos: .background).async {

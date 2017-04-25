@@ -13,7 +13,10 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        for vc in self.viewControllers! {
+            vc.tabBarItem.title = nil
+            vc.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+        }
     }
 
     override func didReceiveMemoryWarning() {
