@@ -295,6 +295,7 @@ class IngredientController {
                                   "Tequila Rose" : ["Tequila Rose"],
                                   "Tia maria" : ["Tia maria"],
                                   "Tomato juice" : ["Tomato juice"],
+                                  "Tonic" : ["Club soda", "Soda water"],
                                   "Triple sec" : ["Triple sec"],
                                   "Tropicana" : ["Tropicana"],
                                   "Tuaca" : ["Tuaca"],
@@ -319,8 +320,7 @@ class IngredientController {
                                   "Yellow Chartreuse" : ["Yellow Chartreuse"],
                                   "Yoghurt" : ["Yoghurt"],
                                   "Yukon Jack" : ["Yukon Jack"],
-                                  "Zima" : ["Zima"],
-                                  "Tonic" : ["Club soda", "Soda water"]]
+                                  "Zima" : ["Zima"]]
 
 
 }
