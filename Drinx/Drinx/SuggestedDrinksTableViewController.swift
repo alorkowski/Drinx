@@ -24,6 +24,8 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+        self.title = nil
         let myCabinet = CabinetController.shared.getMyIngredientsFromUserDefaults()
         IngredientController.share.ingredients = myCabinet
         tableView.separatorStyle = .none
