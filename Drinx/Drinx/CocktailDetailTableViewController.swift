@@ -73,11 +73,13 @@ class CocktailDetailTableViewController: UITableViewController {
     
     func saveCocktailToFavorites() {
         if let cocktail = cocktail {
-            CocktailController.shared.savedCocktails.append(cocktail)
-            CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
+            if !CocktailController.shared.savedCocktails.contains(cocktail) {
+                CocktailController.shared.savedCocktails.append(cocktail)
+                CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
+            }
         }
         self.tabBarController?.selectedIndex = 2
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
         
     }
     

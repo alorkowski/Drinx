@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,28 +18,20 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spot" translatesAutoresizingMaskIntoConstraints="NO" id="sEr-Q1-7PM">
-                                <rect key="frame" x="146" y="391" width="221" height="853"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drinx3" translatesAutoresizingMaskIntoConstraints="NO" id="o4w-gG-gpZ">
-                                <rect key="frame" x="113" y="229" width="149" height="209"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iDrinx-launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="guG-u4-BQP">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.6568305492401123" blue="0.61769950389862061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="o4w-gG-gpZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8ji-jh-Smo"/>
-                            <constraint firstItem="sEr-Q1-7PM" firstAttribute="top" secondItem="o4w-gG-gpZ" secondAttribute="bottom" constant="-47" id="PiY-lI-GFU"/>
-                            <constraint firstItem="o4w-gG-gpZ" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="209" id="VVc-NM-5nh"/>
-                            <constraint firstItem="o4w-gG-gpZ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Xy1-nZ-8zO"/>
-                            <constraint firstAttribute="trailing" secondItem="sEr-Q1-7PM" secondAttribute="trailing" constant="8" id="rgz-fq-5yz"/>
-                            <constraint firstItem="o4w-gG-gpZ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="97" id="rsA-r4-Dh1"/>
-                            <constraint firstItem="sEr-Q1-7PM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="146" id="sSe-Mv-mfT"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="guG-u4-BQP" secondAttribute="bottom" id="EtR-6X-cOd"/>
+                            <constraint firstAttribute="trailing" secondItem="guG-u4-BQP" secondAttribute="trailing" id="OKq-gG-Upb"/>
+                            <constraint firstItem="guG-u4-BQP" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="nVl-Zb-o3C"/>
+                            <constraint firstItem="guG-u4-BQP" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="yqm-rl-4pa"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -50,7 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="drinx3" width="218" height="659"/>
-        <image name="spot" width="723" height="853"/>
+        <image name="iDrinx-launchScreen" width="3413" height="1920"/>
     </resources>
 </document>
