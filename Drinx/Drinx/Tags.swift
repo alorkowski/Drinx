@@ -21,7 +21,7 @@ class Tags {
                              "Aftershock" : ["Aftershock"],
                              "Ale" : ["Ale"],
                              "Almond" : ["Almond"],
-                             "Almond liquor" : ["Amaretto"],
+                             "Almond liqueur" : ["Amaretto"],
                              "Amaretto" : ["Amaretto"],
                              "Angelica root" : ["Angelica root"],
                              "Angostura bitters" : ["Angostura bitters"],
