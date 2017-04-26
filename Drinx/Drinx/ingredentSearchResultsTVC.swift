@@ -10,7 +10,7 @@ import UIKit
 import NotificationCenter
 
 class ingredentSearchResultsTVC: UITableViewController {
-        
+    
     var resultsArray: [Ingredient] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -57,7 +57,6 @@ class ingredentSearchResultsTVC: UITableViewController {
         let notification = Notification.Name(rawValue: "updateMyCabinet")
         nc.post(name: notification, object: nil)
         self.dismiss(animated: true) {
-            self.delegate?.didUpdateMyCabinet()
         }
     }
     
