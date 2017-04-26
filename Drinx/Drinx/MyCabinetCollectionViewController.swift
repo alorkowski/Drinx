@@ -20,6 +20,9 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nc = NotificationCenter.default
+        let notification = Notification.Name(rawValue: "updateMyCabinet")
+        nc.addObserver(self, selector: #selector(MyCabinetCollectionViewController.didUpdateMyCabinet), name: notification, object: nil)
         
         let myIngredients = CabinetController.shared.getMyIngredientsFromUserDefaults()
         if myIngredients.count != 0 {
@@ -59,6 +62,8 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.collectionView?.reloadData()
+        self.collectionView?.reloadInputViews()
         if let layout = self.collectionViewLayout as? UICollectionViewFlowLayout {
             var cellSize = UIScreen.main.bounds.size
             cellSize.width *= 0.45
@@ -70,6 +75,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.collectionView?.reloadData()
         if self.showTutorial {
             TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.myCabinetTitle, message: TutorialController.shared.myCabinetMessage, alertActionTitle: "OK!", completion: { 
                 self.showTutorial = false
@@ -100,6 +106,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     }
     
     func searchIngredients(searchController: UISearchController, completion: (_ resultsViewController: UITableViewController ) -> Void) {
+//        ingredentSearchResultsTVC.delegate = self
         if let resultsViewController = searchController.searchResultsController as? ingredentSearchResultsTVC,
             let searchTerm = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) {
 //            resultsViewController.tableView.tableHeaderView = searchController.searchBar
@@ -120,6 +127,11 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
             CabinetController.shared.myCabinet.myIngredients = IngredientController.share.ingredients
             CabinetController.shared.saveMyCabinetToUserDefaults()
         }
+    }
+    
+    @objc func didUpdateMyCabinet() {
+        self.collectionView?.reloadData()
+        self.collectionView?.reloadInputViews()
     }
     
 //    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
