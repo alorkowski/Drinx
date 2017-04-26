@@ -63,7 +63,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor.white
+        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
         let insets = UIEdgeInsets(top: 20, left: 0, bottom: 45, right: 0)
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
     }
@@ -121,6 +121,9 @@ class SuggestedDrinksTableViewController: UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let dvc = CocktailDetailTableViewController()
+//        dvc.cocktail = suggestedCocktails[indexPath.row]
+//        self.present(dvc, animated: true, completion: nil)
         performSegue(withIdentifier: "toDetail", sender: indexPath)
     }
     
@@ -129,8 +132,18 @@ class SuggestedDrinksTableViewController: UITableViewController {
     
     
     //     In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let modalVC =
         if let dvc = segue.destination as? CocktailDetailTableViewController {
+//            if let presentationStyle = UIModalPresentationStyle(rawValue: 0) {
+//                dvc.modalPresentationStyle = presentationStyle
+//            }
+            if let transitionStyle = UIModalTransitionStyle(rawValue: 2) {
+                dvc.modalTransitionStyle = transitionStyle
+            }
+            
             if let indexPath = tableView.indexPathForSelectedRow {
                 let cocktail = suggestedCocktails[indexPath.row]
                 dvc.cocktail = cocktail

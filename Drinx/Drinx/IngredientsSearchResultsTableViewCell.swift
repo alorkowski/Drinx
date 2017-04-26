@@ -30,7 +30,7 @@ class IngredientsSearchResultsTableViewCell: UITableViewCell {
     
     func updateViews() {
         if let ingredient = ingredient {
-            self.ingredientLabel.text = ingredient.name
+            self.ingredientLabel.text = ingredient.name.trimmingCharacters(in: .whitespacesAndNewlines)
             DispatchQueue.main.async {
                 self.imageLabel.image = ingredient.photoImage
             }

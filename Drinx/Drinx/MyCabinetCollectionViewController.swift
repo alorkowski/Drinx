@@ -10,11 +10,13 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class MyCabinetCollectionViewController: UICollectionViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class MyCabinetCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
     
     var searchController: UISearchController?
     
     var showTutorial = true
+    
+    var ddidLayout = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +44,18 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
 
     }
     
+    
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor.white
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-        self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
+        var insets = UIEdgeInsets(top: 20, left: 0, bottom: 40, right: 0)
+        self.collectionView?.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+        
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -57,6 +65,7 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
             cellSize.height = cellSize.width + 30
             layout.itemSize = cellSize
         }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,8 +90,6 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
         searchController?.searchResultsUpdater = self
         searchController?.searchBar.sizeToFit()
         searchController?.hidesNavigationBarDuringPresentation = true
-        searchController?.searchBar.delegate = self
-        
         definesPresentationContext = true
     }
     
@@ -94,7 +101,8 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
     
     func searchIngredients(searchController: UISearchController, completion: (_ resultsViewController: UITableViewController ) -> Void) {
         if let resultsViewController = searchController.searchResultsController as? ingredentSearchResultsTVC,
-            let searchTerm = searchController.searchBar.text?.lowercased() {
+            let searchTerm = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) {
+//            resultsViewController.tableView.tableHeaderView = searchController.searchBar
             let ingredients = IngredientController.share.ingredientDictionary.keys
             var matchingIngredients: [Ingredient] = []
             for ingredient in ingredients {
@@ -105,25 +113,30 @@ class MyCabinetCollectionViewController: UICollectionViewController, UISearchRes
                         if !IngredientController.share.ingredients.contains(ingObj) {
                             matchingIngredients.append(ingObj)
                         }
-                        
                     }
                 }
             }
-            
             resultsViewController.resultsArray = matchingIngredients
             CabinetController.shared.myCabinet.myIngredients = IngredientController.share.ingredients
             CabinetController.shared.saveMyCabinetToUserDefaults()
         }
-        
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchController?.searchBar.text = ""
-        self.collectionView?.reloadData()
-    }
-    
-    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
-    }
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        searchController?.searchBar.text = ""
+//        self.collectionView?.reloadData()
+//    }
+//    
+//    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+//    }
+//    
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        guard let searchController = searchController else { return }
+//        searchIngredients(searchController: searchController) { (resultsViewController) in
+//            resultsViewController.tableView.reloadData()
+//        }
+//        resignFirstResponder()
+//    }
 
 
 

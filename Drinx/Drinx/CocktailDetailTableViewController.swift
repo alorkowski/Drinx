@@ -27,14 +27,20 @@ class CocktailDetailTableViewController: UITableViewController {
             UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialCocktailDetail")
         }
         tableView.allowsSelection = false
+        
+        
 
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor.white
+        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
         let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+//        let tableInsets = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+
         self.view.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, insets)
+//        self.tableView.separatorInset = tableInsets
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,8 +84,14 @@ class CocktailDetailTableViewController: UITableViewController {
                 CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
             }
         }
-        self.tabBarController?.selectedIndex = 2
-        self.dismiss(animated: false, completion: nil)
+        self.resignFirstResponder()
+        self.dismiss(animated: true) { 
+            self.tabBarController?.selectedIndex = 1
+        }
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+//        self.navigationController?.popViewController(animated: true)
+//        self.dismiss(animated: true, completion: nil)
+//        self.popoverPresentationController
         
     }
     
@@ -128,7 +140,7 @@ class CocktailDetailTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             //            return self.view.frame.width
-            return self.view.frame.size.width
+            return self.view.frame.size.width + 44
         case 1:
             return 30
         case 2:
@@ -142,7 +154,7 @@ class CocktailDetailTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
 //            return self.view.frame.width
-            return self.view.frame.size.width
+            return self.view.frame.size.width + 44
         case 1:
             return 30
         case 2:
@@ -181,46 +193,5 @@ class CocktailDetailTableViewController: UITableViewController {
         }
         return UITableViewCell()
     }
-    
-//    func updateViews() {
-//        
-//        let ingredientString = cocktail?.ingredients.joined(separator: ", ")
-//        
-////        cocktailImageView.image = cocktail?.image
-//        cocktailInstructionsLabel.text = cocktail?.instructions
-//        cocktailIngredientsLabel.text = ingredientString
-//        
-//    }
-    
-    // Mark: - UITableViewDelegate
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        switch indexPath.row {
-//        case 0:
-//            return 53
-//            
-//        case 1:
-//            
-//            let screenWidth = self.view.frame.width
-//            
-//            guard let cocktailImage = self.cocktail?.image else { return screenWidth }
-//            
-//            let imageHeight = cocktailImage.size.height
-//            let imageWidth = cocktailImage.size.width
-//            
-//            let imageAspectRatio = imageWidth / imageHeight
-//            
-//            let cellHeight = self.view.frame.width / imageAspectRatio
-//            
-//            return cellHeight
-//            
-//        case 2:
-//            return 202
-//            
-//        default:
-//            return 40
-//        }
-//        
-//    }
 
 }

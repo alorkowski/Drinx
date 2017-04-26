@@ -12,6 +12,11 @@ class CockailDetailImageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageCell: UIImageView!
     
+    override func awakeFromNib() {
+        
+//        self.cell.frame = UIEdgeInsetsInsetRect(self.view.superview!.bounds, tableInsets)
+    }
+    
     var cocktail: Cocktail? {
         didSet {
             updateCell()

@@ -22,8 +22,26 @@ class Ingredient: Equatable {
     
     init(name: String) {
         self.name = name
-        guard let image = UIImage(named: name) else {return}
-        self.photoImage  = image
+        if let image = UIImage(named: name) {
+            self.photoImage  = image
+        }
+        if let image = UIImage(named: name.capitalized) {
+            self.photoImage = image
+        }
+        if let image = UIImage(named: name.lowercased()) {
+            self.photoImage = image
+        }
+        let nameArray = name.components(separatedBy: " ")
+        var nameFirstLettersCaps: String {
+            var tempArray: [String] = []
+            for string in nameArray {
+                tempArray.append(string.capitalized)
+            }
+            return tempArray.joined(separator: " ")
+        }
+        if let image = UIImage(named: nameFirstLettersCaps) {
+            self.photoImage = image
+        }
         
     }
     

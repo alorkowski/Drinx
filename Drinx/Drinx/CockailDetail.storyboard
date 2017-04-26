@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pa3-fr-qIW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pa3-fr-qIW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,25 +21,45 @@
                         <color key="backgroundColor" red="0.00062328041531145573" green="0.65474861860275269" blue="0.61754077672958374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.00062328041530000005" green="0.6547486186" blue="0.61754077669999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="375" id="rrY-5n-fQI" customClass="CockailDetailImageTableViewCell" customModule="Drinx" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="375"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="420" id="rrY-5n-fQI" customClass="CockailDetailImageTableViewCell" customModule="Drinx" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="420"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rrY-5n-fQI" id="OYX-hh-VHa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="419.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKC-8o-o39">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="374.5"/>
+                                            <rect key="frame" x="0.0" y="44" width="375" height="374.5"/>
                                             <color key="backgroundColor" red="0.00062328041531145573" green="0.65474861860275269" blue="0.61754077672958374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="375" id="1K9-Kh-R0u"/>
+                                                <constraint firstAttribute="width" constant="375" id="KJc-lZ-F0b"/>
                                                 <constraint firstAttribute="width" secondItem="nKC-8o-o39" secondAttribute="height" multiplier="1:1" id="ug1-PV-LNH"/>
                                             </constraints>
                                         </imageView>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZJ-cE-yHT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="sIW-jI-13g"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="nKC-8o-o39" secondAttribute="trailing" id="3XS-27-SsD"/>
-                                        <constraint firstItem="nKC-8o-o39" firstAttribute="top" secondItem="OYX-hh-VHa" secondAttribute="top" id="SIZ-AO-UpV"/>
+                                        <constraint firstItem="nKC-8o-o39" firstAttribute="bottom" secondItem="OYX-hh-VHa" secondAttribute="bottomMargin" id="9Sa-rx-eyu"/>
+                                        <constraint firstItem="fZJ-cE-yHT" firstAttribute="top" secondItem="OYX-hh-VHa" secondAttribute="topMargin" id="CT5-o8-van"/>
+                                        <constraint firstItem="nKC-8o-o39" firstAttribute="leading" secondItem="OYX-hh-VHa" secondAttribute="leadingMargin" id="Ed9-F3-ddy"/>
+                                        <constraint firstItem="fZJ-cE-yHT" firstAttribute="leading" secondItem="OYX-hh-VHa" secondAttribute="leadingMargin" id="QhN-gE-LFM"/>
+                                        <constraint firstItem="nKC-8o-o39" firstAttribute="top" secondItem="fZJ-cE-yHT" secondAttribute="bottom" id="U7D-bx-fUU"/>
                                         <constraint firstItem="nKC-8o-o39" firstAttribute="leading" secondItem="OYX-hh-VHa" secondAttribute="leading" id="XII-4o-9DW"/>
+                                        <constraint firstItem="nKC-8o-o39" firstAttribute="trailing" secondItem="OYX-hh-VHa" secondAttribute="trailingMargin" id="Yrx-X3-3Wt"/>
+                                        <constraint firstItem="nKC-8o-o39" firstAttribute="top" secondItem="OYX-hh-VHa" secondAttribute="topMargin" constant="44" id="d71-wX-eka"/>
+                                        <constraint firstItem="nKC-8o-o39" firstAttribute="top" secondItem="OYX-hh-VHa" secondAttribute="topMargin" constant="44" id="jmv-1k-Mbk"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="nKC-8o-o39" secondAttribute="bottom" id="leW-ch-Z39"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fZJ-cE-yHT" secondAttribute="trailing" id="szA-gg-Ugp"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                 </tableViewCellContentView>
@@ -48,7 +69,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="none" indentationWidth="10" reuseIdentifier="ingredientCell" textLabel="P1X-Xp-GFN" rowHeight="30" style="IBUITableViewCellStyleDefault" id="I2a-jK-qGK" customClass="CocktailDetailIngredientTableViewCell" customModule="Drinx" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="403" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="448" width="375" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I2a-jK-qGK" id="F3F-b3-0ez">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="29.5"/>
@@ -68,7 +89,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="none" indentationWidth="10" reuseIdentifier="instructionCell" textLabel="ILV-ix-4dT" rowHeight="40" style="IBUITableViewCellStyleDefault" id="98F-Ou-Nx0" customClass="CocktailDetailInstructionTableViewCell" customModule="Drinx" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="433" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="478" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="98F-Ou-Nx0" id="dSm-mj-YJg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
@@ -96,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7c-zw-vvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264.80000000000001" y="401.64917541229386"/>
+            <point key="canvasLocation" x="264.80000000000001" y="400.74962518740631"/>
         </scene>
     </scenes>
 </document>

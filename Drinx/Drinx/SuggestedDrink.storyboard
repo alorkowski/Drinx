@@ -83,6 +83,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Cocktail" width="25" height="33"/>
+        <image name="Cocktail" width="26" height="36"/>
     </resources>
 </document>
