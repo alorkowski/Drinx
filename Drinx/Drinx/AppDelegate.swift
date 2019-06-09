@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         
@@ -64,7 +64,7 @@ func generateCloudKitRecords(jsonDictionaryToUse: String) -> Bool {
         guard let jsonArrayOfDictionaries = jsonArray as? [[String:Any]]
             else { return false }
         print("json dictionary successfully created")
-        let cocktails = jsonArrayOfDictionaries.flatMap { Cocktail(cocktailDictionary: $0) }
+      let cocktails = jsonArrayOfDictionaries.compactMap { Cocktail(cocktailDictionary: $0) }
         print("\(cocktails.count)")
         
         var cocktailsWithImages: [Cocktail] = []
