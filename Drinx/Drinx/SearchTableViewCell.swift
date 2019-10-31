@@ -9,7 +9,7 @@
 import UIKit
 
 final class SearchTableViewCell: UITableViewCell {
-    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var drinkImageView: UIImageView!
     @IBOutlet weak var drinkNameText: UILabel!
 
     var cocktail: Cocktail? {
@@ -22,12 +22,12 @@ final class SearchTableViewCell: UITableViewCell {
     func update(cocktail: Cocktail) {
         drinkNameText.text = cocktail.name
         if cocktail.image != nil {
-            ImageView.image = cocktail.image
+            drinkImageView.image = cocktail.image
         } else {
             if let image = UIImage(named: cocktail.ingredients[0]) {
-                ImageView.image = image
+                drinkImageView.image = image
             } else if let image = UIImage(named: cocktail.ingredients[1]) {
-                ImageView.image = image
+                drinkImageView.image = image
             }
         }
     }
