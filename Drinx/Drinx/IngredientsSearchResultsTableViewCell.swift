@@ -8,13 +8,10 @@
 
 import UIKit
 
-class IngredientsSearchResultsTableViewCell: UITableViewCell {
-
+final class IngredientsSearchResultsTableViewCell: UITableViewCell {
     @IBOutlet weak var imageLabel: UIImageView!
-    
     @IBOutlet weak var ingredientLabel: UILabel!
-    
-    
+
     var ingredient: Ingredient? {
         didSet {
             updateViews()
@@ -25,9 +22,7 @@ class IngredientsSearchResultsTableViewCell: UITableViewCell {
         super.layoutSubviews()
         updateViews()
     }
-    
-//    override func did
-    
+
     func updateViews() {
         if let ingredient = ingredient {
             self.ingredientLabel.text = ingredient.name.trimmingCharacters(in: .whitespacesAndNewlines)

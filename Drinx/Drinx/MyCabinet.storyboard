@@ -57,7 +57,7 @@
                                     <constraint firstItem="kM6-d8-SvB" firstAttribute="leading" secondItem="aAR-4y-U0J" secondAttribute="leading" id="nUr-Av-MpL"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="imageView" destination="kM6-d8-SvB" id="6p8-0Z-Cc6"/>
+                                    <outlet property="ingredientImageView" destination="kM6-d8-SvB" id="6p8-0Z-Cc6"/>
                                     <outlet property="ingredientLabel" destination="orV-sU-LNx" id="YDU-Mv-uzf"/>
                                 </connections>
                             </collectionViewCell>

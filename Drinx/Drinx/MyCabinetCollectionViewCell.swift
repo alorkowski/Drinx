@@ -8,9 +8,8 @@
 
 import UIKit
 
-class MyCabinetCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var imageView: UIImageView!
+final class MyCabinetCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var ingredientImageView: UIImageView!
     @IBOutlet weak var ingredientLabel: UILabel!
     
     var ingredient: Ingredient? {
@@ -21,9 +20,8 @@ class MyCabinetCollectionViewCell: UICollectionViewCell {
     
     func updateViews() {
         if let ingredient = ingredient {
-            self.imageView.image = ingredient.photoImage
+            self.ingredientImageView.image = ingredient.photoImage
             self.ingredientLabel.text = ingredient.name
         }
-//        self.reloadInputViews()
     }
 }
