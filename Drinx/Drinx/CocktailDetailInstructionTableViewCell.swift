@@ -8,18 +8,6 @@
 
 import UIKit
 
-class CocktailDetailInstructionTableViewCell: UITableViewCell {
-
-    
-    var cocktail: Cocktail? {
-        didSet {
-//            updateCell()
-        }
-    }
-//
-//    func updateCell() {
-//        guard let cocktail = cocktail else { return }
-//        
-//        instructionsCell.text = cocktail.instructions
-//    }
+final class CocktailDetailInstructionTableViewCell: UITableViewCell {
+    var cocktail: Cocktail?
 }

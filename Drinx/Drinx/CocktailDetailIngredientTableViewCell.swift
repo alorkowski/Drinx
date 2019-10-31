@@ -8,17 +8,6 @@
 
 import UIKit
 
-class CocktailDetailIngredientTableViewCell: UITableViewCell {
-    
-    var cocktail: Cocktail? {
-        didSet {
-//            updateCell()
-        }
-    }
-//
-//    func updateCell() {
-//        guard let cocktail = cocktail else { return }
-//        
-//        ingredientsCell.text = cocktail.ingredients.joined(separator: ", ")
-//    }
+final class CocktailDetailIngredientTableViewCell: UITableViewCell {
+    var cocktail: Cocktail?
 }
