@@ -8,34 +8,33 @@
 
 import Foundation
 
-class Cabinet {
-    
+final class Cabinet {
     static let sampleIngredientStrings = ["Gin" ,
-                                  "Scotch" ,
-                                  "Triple sec" ,
-                                  "Brandy" ,
-                                  "Coffee liqueur" ,
-                                  "Rum" ,
-                                  "Sugar" ,
-                                  "Ice" ,
-                                  "Lemon" ,
-                                  "Bourbon" ,
-                                  "Vodka" ,
-                                  "Tequila" ,
-                                  "Lime juice" ,
-                                  "Egg" ,
-                                  "Salt" ,
-                                  "Carbonated water" ,
-                                  "Lemon peel" ,
-                                  "Apple juice" ,
-                                  "Orange juice" ,
-                                  "Brown sugar" ,
-                                  "Milk" ,
-                                  "Egg yolk" ,
-                                  "Lemon juice" ,
-                                  "Soda water" ,
-                                  "Whisky" ,
-                                  "Coca-Cola"]
+                                          "Scotch" ,
+                                          "Triple sec" ,
+                                          "Brandy" ,
+                                          "Coffee liqueur" ,
+                                          "Rum" ,
+                                          "Sugar" ,
+                                          "Ice" ,
+                                          "Lemon" ,
+                                          "Bourbon" ,
+                                          "Vodka" ,
+                                          "Tequila" ,
+                                          "Lime juice" ,
+                                          "Egg" ,
+                                          "Salt" ,
+                                          "Carbonated water" ,
+                                          "Lemon peel" ,
+                                          "Apple juice" ,
+                                          "Orange juice" ,
+                                          "Brown sugar" ,
+                                          "Milk" ,
+                                          "Egg yolk" ,
+                                          "Lemon juice" ,
+                                          "Soda water" ,
+                                          "Whisky" ,
+                                          "Coca-Cola"]
     
     var sampleIngredients: [Ingredient] {
         var ingredients: [Ingredient] = []
@@ -54,5 +53,4 @@ class Cabinet {
         }
         return ckRecordList
     }
-    
 }

@@ -8,8 +8,7 @@
 
 import Foundation
 
-class CabinetController {
-    
+final class CabinetController {
     let ingredientIDsKey = "ingredientIDs"
     
     static let shared = CabinetController()
@@ -19,6 +18,7 @@ class CabinetController {
     func saveMyCabinetToUserDefaults() {
         UserDefaults.standard.set(myCabinet.ingredientIDs, forKey: ingredientIDsKey)
     }
+
     func getMyIngredientsFromUserDefaults() -> [Ingredient] {
         var ingredients: [Ingredient] = []
         guard let myIngredientsStringAray = UserDefaults.standard.array(forKey: ingredientIDsKey) as? [String] else { return [] }

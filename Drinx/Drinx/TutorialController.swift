@@ -8,10 +8,8 @@
 
 import UIKit
 
-class TutorialController {
-    
+final class TutorialController {
     static let shared = TutorialController()
-    
     var showTutorial = false
     
     let suggestedDrinksTitle = "Suggested Drinx Tab"
@@ -36,7 +34,11 @@ class TutorialController {
     
     var shouldPresentTutorial = true
     
-    func drinksTutorial(viewController: UIViewController, title: String, message: String, alertActionTitle: String,  completion: @escaping () -> Void) {
+    func drinksTutorial(viewController: UIViewController,
+                        title: String,
+                        message: String,
+                        alertActionTitle: String,
+                        completion: @escaping () -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let showMeTheNextTab = UIAlertAction(title: alertActionTitle, style: .cancel) { (_) in
             completion()
@@ -48,6 +50,4 @@ class TutorialController {
     func saveShowTutorialToUserDefaults() {
         UserDefaults.standard.set(TutorialController.shared.showTutorial, forKey: "showTutorial")
     }
-    
-    
 }
