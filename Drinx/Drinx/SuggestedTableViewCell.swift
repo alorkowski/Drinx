@@ -9,21 +9,9 @@
 import UIKit
 
 class SuggestedTableViewCell: UITableViewCell {
-    
-    
-    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var drinkImageView: UIImageView!
     @IBOutlet weak var drinkLabelView: UILabel!
-    
-    func update(cocktail: Cocktail){
-        if let image = cocktail.image {
-            ImageView.image = image
-        } else {
-            ImageView.image = UIImage(named: cocktail.ingredients[0])
-        }
-        drinkLabelView.text = cocktail.name
-        
-    }
-    
+
     var cocktail: Cocktail? {
         didSet {
             guard let cocktail = cocktail else { return }
@@ -31,4 +19,12 @@ class SuggestedTableViewCell: UITableViewCell {
         }
     }
     
+    func update(cocktail: Cocktail) {
+        if let image = cocktail.image {
+            drinkImageView.image = image
+        } else {
+            drinkImageView.image = UIImage(named: cocktail.ingredients[0])
+        }
+        drinkLabelView.text = cocktail.name
+    }
 }
