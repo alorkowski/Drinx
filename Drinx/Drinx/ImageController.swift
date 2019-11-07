@@ -9,11 +9,10 @@
 import UIKit
 import CloudKit
 
-class ImageController {
-    
-    static func getImage(forURL url: String, completion: @escaping (UIImage?) -> Void) {
+final class ImageController {
+    static func getImage(forURL url: String,
+                         completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: url) else { completion(nil); return }
-        
         NetworkController.performRequest(forURL: url, httpMethod: .get) { (data, error) in
             if let error = error {
                 print("Error performing network request: \(error.localizedDescription)")
@@ -28,8 +27,8 @@ class ImageController {
     }
     
     // MARK: - Get Images For Cocktails With Images
-    
-    static func fetchAvailableImagesFromCloudKit(forCocktails cocktails: [Cocktail], perRecordCompletion: @escaping (Cocktail?) -> Void) {
+    static func fetchAvailableImagesFromCloudKit(forCocktails cocktails: [Cocktail],
+                                                 perRecordCompletion: @escaping (Cocktail?) -> Void) {
         var cocktailsWithImagesOnCloudKit: [Cocktail] = []
         var apiIDsOfCocktailsWithImages: [String] = []
         for cocktail in cocktails {

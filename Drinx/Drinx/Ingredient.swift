@@ -6,20 +6,14 @@
 //  Copyright © 2017 Jeremiah Hawks. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 import CloudKit
 
-class Ingredient: Equatable {
-    
+final class Ingredient: Equatable {
     static let photoImageKey = "photoImage"
-    
-    
     var photoImage: UIImage? = nil
     let name: String
-    
-    
+
     init(name: String) {
         self.name = name
         if let image = UIImage(named: name) {
@@ -42,10 +36,7 @@ class Ingredient: Equatable {
         if let image = UIImage(named: nameFirstLettersCaps) {
             self.photoImage = image
         }
-        
     }
-    
-    
 }
 
 extension Ingredient {
