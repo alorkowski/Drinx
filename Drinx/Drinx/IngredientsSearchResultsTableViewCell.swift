@@ -1,11 +1,3 @@
-//
-//  IngredientsSearchResultsTableViewCell.swift
-//  Drinx
-//
-//  Created by Angela Montierth on 4/19/17.
-//  Copyright © 2017 Jeremiah Hawks. All rights reserved.
-//
-
 import UIKit
 
 final class IngredientsSearchResultsTableViewCell: UITableViewCell {

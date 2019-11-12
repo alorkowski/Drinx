@@ -1,11 +1,3 @@
-//
-//  SearchTableViewCell.swift
-//  Drinx
-//
-//  Created by DANIEL CORNWELL on 4/13/17.
-//  Copyright © 2017 Jeremiah Hawks. All rights reserved.
-//
-
 import UIKit
 
 final class SearchTableViewCell: UITableViewCell {
