@@ -1,5 +1,4 @@
 import UIKit
-import CloudKit
 
 class SuggestedDrinksTableViewController: UITableViewController {
     let cocktail = [String]()
@@ -33,7 +32,7 @@ class SuggestedDrinksTableViewController: UITableViewController {
         guard CabinetController.shared.cabinetHasBeenUpdated else { return }
         findMatches { [weak self] in
             CabinetController.shared.cabinetHasBeenUpdated = false
-            self?.reloadTableViewData()
+            self?.tableView.reloadData()
         }
     }
 
@@ -54,7 +53,7 @@ extension SuggestedDrinksTableViewController {
     private func getCocktailDictionaryArray() {
         CocktailController.shared.getCocktailDictionaryArray { [weak self] in
             self?.findMatches { [weak self] in
-                self?.reloadTableViewData()
+                self?.tableView.reloadData()
             }
         }
     }
@@ -69,22 +68,6 @@ extension SuggestedDrinksTableViewController {
         }
         self.suggestedCocktails = sugCocktails
         self.tableView.reloadData()
-    }
-
-    private func reloadTableViewData() {
-        self.tableView.reloadData()
-        DispatchQueue.global(qos: .background).async {
-            ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.suggestedCocktails) { (cocktail) in
-                guard let cocktail = cocktail else { return }
-                if let index = self.suggestedCocktails.firstIndex(of: cocktail) {
-                    self.suggestedCocktails.remove(at: index)
-                    self.suggestedCocktails.insert(cocktail, at: index)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
     }
 }
 

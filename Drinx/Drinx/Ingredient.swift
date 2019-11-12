@@ -1,5 +1,4 @@
 import UIKit
-import CloudKit
 
 final class Ingredient: Equatable {
     static let photoImageKey = "photoImage"
@@ -36,4 +35,3 @@ extension Ingredient {
         return lhs.name == rhs.name
     }
 }
-

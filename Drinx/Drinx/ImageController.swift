@@ -1,5 +1,4 @@
 import UIKit
-import CloudKit
 
 final class ImageController {
     static func getImage(forURL url: String,
@@ -15,34 +14,6 @@ final class ImageController {
                     return
             }
             DispatchQueue.main.async { completion(image) }
-        }
-    }
-    
-    // MARK: - Get Images For Cocktails With Images
-    static func fetchAvailableImagesFromCloudKit(forCocktails cocktails: [Cocktail],
-                                                 perRecordCompletion: @escaping (Cocktail?) -> Void) {
-        var cocktailsWithImagesOnCloudKit: [Cocktail] = []
-        var apiIDsOfCocktailsWithImages: [String] = []
-        for cocktail in cocktails {
-            if cocktail.imageURLs[0] != "" {
-                cocktailsWithImagesOnCloudKit.append(cocktail)
-                if let apiID = cocktail.apiID {
-                    apiIDsOfCocktailsWithImages.append(apiID)
-                }
-            }
-        }
-        for apiID in apiIDsOfCocktailsWithImages {
-            let predicate = NSPredicate(format: "%@ = apiID", apiID)
-            let query = CKQuery(recordType: "Cocktail", predicate: predicate)
-            let queryOperation = CKQueryOperation(query: query)
-            queryOperation.recordFetchedBlock = { (record) -> Void in
-                let tempCocktail = Cocktail(record: record)
-                perRecordCompletion(tempCocktail)
-            }
-            queryOperation.queryCompletionBlock = { (cursor, error) -> Void in
-                
-            }
-            CloudKitManager.shared.publicDatabase.add(queryOperation)
         }
     }
 }
