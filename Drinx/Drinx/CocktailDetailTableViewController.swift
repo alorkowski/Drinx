@@ -148,7 +148,7 @@ extension CocktailDetailTableViewController {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell",
-                                                     for: indexPath) as! CockailDetailImageTableViewCell
+                                                     for: indexPath) as! CocktailDetailImageTableViewCell
             cell.cocktail = cocktail
             return cell
         case 1:

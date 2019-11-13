@@ -2,8 +2,8 @@ import UIKit
 
 final class Ingredient: Equatable {
     static let photoImageKey = "photoImage"
-    var photoImage: UIImage? = nil
     let name: String
+    var photoImage: UIImage? = nil
 
     init(name: String) {
         self.name = name

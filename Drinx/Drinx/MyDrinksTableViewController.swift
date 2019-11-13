@@ -3,12 +3,8 @@ import UIKit
 class MyDrinksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func viewDidLayoutSubviews() {
@@ -17,15 +13,15 @@ class MyDrinksTableViewController: UITableViewController {
         self.view.frame = self.view.superview!.bounds
         self.view.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
     }
+}
 
-    // MARK: - Table view data source
+// MARK: - UITableViewDataSource
+extension MyDrinksTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 0
     }
 }

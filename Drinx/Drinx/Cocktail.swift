@@ -1,20 +1,13 @@
 import UIKit
 
-struct Cocktail: Equatable {
-    fileprivate let nameKey = "strDrink"
-    fileprivate let instructionsKey = "strInstructions"
-    fileprivate let ingredientsKey = "ingredient"
-    fileprivate let ingredientProportionsKey = "ingredientProportions"
-    fileprivate let imageURLsKey = "strDrinkThumb"
-    fileprivate let isAlcoholicKey = "strAlcoholic"
-    fileprivate let apiIDKey = "idDrink"
-    fileprivate let photoDataKey = "photoData"
-
+struct Cocktail: Decodable, Equatable {
     let name: String
     let instructions: String
     let ingredients: [String]
     let ingredientProportions: [String]
     var imageURLs: [String]
+    let isAlcoholic: Bool
+    var apiID: String?
 
     var photoData: Data? {
         guard let tempImage = image,
@@ -24,24 +17,39 @@ struct Cocktail: Equatable {
     }
 
     var image: UIImage? = nil
-    let isAlcoholic: Bool
-    var apiID: String?
 
-    init(name: String, instructions: String, ingredients: [String], ingredientProportions: [String], imageURLs: [String], isAlcoholic: Bool) {
+    fileprivate enum CodingKeys: String, CodingKey {
+        case name = "strDrink"
+        case instructions = "strInstructions"
+        case ingredients = "ingredient"
+        case ingredientProportions = "ingredientProportions"
+        case imageURLs = "strDrinkThumb"
+        case isAlcoholic = "strAlcoholic"
+        case apiID = "idDrink"
+    }
+
+    init(name: String,
+         instructions: String,
+         ingredients: [String],
+         ingredientProportions: [String],
+         imageURLs: [String],
+         isAlcoholic: Bool,
+         apiID: String) {
         self.name = name
         self.instructions = instructions
         self.ingredients = ingredients
         self.ingredientProportions = ingredientProportions
         self.imageURLs = imageURLs
         self.isAlcoholic = isAlcoholic
+        self.apiID = apiID
     }
 
     // Failable Initializer for pulling Cockatils from the API to turn into Model Objects
     init?(cocktailDictionary: [String: Any]) {
-        guard let name = cocktailDictionary[nameKey] as? String,
-            let instructions = cocktailDictionary[instructionsKey] as? String,
-            let alcoholicString = cocktailDictionary[isAlcoholicKey] as? String,
-            let apiID = cocktailDictionary[apiIDKey] as? String
+        guard let name = cocktailDictionary[CodingKeys.name.rawValue] as? String,
+            let instructions = cocktailDictionary[CodingKeys.instructions.rawValue] as? String,
+            let alcoholicString = cocktailDictionary[CodingKeys.isAlcoholic.rawValue] as? String,
+            let apiID = cocktailDictionary[CodingKeys.apiID.rawValue] as? String
             else { return nil }
 
         var alcoholicBool: Bool = false
@@ -69,7 +77,7 @@ struct Cocktail: Equatable {
             measurementStrings.append(measurementString)
         }
 
-        let imageURL = cocktailDictionary[imageURLsKey] as? String ?? ""
+        let imageURL = cocktailDictionary[CodingKeys.imageURLs.rawValue] as? String ?? ""
         var imageURLStrings: [String] = []
         imageURLStrings.append(imageURL)
 
@@ -80,18 +88,6 @@ struct Cocktail: Equatable {
         self.imageURLs = imageURLStrings
         self.isAlcoholic = alcoholicBool
         self.apiID = apiID
-
-    }
-
-    fileprivate var temporaryPhotoURL: URL {
-        // Must write to temporary directory to be able to pass image file path url to CKAsset
-        let temporaryDirectory = NSTemporaryDirectory()
-        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
-
-        try? photoData?.write(to: fileURL, options: [.atomic])
-        print(fileURL)
-        return fileURL
     }
 }
 
