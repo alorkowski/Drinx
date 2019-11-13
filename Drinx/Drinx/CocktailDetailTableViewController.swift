@@ -5,18 +5,13 @@ final class CocktailDetailTableViewController: UITableViewController, TutorialDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationBar()
         self.setupTableView()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        self.view.frame = self.view.superview!.bounds
-        self.view.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.title = self.cocktailDetailTableViewModel.cocktail?.name
         guard self.cocktailDetailTableViewModel.tutorialState?.isActive ?? true else { return }
         self.showTutorial(viewController: self,
                           title: TutorialState.cocktailDetailTitle,
@@ -24,15 +19,19 @@ final class CocktailDetailTableViewController: UITableViewController, TutorialDe
                           alertActionTitle: "OK!",
                           completion: self.cocktailDetailTableViewModel.toggleTutorialStateClosure)
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationBar()
-    }
 }
 
 // MARK: - Setup functions
 extension CocktailDetailTableViewController {
+    private func setNavigationBar() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back",
+                                                                style: .done,
+                                                                target: self,
+                                                                action: #selector(done))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                                 target: self, action: #selector(saveCocktailToFavorites))
+    }
+
     private func setupTableView() {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
@@ -40,24 +39,6 @@ extension CocktailDetailTableViewController {
         CocktailDetailImageTableViewCell.register(with: self.tableView)
         CocktailDetailIngredientTableViewCell.register(with: self.tableView)
         CocktailDetailInstructionTableViewCell.register(with: self.tableView)
-    }
-
-    private func setNavigationBar() {
-        let screenSize: CGRect = UIScreen.main.bounds
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: 44))
-        let navItem = UINavigationItem(title: "")
-        if let cocktail = self.cocktailDetailTableViewModel.cocktail { navItem.title = cocktail.name }
-        navBar.backgroundColor =  UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        navBar.tintColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        let backItem = UIBarButtonItem(title: "Back", style: .done, target: nil, action: #selector(done))
-        let favoriteItem = UIBarButtonItem(title: "Save",
-                                           style: .plain,
-                                           target: nil,
-                                           action: #selector(saveCocktailToFavorites))
-        navItem.leftBarButtonItem = backItem
-        navItem.rightBarButtonItem = favoriteItem
-        navBar.setItems([navItem], animated: false)
-        self.view.addSubview(navBar)
     }
 
     @objc func saveCocktailToFavorites() {
@@ -68,7 +49,7 @@ extension CocktailDetailTableViewController {
     }
 
     @objc func done() {
-        self.dismiss(animated: false, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

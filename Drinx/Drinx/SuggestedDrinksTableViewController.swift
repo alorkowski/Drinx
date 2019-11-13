@@ -91,6 +91,7 @@ extension SuggestedDrinksTableViewController: UITableViewDelegate {
 
         let cocktailDetailTableViewController = CocktailDetailTableViewController()
         cocktailDetailTableViewController.cocktailDetailTableViewModel = cocktailDetailTableViewModel
+        cocktailDetailTableViewController.title = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row].name
 
         self.navigationController?.pushViewController(cocktailDetailTableViewController, animated: true)
     }
