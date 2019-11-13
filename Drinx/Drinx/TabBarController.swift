@@ -12,7 +12,7 @@ class TabBarController: UITabBarController {
         let searchTableViewController = SearchTableViewController()
         searchTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
 
-        self.viewControllers = [ suggestedDrinksTableViewController,
+        self.viewControllers = [ UINavigationController(rootViewController: suggestedDrinksTableViewController),
                                  myDrinksTableViewController,
                                  searchTableViewController ]
     }

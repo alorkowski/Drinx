@@ -1,5 +1,5 @@
 import UIKit
 
-final class CocktailDetailIngredientTableViewCell: UITableViewCell {
+final class CocktailDetailIngredientTableViewCell: UITableViewCell, ProgrammaticView {
     var cocktail: Cocktail?
 }

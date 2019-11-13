@@ -1,18 +1,11 @@
 import UIKit
 
-final class CocktailDetailTableViewController: UITableViewController {
-    var showTutorial = true
-    let mockCocktail = ["idDrink":"15112","strDrink":"Alamo Splash","strCategory":"Ordinary Drink","strAlcoholic":"Alcoholic","strGlass":"Collins glass","strInstructions":"Mix with cracked ice and strain into collins glass.","strDrinkThumb":"","strIngredient1":"Tequila","strIngredient2":"Orange juice","strIngredient3":"Pineapple juice","strIngredient4":"Lemon-lime soda","strIngredient5":"","strIngredient6":"","strIngredient7":"","strIngredient8":"","strIngredient9":"","strIngredient10":"","strIngredient11":"","strIngredient12":"","strIngredient13":"","strIngredient14":"","strIngredient15":"","strMeasure1":"1 1/2 oz ","strMeasure2":"1 oz ","strMeasure3":"1/2 oz ","strMeasure4":"1 splash ","strMeasure5":" ","strMeasure6":" ","strMeasure7":" ","strMeasure8":" ","strMeasure9":" ","strMeasure10":"","strMeasure11":"","strMeasure12":"","strMeasure13":"","strMeasure14":"","strMeasure15":"","dateModified":""]
-
-    var cocktail: Cocktail?
-
+final class CocktailDetailTableViewController: UITableViewController, TutorialDelegate {
+    var cocktailDetailTableViewModel: CocktailDetailTableViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 44
-        self.tableView.allowsSelection = false
-        self.showTutorial = ( UserDefaults.standard.object(forKey: "showTutorialCocktailDetail") as? Bool ) ?? true
-        UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialCocktailDetail")
+        self.setupTableView()
     }
 
     override func viewDidLayoutSubviews() {
@@ -24,17 +17,12 @@ final class CocktailDetailTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard self.showTutorial else { return }
-//        TutorialController
-//            .shared
-//            .drinksTutorial(viewController: self,
-//                            title: TutorialController.shared.cocktailDetailTitle,
-//                            message: TutorialController.shared.cocktailDetailMessage,
-//                            alertActionTitle: "OK!") {
-//                                self.showTutorial = false
-//                                UserDefaults.standard.set(self.showTutorial,
-//                                                          forKey: "showTutorialCocktailDetail")
-//        }
+        guard self.cocktailDetailTableViewModel.tutorialState?.isActive ?? true else { return }
+        self.showTutorial(viewController: self,
+                          title: TutorialState.cocktailDetailTitle,
+                          message: TutorialState.cocktailDetailMessage,
+                          alertActionTitle: "OK!",
+                          completion: self.cocktailDetailTableViewModel.toggleTutorialStateClosure)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,11 +33,20 @@ final class CocktailDetailTableViewController: UITableViewController {
 
 // MARK: - Setup functions
 extension CocktailDetailTableViewController {
-    func setNavigationBar() {
+    private func setupTableView() {
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.allowsSelection = false
+        CocktailDetailImageTableViewCell.register(with: self.tableView)
+        CocktailDetailIngredientTableViewCell.register(with: self.tableView)
+        CocktailDetailInstructionTableViewCell.register(with: self.tableView)
+    }
+
+    private func setNavigationBar() {
         let screenSize: CGRect = UIScreen.main.bounds
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: 44))
         let navItem = UINavigationItem(title: "")
-        if let cocktail = cocktail { navItem.title = cocktail.name }
+        if let cocktail = self.cocktailDetailTableViewModel.cocktail { navItem.title = cocktail.name }
         navBar.backgroundColor =  UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
         navBar.tintColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
         let backItem = UIBarButtonItem(title: "Back", style: .done, target: nil, action: #selector(done))
@@ -64,12 +61,7 @@ extension CocktailDetailTableViewController {
     }
 
     @objc func saveCocktailToFavorites() {
-        if let cocktail = cocktail {
-            if !CocktailController.shared.savedCocktails.contains(cocktail) {
-                CocktailController.shared.savedCocktails.append(cocktail)
-                CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
-            }
-        }
+        self.cocktailDetailTableViewModel.saveCocktailToFavorites()
         self.resignFirstResponder()
         self.dismiss(animated: true) { self.tabBarController?.selectedIndex = 1 }
         self.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -88,7 +80,7 @@ extension CocktailDetailTableViewController {
 
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        guard let cocktail = cocktail else { return 0 }
+        guard let cocktail = self.cocktailDetailTableViewModel.cocktail else { return 0 }
         switch section {
         case 0:
             return 1
@@ -147,24 +139,21 @@ extension CocktailDetailTableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell",
-                                                     for: indexPath) as! CocktailDetailImageTableViewCell
-            cell.cocktail = cocktail
+            let cell = CocktailDetailImageTableViewCell.dequeue(from: tableView, for: indexPath)
+            cell.cocktail = self.cocktailDetailTableViewModel.cocktail
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell",
-                                                     for: indexPath) as! CocktailDetailIngredientTableViewCell
-            cell.cocktail = cocktail
-            if let ingredient = cocktail?.ingredients[indexPath.row],
-                let amount = cocktail?.ingredientProportions[indexPath.row] {
+            let cell = CocktailDetailIngredientTableViewCell.dequeue(from: tableView, for: indexPath)
+            cell.cocktail = self.cocktailDetailTableViewModel.cocktail
+            if let ingredient = self.cocktailDetailTableViewModel.cocktail?.ingredients[indexPath.row],
+                let amount = self.cocktailDetailTableViewModel.cocktail?.ingredientProportions[indexPath.row] {
                 cell.textLabel?.text = "\(ingredient) - \(amount)"
             }
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell",
-                                                     for: indexPath) as! CocktailDetailInstructionTableViewCell
-            cell.cocktail = cocktail
-            if let instructions = cocktail?.instructions { cell.textLabel?.text = instructions }
+            let cell = CocktailDetailInstructionTableViewCell.dequeue(from: tableView, for: indexPath)
+            cell.cocktail = self.cocktailDetailTableViewModel.cocktail
+            if let instructions = self.cocktailDetailTableViewModel.cocktail?.instructions { cell.textLabel?.text = instructions }
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.sizeToFit()
             return cell

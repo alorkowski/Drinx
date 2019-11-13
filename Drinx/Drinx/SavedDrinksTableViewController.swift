@@ -72,12 +72,12 @@ extension SavedDrinksTableViewController {
 // MARK: - Navigation
 extension SavedDrinksTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let indexPath = tableView.indexPathForSelectedRow,
-            let dvc = segue.destination as? CocktailDetailTableViewController
-            else { return }
-        if let transitionStyle = UIModalTransitionStyle(rawValue: 2) {
-            dvc.modalTransitionStyle = transitionStyle
-        }
-        dvc.cocktail = CocktailController.shared.savedCocktails[indexPath.row]
+//        guard let indexPath = tableView.indexPathForSelectedRow,
+//            let dvc = segue.destination as? CocktailDetailTableViewController
+//            else { return }
+//        if let transitionStyle = UIModalTransitionStyle(rawValue: 2) {
+//            dvc.modalTransitionStyle = transitionStyle
+//        }
+//        dvc.cocktail = CocktailController.shared.savedCocktails[indexPath.row]
     }
 }

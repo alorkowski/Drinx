@@ -33,6 +33,7 @@
 		73FB501F237B8C1B009561F0 /* NibRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB501E237B8C1B009561F0 /* NibRepresentedView.swift */; };
 		73FB5021237BB388009561F0 /* ProgrammaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5020237BB388009561F0 /* ProgrammaticView.swift */; };
 		73FB5023237BC151009561F0 /* SearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5022237BC151009561F0 /* SearchTableViewModel.swift */; };
+		73FB5025237C7450009561F0 /* CocktailDetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5024237C7450009561F0 /* CocktailDetailTableViewModel.swift */; };
 		A8297B701E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B6F1E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift */; };
 		A8297B721E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B711E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift */; };
 		A8297B741E9E847B000D30A5 /* CocktailDetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B731E9E847B000D30A5 /* CocktailDetailImageTableViewCell.swift */; };
@@ -78,6 +79,7 @@
 		73FB501E237B8C1B009561F0 /* NibRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRepresentedView.swift; sourceTree = "<group>"; };
 		73FB5020237BB388009561F0 /* ProgrammaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammaticView.swift; sourceTree = "<group>"; };
 		73FB5022237BC151009561F0 /* SearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModel.swift; sourceTree = "<group>"; };
+		73FB5024237C7450009561F0 /* CocktailDetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailTableViewModel.swift; sourceTree = "<group>"; };
 		A8297B6F1E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCabinetCollectionViewController.swift; sourceTree = "<group>"; };
 		A8297B711E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCabinetCollectionViewCell.swift; sourceTree = "<group>"; };
 		A8297B731E9E847B000D30A5 /* CocktailDetailImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				A8297B751E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift */,
 				A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */,
 				A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */,
+				73FB5024237C7450009561F0 /* CocktailDetailTableViewModel.swift */,
 			);
 			name = CocktailDetail;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				C39A9FB21E9EA06700EA5F30 /* Cabinet.swift in Sources */,
 				A85216E21EA7F51B0064404D /* SuggestedTableViewCell.swift in Sources */,
 				5CAB298B1E9FCD91000E2B34 /* CabinetController.swift in Sources */,
+				73FB5025237C7450009561F0 /* CocktailDetailTableViewModel.swift in Sources */,
 				73FB5021237BB388009561F0 /* ProgrammaticView.swift in Sources */,
 				5CA46BC31E9D969D00245AD9 /* CocktailController.swift in Sources */,
 				5C3FCF9F1EAD935100C0A5F6 /* TutorialState.swift in Sources */,

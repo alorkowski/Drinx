@@ -58,7 +58,6 @@ extension SuggestedDrinksTableViewController {
         self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableView.automaticDimension
-//        self.tableView.separatorStyle = .none
     }
 }
 
@@ -86,6 +85,13 @@ extension SuggestedDrinksTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
-        // Move to the detail view of the suggestedCocktails[indexPath.row]
+
+        let cocktailDetailTableViewModel = CocktailDetailTableViewModel()
+        cocktailDetailTableViewModel.cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
+
+        let cocktailDetailTableViewController = CocktailDetailTableViewController()
+        cocktailDetailTableViewController.cocktailDetailTableViewModel = cocktailDetailTableViewModel
+
+        self.navigationController?.pushViewController(cocktailDetailTableViewController, animated: true)
     }
 }
