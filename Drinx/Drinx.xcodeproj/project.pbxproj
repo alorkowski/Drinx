@@ -137,14 +137,14 @@
 			children = (
 				5C46EF511EA126DE00378487 /* Drinx.entitlements */,
 				5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */,
-				5CA46BCA1E9D96D300245AD9 /* Models */,
-				5CA46BCD1E9D970400245AD9 /* ModelControllers */,
-				5CA46BCB1E9D96DD00245AD9 /* OtherControllers */,
-				5CA46BD01E9D973900245AD9 /* Features */,
-				5CA46BCE1E9D971E00245AD9 /* Storyboards */,
-				5CA46BCC1E9D96EB00245AD9 /* Resources */,
 				73FB501E237B8C1B009561F0 /* NibRepresentedView.swift */,
 				73FB5020237BB388009561F0 /* ProgrammaticView.swift */,
+				5CA46BD01E9D973900245AD9 /* Features */,
+				5CA46BCD1E9D970400245AD9 /* ModelControllers */,
+				5CA46BCA1E9D96D300245AD9 /* Models */,
+				5CA46BCC1E9D96EB00245AD9 /* Resources */,
+				5CA46BCB1E9D96DD00245AD9 /* Services */,
+				5CA46BCE1E9D971E00245AD9 /* Storyboards */,
 			);
 			path = Drinx;
 			sourceTree = "<group>";
@@ -152,34 +152,34 @@
 		5CA46BCA1E9D96D300245AD9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */,
 				5CA46BC01E9D968D00245AD9 /* Cocktail.swift */,
 				C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */,
-				C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
 		};
-		5CA46BCB1E9D96DD00245AD9 /* OtherControllers */ = {
+		5CA46BCB1E9D96DD00245AD9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5CA46BC41E9D96AD00245AD9 /* NetworkController.swift */,
 				5CA46BC61E9D96B900245AD9 /* ImageController.swift */,
 				5CBDED7B1EA915CB00680547 /* JSONController.swift */,
-				5C3FCF9E1EAD935100C0A5F6 /* TutorialState.swift */,
+				5CA46BC41E9D96AD00245AD9 /* NetworkController.swift */,
 				73FB501C237B83E0009561F0 /* TutorialDelegate.swift */,
+				5C3FCF9E1EAD935100C0A5F6 /* TutorialState.swift */,
 			);
-			name = OtherControllers;
+			name = Services;
 			sourceTree = "<group>";
 		};
 		5CA46BCC1E9D96EB00245AD9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5C46EF551EA1709300378487 /* CocktailRecipes.json */,
+				4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */,
+				5CAB298C1E9FD004000E2B34 /* ingredients.json */,
+				5CA46BBA1E9D963200245AD9 /* Info.plist */,
 				5CA46BB51E9D963200245AD9 /* Assets.xcassets */,
 				5CA46BB71E9D963200245AD9 /* LaunchScreen.storyboard */,
-				5CA46BBA1E9D963200245AD9 /* Info.plist */,
-				5CAB298C1E9FD004000E2B34 /* ingredients.json */,
-				4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */,
-				5C46EF551EA1709300378487 /* CocktailRecipes.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -187,9 +187,9 @@
 		5CA46BCD1E9D970400245AD9 /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5CAB298A1E9FCD91000E2B34 /* CabinetController.swift */,
 				5CA46BC21E9D969D00245AD9 /* CocktailController.swift */,
 				5CAB29881E9FCD7D000E2B34 /* IngredientController.swift */,
-				5CAB298A1E9FCD91000E2B34 /* CabinetController.swift */,
 			);
 			name = ModelControllers;
 			sourceTree = "<group>";
@@ -205,12 +205,12 @@
 		5CA46BD01E9D973900245AD9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				A8297B661E9E7EAD000D30A5 /* SuggestedDrink */,
+				A8297B6C1E9E7F0B000D30A5 /* CocktailDetail */,
+				A8297B651E9E7E8A000D30A5 /* MyCabinet */,
+				A8297B691E9E7EDA000D30A5 /* MyDrink */,
 				A8297B6A1E9E7EF0000D30A5 /* SaveDrink */,
 				A8297B681E9E7ECB000D30A5 /* SearchDrink */,
-				A8297B691E9E7EDA000D30A5 /* MyDrink */,
-				A8297B651E9E7E8A000D30A5 /* MyCabinet */,
-				A8297B6C1E9E7F0B000D30A5 /* CocktailDetail */,
+				A8297B661E9E7EAD000D30A5 /* SuggestedDrink */,
 			);
 			name = Features;
 			sourceTree = "<group>";
