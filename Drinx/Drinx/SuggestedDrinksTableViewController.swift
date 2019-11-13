@@ -80,6 +80,10 @@ extension SuggestedDrinksTableViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension SuggestedDrinksTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
         // Move to the detail view of the suggestedCocktails[indexPath.row]
