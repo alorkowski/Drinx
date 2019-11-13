@@ -1,6 +1,6 @@
 import UIKit
 
-class SuggestedTableViewCell: UITableViewCell, ProgrammaticView {
+class DrinkTableViewCell: UITableViewCell, ProgrammaticView {
     let drinkImageView = UIImageView()
     let drinkLabelView = UILabel()
 
@@ -23,7 +23,7 @@ class SuggestedTableViewCell: UITableViewCell, ProgrammaticView {
 }
 
 // MARK: - Setup functions
-extension SuggestedTableViewCell {
+extension DrinkTableViewCell {
     private func setupImageView() {
         self.contentView.addSubview(drinkImageView)
         self.drinkImageView.contentMode = .scaleAspectFit
@@ -45,7 +45,7 @@ extension SuggestedTableViewCell {
 }
 
 // MARK: - Utility Functions
-extension SuggestedTableViewCell {
+extension DrinkTableViewCell {
     func update(cocktail: Cocktail) {
         if let image = cocktail.image {
             drinkImageView.image = image

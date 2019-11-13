@@ -2,20 +2,12 @@ import Foundation
 
 final class SearchTableViewModel {
     var tutorialState: TutorialState?
-    var filterCocktail = [Cocktail]()
     var cocktails = CocktailController.shared.cocktails
-
-//    var cocktails = [Cocktail]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
+    var filteredCocktails = [Cocktail]()
 
     lazy var toggleTutorialStateClosure = { [weak self] in
         self?.tutorialState = self?.tutorialState?.toggle()
-        UserDefaults.standard.set(self?.tutorialState?.isActive, forKey: TutorialState.suggestedDrinksKey)
+        UserDefaults.standard.set(self?.tutorialState?.isActive, forKey: TutorialState.searchDrinksKey)
     }
     
     init() {
@@ -30,5 +22,19 @@ final class SearchTableViewModel {
 extension SearchTableViewModel {
     var numberOfCocktails: Int {
         self.cocktails.count
+    }
+
+    var numberOfFilteredCocktails: Int {
+        self.filteredCocktails.count
+    }
+}
+
+// MARK: - SearchController utility functions
+extension SearchTableViewModel {
+    func filterContentForSearchText(_ searchText: String, completion: () -> Void) {
+        self.filteredCocktails = cocktails.filter { (cocktail: Cocktail) -> Bool in
+            return cocktail.name.lowercased().contains(searchText.lowercased())
+        }
+        completion()
     }
 }

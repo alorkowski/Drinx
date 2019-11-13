@@ -2,25 +2,19 @@ import UIKit
 
 final class SearchTableViewController: UITableViewController, TutorialDelegate {
     let searchTableViewModel = SearchTableViewModel()
-    var searchBar = UISearchBar()
+    var searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchBar.delegate = self
-        self.searchBar.showsCancelButton = true
-        SearchTableViewCell.register(with: self.tableView)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        self.view.frame = self.view.superview!.bounds
-        self.view.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 50, right: 0))
+        self.view.backgroundColor = .white
+        self.title = "Search"
+        self.setupTableView()
+        self.setupSearchController()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.reloadData()
+        DispatchQueue.main.async { self.tableView.reloadData() }
         guard self.searchTableViewModel.tutorialState?.isActive ?? true else { return }
         self.showTutorial(viewController: self,
                           title: TutorialState.searchDrinksTitle,
@@ -30,17 +24,36 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
     }
 }
 
+// MARK: - Setup functions
+extension SearchTableViewController {
+    private func setupSearchController() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search"
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
+    }
+
+    private func setupTableView() {
+        self.tableView.estimatedRowHeight = 50
+        self.tableView.rowHeight = UITableView.automaticDimension
+        DrinkTableViewCell.register(with: self.tableView)
+    }
+}
+
 // MARK: - UITableViewDataSource
 extension SearchTableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return self.searchTableViewModel.numberOfCocktails
+        return self.isFiltering ?
+            self.searchTableViewModel.numberOfFilteredCocktails : self.searchTableViewModel.numberOfCocktails
     }
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = SearchTableViewCell.dequeue(from: self.tableView, for: indexPath)
-        let cocktail = self.searchTableViewModel.cocktails[indexPath.row]
+        let cell = DrinkTableViewCell.dequeue(from: self.tableView, for: indexPath)
+        let cocktail = self.isFiltering ?
+            self.searchTableViewModel.filteredCocktails[indexPath.row] : self.searchTableViewModel.cocktails[indexPath.row]
         cell.update(cocktail: cocktail)
         return cell
     }
@@ -48,50 +61,43 @@ extension SearchTableViewController {
 
 // MARK: - UITableViewDelegate
 extension SearchTableViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
+
+        let cocktail = self.isFiltering ?
+            self.searchTableViewModel.filteredCocktails[indexPath.row] : self.searchTableViewModel.cocktails[indexPath.row]
+
+        let cocktailDetailTableViewModel = CocktailDetailTableViewModel()
+        cocktailDetailTableViewModel.cocktail = cocktail
+
+        let cocktailDetailTableViewController = CocktailDetailTableViewController()
+        cocktailDetailTableViewController.cocktailDetailTableViewModel = cocktailDetailTableViewModel
+        cocktailDetailTableViewController.title = cocktail.name
+
+        self.navigationController?.pushViewController(cocktailDetailTableViewController, animated: true)
     }
 }
 
-// MARK: - UISearchBarDelegate
-extension SearchTableViewController: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBar.resignFirstResponder()
+// MARK: - UISearchResultsUpdating
+extension SearchTableViewController: UISearchResultsUpdating {
+    var isSearchBarEmpty: Bool {
+        return self.searchController.searchBar.text?.isEmpty ?? true
     }
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard let searchTerm = searchBar.text else { return }
-        guard searchTerm.count >= 3 else { return }
-        var cocktails = [Cocktail]()
-        self.tableView.reloadData()
-        CocktailController.shared.searchCocktails(for: searchTerm, perRecordCompletion: { [weak self] cocktail in
-            if !(self?.searchTableViewModel.cocktails.contains(cocktail) ?? false) {
-                cocktails.append(cocktail)
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+    var isFiltering: Bool {
+        return self.searchController.isActive && !self.isSearchBarEmpty
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        DispatchQueue.main.async { [weak self] in
+            self?.searchTableViewModel.filterContentForSearchText(searchBar.text!) {
+                self?.tableView.reloadData()
             }
-        }){}
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBar.resignFirstResponder()
-        guard let searchTerm = searchBar.text else { return }
-        guard searchTerm != "" else {
-            self.searchTableViewModel.cocktails = CocktailController.shared.cocktails
-            self.tableView.reloadData()
-            return
         }
-
-        let perRecordCompletion: (Cocktail) -> Void = { [weak self] cocktail in
-            guard !(self?.searchTableViewModel.cocktails.contains(cocktail) ?? false) else { return }
-            self?.searchTableViewModel.cocktails.append(cocktail)
-            self?.tableView.reloadData()
-        }
-
-        self.searchTableViewModel.cocktails = []
-        CocktailController.shared.searchCocktails(for: searchTerm,
-                                                  perRecordCompletion: perRecordCompletion,
-                                                  completion: {})
     }
 }

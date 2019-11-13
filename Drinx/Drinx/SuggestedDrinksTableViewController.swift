@@ -12,22 +12,12 @@ class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        self.title = TutorialState.suggestedDrinksTitle
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        SuggestedTableViewCell.register(with: self.tableView)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        self.view.frame = self.view.superview!.bounds
-        self.view.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 45, right: 0))
+        self.title = "Suggested"
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        DispatchQueue.main.async { self.tableView.reloadData() }
         guard CabinetController.shared.cabinetHasBeenUpdated else { return }
         self.suggestedDrinksViewModel.findMatches { [weak self] in
             CabinetController.shared.cabinetHasBeenUpdated = false
@@ -58,6 +48,9 @@ extension SuggestedDrinksTableViewController {
         self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        DrinkTableViewCell.register(with: self.tableView)
     }
 }
 
@@ -70,7 +63,7 @@ extension SuggestedDrinksTableViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = SuggestedTableViewCell.dequeue(from: tableView, for: indexPath)
+        let cell = DrinkTableViewCell.dequeue(from: tableView, for: indexPath)
         let cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
         cell.update(cocktail: cocktail)
         return cell
