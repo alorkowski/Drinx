@@ -25,16 +25,16 @@ final class CocktailDetailTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         guard self.showTutorial else { return }
-        TutorialController
-            .shared
-            .drinksTutorial(viewController: self,
-                            title: TutorialController.shared.cocktailDetailTitle,
-                            message: TutorialController.shared.cocktailDetailMessage,
-                            alertActionTitle: "OK!") {
-                                self.showTutorial = false
-                                UserDefaults.standard.set(self.showTutorial,
-                                                          forKey: "showTutorialCocktailDetail")
-        }
+//        TutorialController
+//            .shared
+//            .drinksTutorial(viewController: self,
+//                            title: TutorialController.shared.cocktailDetailTitle,
+//                            message: TutorialController.shared.cocktailDetailMessage,
+//                            alertActionTitle: "OK!") {
+//                                self.showTutorial = false
+//                                UserDefaults.standard.set(self.showTutorial,
+//                                                          forKey: "showTutorialCocktailDetail")
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -16,7 +16,7 @@ class CocktailController {
     // MARK: - UserDefaults
     func saveMyFavoriteCocktailsToUserDefaults() {
         var cocktailIDStrings: [String] = []
-        for cocktail in savedCocktails {
+        for cocktail in self.savedCocktails {
             guard let idString = cocktail.apiID else { break }
             cocktailIDStrings.append(idString)
         }
@@ -40,7 +40,7 @@ class CocktailController {
     }
 
     func getCocktailDictionaryArray(completion: () -> Void) {
-        guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else {return}
+        guard let path = Bundle.main.path(forResource: "CocktailRecipes", ofType: "json") else { return }
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
             guard let jsonArray = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }

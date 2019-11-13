@@ -7,7 +7,6 @@ final class SavedDrinksTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
-        fetchAvailableImagesFromCloudKit()
         if CocktailController.shared.savedCocktails.isEmpty {
             CocktailController.shared.savedCocktails = CocktailController.shared.sampleSavedCocktails
         }
@@ -30,31 +29,13 @@ final class SavedDrinksTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if self.showTutorial {
-            TutorialController.shared.drinksTutorial(viewController: self,
-                                                     title: TutorialController.shared.favoriteDrinksTitle,
-                                                     message: TutorialController.shared.favoriteDrinksMessage,
-                                                     alertActionTitle: "OK!") {
-                self.showTutorial = false
-                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
-            }
-        }
-    }
-}
-
-// MARK: - Setup functions
-extension SavedDrinksTableViewController {
-    private func fetchAvailableImagesFromCloudKit() {
-        DispatchQueue.global(qos: .background).async {
-            ImageController.fetchAvailableImagesFromCloudKit(forCocktails: CocktailController.shared.savedCocktails) { (cocktail) in
-                guard let cocktail = cocktail else { return }
-                if let index = CocktailController.shared.savedCocktails.firstIndex(of: cocktail) {
-                    CocktailController.shared.savedCocktails.remove(at: index)
-                    CocktailController.shared.savedCocktails.insert(cocktail, at: index)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
+//            TutorialController.shared.drinksTutorial(viewController: self,
+//                                                     title: TutorialController.shared.favoriteDrinksTitle,
+//                                                     message: TutorialController.shared.favoriteDrinksMessage,
+//                                                     alertActionTitle: "OK!") {
+//                self.showTutorial = false
+//                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
+//            }
         }
     }
 }

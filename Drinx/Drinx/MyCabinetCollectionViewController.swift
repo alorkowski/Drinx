@@ -58,10 +58,10 @@ final class MyCabinetCollectionViewController: UICollectionViewController, UISea
         super.viewDidAppear(animated)
         self.collectionView?.reloadData()
         if self.showTutorial {
-            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.myCabinetTitle, message: TutorialController.shared.myCabinetMessage, alertActionTitle: "OK!", completion: {
-                self.showTutorial = false
-                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
-            })
+//            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.myCabinetTitle, message: TutorialController.shared.myCabinetMessage, alertActionTitle: "OK!", completion: {
+//                self.showTutorial = false
+//                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
+//            })
         }
     }
 }

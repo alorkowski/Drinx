@@ -33,13 +33,13 @@ final class SearchTableViewController: UITableViewController {
         self.cocktails = CocktailController.shared.cocktails
         self.tableView.reloadData()
         guard self.showTutorial else { return }
-        TutorialController.shared.drinksTutorial(viewController: self,
-                                                 title: TutorialController.shared.searchDrinksTitle,
-                                                 message: TutorialController.shared.searchDrinksMessage,
-                                                 alertActionTitle: "OK!") { [weak self] in
-            self?.showTutorial = false
-            UserDefaults.standard.set(self?.showTutorial, forKey: "showTutorialSearch")
-        }
+//        TutorialController.shared.drinksTutorial(viewController: self,
+//                                                 title: TutorialController.shared.searchDrinksTitle,
+//                                                 message: TutorialController.shared.searchDrinksMessage,
+//                                                 alertActionTitle: "OK!") { [weak self] in
+//            self?.showTutorial = false
+//            UserDefaults.standard.set(self?.showTutorial, forKey: "showTutorialSearch")
+//        }
     }
 }
 
@@ -128,23 +128,9 @@ extension SearchTableViewController: UISearchBarDelegate {
             self?.tableView.reloadData()
         }
 
-        let completion: () -> Void = {
-            DispatchQueue.global(qos: .background).async {
-                ImageController.fetchAvailableImagesFromCloudKit(forCocktails: self.cocktails) { [weak self] (cocktail) in
-                    guard let cocktail = cocktail else { return }
-                    guard let index = self?.cocktails.firstIndex(of: cocktail) else { return }
-                    self?.cocktails.remove(at: index)
-                    self?.cocktails.insert(cocktail, at: index)
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
-                }
-            }
-        }
-
         self.cocktails = []
         CocktailController.shared.searchCocktails(for: searchTerm,
                                                   perRecordCompletion: perRecordCompletion,
-                                                  completion: completion)
+                                                  completion: {})
     }
 }

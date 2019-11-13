@@ -1,22 +1,21 @@
 import UIKit
 
-class SuggestedDrinksTableViewController: UITableViewController {
-    let cocktail = [String]()
-    var showTutorial = true
-    var cocktailDictionaries = [[String: Any]]()
-    var suggestedCocktails = [Cocktail]()
-    var tempCocktails = [Cocktail]()
+class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
+    let tableView = UITableView()
+    let suggestedDrinksViewModel = SuggestedDrinksViewModel()
+
+    override func loadView() {
+        super.loadView()
+        self.setupTableView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        IngredientController.share.ingredients = CabinetController.shared.getMyIngredientsFromUserDefaults()
-        tableView.separatorStyle = .none
-        self.getCocktailDictionaryArray()
-        if self.suggestedCocktails.count == 0 {
-            self.suggestedCocktails = CocktailController.getRandomCocktails(numberOfCocktailsToGet: 10)
-        }
-        self.showTutorial = ( UserDefaults.standard.object(forKey: "showTutorialSuggested") as? Bool ) ?? true
-        UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSuggested")
+        self.view.backgroundColor = .white
+        self.title = TutorialState.suggestedDrinksTitle
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        SuggestedTableViewCell.register(with: self.tableView)
     }
 
     override func viewDidLayoutSubviews() {
@@ -28,88 +27,61 @@ class SuggestedDrinksTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        self.tableView.reloadData()
         guard CabinetController.shared.cabinetHasBeenUpdated else { return }
-        findMatches { [weak self] in
+        self.suggestedDrinksViewModel.findMatches { [weak self] in
             CabinetController.shared.cabinetHasBeenUpdated = false
             self?.tableView.reloadData()
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        guard showTutorial else { return }
-        TutorialController.shared.drinksTutorial(viewController: self,
-                                                 title: TutorialController.shared.suggestedDrinksTitle,
-                                                 message: TutorialController.shared.suggestedDrinksMessage,
-                                                 alertActionTitle: "OK!") { [weak self] in
-            self?.showTutorial = false
-            UserDefaults.standard.set(self?.showTutorial, forKey: "showTutorialSuggested")
-        }
+        guard let tutorialState = self.suggestedDrinksViewModel.tutorialState,
+            tutorialState.isActive
+            else { return }
+        self.showTutorial(viewController: self,
+                          title: TutorialState.suggestedDrinksTitle,
+                          message: TutorialState.suggestedDrinksMessage,
+                          alertActionTitle: "OK!",
+                          completion: self.suggestedDrinksViewModel.toggleTutorialStateClosure)
     }
 }
 
-// MARK: - Setup utility functions
+// MARK: - Setup Functions
 extension SuggestedDrinksTableViewController {
-    private func getCocktailDictionaryArray() {
-        CocktailController.shared.getCocktailDictionaryArray { [weak self] in
-            self?.findMatches { [weak self] in
-                self?.tableView.reloadData()
-            }
-        }
-    }
-
-    private func findMatches(completion: @escaping () -> Void) {
-        var sugCocktails = [Cocktail]()
-        for cocktail in cocktails {
-            let cocktailIngredients = Set(cocktail.ingredients)
-            if cocktailIngredients.isSubset(of: IngredientController.share.myCabinetIngredientStrings) {
-                sugCocktails.append(cocktail)
-            }
-        }
-        self.suggestedCocktails = sugCocktails
-        self.tableView.reloadData()
-    }
-}
-
-// MARK: - Computed Properties
-extension SuggestedDrinksTableViewController {
-    var cocktails: [Cocktail] {
-        return CocktailController.shared.cocktails
+    private func setupTableView() {
+        self.view.addSubview(self.tableView)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        self.tableView.estimatedRowHeight = 50
+        self.tableView.rowHeight = UITableView.automaticDimension
+//        self.tableView.separatorStyle = .none
     }
 }
 
 // MARK: - UITableViewDataSource
-extension SuggestedDrinksTableViewController {
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
-        return self.suggestedCocktails.count
+extension SuggestedDrinksTableViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return self.suggestedDrinksViewModel.numberOfSuggestedCocktails
     }
 
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestCell", for: indexPath) as! SuggestedTableViewCell
-        let cocktail = suggestedCocktails[indexPath.row]
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = SuggestedTableViewCell.dequeue(from: tableView, for: indexPath)
+        let cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
         cell.update(cocktail: cocktail)
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
-extension SuggestedDrinksTableViewController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toDetail", sender: indexPath)
-    }
-}
-
-// MARK: - Navigation
-extension SuggestedDrinksTableViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let dvc = segue.destination as? CocktailDetailTableViewController else { return }
-        if let transitionStyle = UIModalTransitionStyle(rawValue: 2) {
-            dvc.modalTransitionStyle = transitionStyle
-        }
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let cocktail = suggestedCocktails[indexPath.row]
-        dvc.cocktail = cocktail
+extension SuggestedDrinksTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.isSelected = false
+        // Move to the detail view of the suggestedCocktails[indexPath.row]
     }
 }
