@@ -4,16 +4,16 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let suggestedDrinksTableViewController = SuggestedDrinksTableViewController()
-        suggestedDrinksTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        suggestedDrinksTableViewController.tabBarItem = UITabBarItem(title: "Suggested", image: UIImage(named: "Cocktail"), tag: 0)
 
         let savedDrinksTableViewController = SavedDrinksTableViewController()
-        savedDrinksTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        savedDrinksTableViewController.tabBarItem = UITabBarItem(title: "Save", image: UIImage(named: "Save"), tag: 1)
 
         let searchTableViewController = SearchTableViewController()
-        searchTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+        searchTableViewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "Search"), tag: 2)
 
         let myCabinetTableViewController = MyCabinetCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        myCabinetTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 3)
+        myCabinetTableViewController.tabBarItem = UITabBarItem(title: "My Cabinet", image: UIImage(named: "myShot"), tag: 3)
 
         self.viewControllers = [ UINavigationController(rootViewController: suggestedDrinksTableViewController),
                                  UINavigationController(rootViewController: savedDrinksTableViewController),

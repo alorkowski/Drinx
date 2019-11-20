@@ -5,7 +5,7 @@ final class SavedDrinksTableViewController: UITableViewController, TutorialDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Favorites"
+        self.title = "Saved"
         self.view.backgroundColor = AppData.backgroundColor
         self.setupNavigationBar()
         self.setupTableView()
