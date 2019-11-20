@@ -1,95 +1,91 @@
-//
-//  SuggestedDrinksTableViewController.swift
-//  Drinx
-//
-//  Created by Jeremiah Hawks on 4/11/17.
-//  Copyright © 2017 Jeremiah Hawks. All rights reserved.
-//
-
 import UIKit
 
-class SuggestedDrinksTableViewController: UITableViewController {
+class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
+    let tableView = UITableView()
+    let suggestedDrinksViewModel = SuggestedDrinksViewModel()
+
+    override func loadView() {
+        super.loadView()
+        self.setupTableView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.view.backgroundColor = .white
+        self.title = "Suggested"
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async { self.tableView.reloadData() }
+        guard CabinetController.shared.cabinetHasBeenUpdated else { return }
+        self.suggestedDrinksViewModel.findMatches { [weak self] in
+            CabinetController.shared.cabinetHasBeenUpdated = false
+            self?.tableView.reloadData()
+        }
     }
 
-    // MARK: - Table view data source
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tutorialState = self.suggestedDrinksViewModel.tutorialState,
+            tutorialState.isActive
+            else { return }
+        self.showTutorial(viewController: self,
+                          title: TutorialState.suggestedDrinksTitle,
+                          message: TutorialState.suggestedDrinksMessage,
+                          alertActionTitle: "OK!",
+                          completion: self.suggestedDrinksViewModel.toggleTutorialStateClosure)
+    }
+}
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+// MARK: - Setup Functions
+extension SuggestedDrinksTableViewController {
+    private func setupTableView() {
+        self.view.addSubview(self.tableView)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        self.tableView.estimatedRowHeight = 50
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        DrinkTableViewCell.register(with: self.tableView)
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension SuggestedDrinksTableViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return self.suggestedDrinksViewModel.numberOfSuggestedCocktails
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = DrinkTableViewCell.dequeue(from: tableView, for: indexPath)
+        let cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
+        cell.update(cocktail: cocktail)
         return cell
     }
-    */
+}
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+// MARK: - UITableViewDelegate
+extension SuggestedDrinksTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.isSelected = false
+
+        let cocktailDetailTableViewModel = CocktailDetailTableViewModel()
+        cocktailDetailTableViewModel.cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
+
+        let cocktailDetailTableViewController = CocktailDetailTableViewController()
+        cocktailDetailTableViewController.cocktailDetailTableViewModel = cocktailDetailTableViewModel
+        cocktailDetailTableViewController.title = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row].name
+
+        self.navigationController?.pushViewController(cocktailDetailTableViewController, animated: true)
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

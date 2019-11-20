@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gwT-aZ-fNd">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Jo1-0p-0UF">
+            <objects>
+                <tabBarController id="gwT-aZ-fNd" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="0oJ-cJ-Xp6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="1ZY-FX-5ga" kind="relationship" relationship="viewControllers" id="Fpn-oq-knx"/>
+                        <segue destination="g4G-O0-UnQ" kind="relationship" relationship="viewControllers" id="0dI-YU-3oS"/>
+                        <segue destination="SVO-Yf-703" kind="relationship" relationship="viewControllers" id="fBX-18-gbf"/>
+                        <segue destination="0Yq-Dj-d7b" kind="relationship" relationship="viewControllers" id="Yjq-ty-h7v"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pX3-aH-ZDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-486" y="236"/>
+        </scene>
+        <!--SuggestedDrink-->
+        <scene sceneID="XNQ-yI-AEM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SuggestedDrink" id="1ZY-FX-5ga" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="F0G-Fy-LQR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vw9-Qt-UND" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="-229"/>
+        </scene>
+        <!--SearchDrink-->
+        <scene sceneID="eVx-ne-T9H">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchDrink" id="dGg-Au-kvb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="4YB-WO-QOn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pk2-Ql-Gt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="297" y="441"/>
+        </scene>
+        <!--MyCabinet-->
+        <scene sceneID="uOk-Qy-wAj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyCabinet" id="0Yq-Dj-d7b" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Wnp-qX-hFA"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5iF-pz-BXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="297" y="1128"/>
+        </scene>
+        <!--SaveDrinks-->
+        <scene sceneID="uo7-nJ-yyT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SaveDrinks" id="g4G-O0-UnQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="7TS-pa-SoG"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QD9-l1-F8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-878" y="1048"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="FNf-p9-zas">
+            <objects>
+                <tableViewController id="SVO-Yf-703" customClass="SearchTableViewController" customModule="Drinx" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xTA-aI-tbd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Mgk-Z1-HZc">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="84" id="swM-7c-304">
+                                <rect key="frame" x="0.0" y="72" width="375" height="84"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="swM-7c-304" id="hIP-vr-HAQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kj7-kJ-I6y">
+                                            <rect key="frame" x="13" y="26" width="349" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="centerY" secondItem="hIP-vr-HAQ" secondAttribute="centerY" id="G7X-Xr-6IX"/>
+                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="top" secondItem="hIP-vr-HAQ" secondAttribute="topMargin" constant="18" id="QUy-5D-nZ9"/>
+                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="leading" secondItem="hIP-vr-HAQ" secondAttribute="leadingMargin" constant="5" id="g6N-FR-0bo"/>
+                                        <constraint firstItem="kj7-kJ-I6y" firstAttribute="centerX" secondItem="hIP-vr-HAQ" secondAttribute="centerX" id="pq3-vb-bPG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SVO-Yf-703" id="ktW-YQ-5Vu"/>
+                            <outlet property="delegate" destination="SVO-Yf-703" id="8W2-z7-kWW"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="4Zt-Hg-tQ3"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Mgk-Z1-HZc" id="8lb-si-9eT"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SFY-t1-NfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-308" y="1302"/>
+        </scene>
+    </scenes>
+</document>

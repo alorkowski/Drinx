@@ -17,5 +17,9 @@ profile
 *.moved-aside
 *.orig
 
+#Playgrounds
+[Pp]layground/
+*.playground
+
 build
 .DS_Store
