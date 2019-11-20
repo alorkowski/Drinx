@@ -2,16 +2,18 @@ import Foundation
 
 final class SavedDrinksTableViewModel {
     var tutorialState: TutorialState?
+    let cocktailController: CocktailController!
 
     lazy var toggleTutorialStateClosure = { [weak self] in
         self?.tutorialState = self?.tutorialState?.toggle()
         UserDefaults.standard.set(self?.tutorialState?.isActive, forKey: TutorialState.favoriteDrinksKey)
     }
 
-    init() {
-        CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
-        if CocktailController.shared.savedCocktails.isEmpty {
-            CocktailController.shared.savedCocktails = CocktailController.shared.sampleSavedCocktails
+    init(cocktailController: CocktailController = CocktailController.shared) {
+        self.cocktailController = cocktailController
+        self.cocktailController.fetchMyFavoriteCocktailsFromUserDefaults()
+        if self.cocktailController.savedCocktails.isEmpty {
+            self.cocktailController.savedCocktails = self.cocktailController.sampleSavedCocktails
         }
         let state = ( UserDefaults.standard.object(forKey: TutorialState.favoriteDrinksKey) as? Bool ) ?? true
         self.tutorialState = TutorialState(isActive: state)

@@ -4,19 +4,24 @@ typealias ResultsViewControllerHandler = (_ resultsViewController: UITableViewCo
 
 final class MyCabinetCollectionViewModel {
     var tutorialState: TutorialState?
+    let cabinetController: CabinetController!
+    let ingredientController: IngredientController!
 
     lazy var toggleTutorialStateClosure = { [weak self] in
         self?.tutorialState = self?.tutorialState?.toggle()
         UserDefaults.standard.set(self?.tutorialState?.isActive, forKey: TutorialState.myCabinetKey)
     }
 
-    init() {
-        let myIngredients = CabinetController.shared.getMyIngredientsFromUserDefaults()
-        CabinetController.shared.myCabinet.myIngredients = myIngredients.isEmpty ?
-            CabinetController.shared.myCabinet.sampleIngredients : myIngredients
-        IngredientController.shared.ingredients = myIngredients.isEmpty ?
-            CabinetController.shared.myCabinet.sampleIngredients : myIngredients
-        CabinetController.shared.saveMyCabinetToUserDefaults()
+    init(cabinetController: CabinetController = CabinetController.shared,
+         ingredientController: IngredientController = IngredientController.shared) {
+        self.cabinetController = cabinetController
+        self.ingredientController = ingredientController
+        let myIngredients = self.cabinetController.getMyIngredientsFromUserDefaults()
+        self.cabinetController.myCabinet.myIngredients = myIngredients.isEmpty ?
+            self.cabinetController.myCabinet.sampleIngredients : myIngredients
+        self.ingredientController.ingredients = myIngredients.isEmpty ?
+            self.cabinetController.myCabinet.sampleIngredients : myIngredients
+        self.cabinetController.saveMyCabinetToUserDefaults()
         let state = ( UserDefaults.standard.object(forKey: TutorialState.myCabinetKey) as? Bool ) ?? true
         self.tutorialState = TutorialState(isActive: state)
         guard let showTutorial = self.tutorialState?.isActive else { return }
@@ -32,21 +37,21 @@ extension MyCabinetCollectionViewModel {
             let searchTerm = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
             else { return }
         DispatchQueue.global().async {
-            let ingredients = IngredientController.shared.ingredientDictionary.keys
+            let ingredients = self.ingredientController.ingredientDictionary.keys
             var matchingIngredients: [Ingredient] = []
             for ingredient in ingredients {
                 guard ingredient.lowercased().contains(searchTerm) else { continue }
-                guard let ingredientArray = IngredientController.shared.ingredientDictionary[ingredient] else { return }
+                guard let ingredientArray = self.ingredientController.ingredientDictionary[ingredient] else { return }
                 for ingredientName in ingredientArray {
                     let ingredientObject = Ingredient(name: ingredientName)
-                    if !IngredientController.shared.ingredients.contains(ingredientObject) {
+                    if !self.ingredientController.ingredients.contains(ingredientObject) {
                         matchingIngredients.append(ingredientObject)
                     }
                 }
             }
             resultsViewController.resultsArray = matchingIngredients
-            CabinetController.shared.myCabinet.myIngredients = IngredientController.shared.ingredients
-            CabinetController.shared.saveMyCabinetToUserDefaults()
+            self.cabinetController.myCabinet.myIngredients = self.ingredientController.ingredients
+            self.cabinetController.saveMyCabinetToUserDefaults()
         }
     }
 }
