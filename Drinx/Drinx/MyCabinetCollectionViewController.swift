@@ -1,44 +1,22 @@
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-final class MyCabinetCollectionViewController: UICollectionViewController, UISearchResultsUpdating {
+final class MyCabinetCollectionViewController: UICollectionViewController, TutorialDelegate {
+    let myCabinetCollectionViewModel = MyCabinetCollectionViewModel()
     var searchController: UISearchController?
-    var showTutorial = true
-    var ddidLayout = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "My Cabinet"
+        self.view.backgroundColor = AppFeatures.backgroundColor
         let nc = NotificationCenter.default
         let notification = Notification.Name(rawValue: "updateMyCabinet")
-        nc.addObserver(self, selector: #selector(MyCabinetCollectionViewController.didUpdateMyCabinet), name: notification, object: nil)
-
-        let myIngredients = CabinetController.shared.getMyIngredientsFromUserDefaults()
-        if myIngredients.count != 0 {
-            CabinetController.shared.myCabinet.myIngredients = myIngredients
-            IngredientController.share.ingredients = myIngredients
-            CabinetController.shared.saveMyCabinetToUserDefaults()
-        } else {
-            CabinetController.shared.myCabinet.myIngredients = CabinetController.shared.myCabinet.sampleIngredients
-            IngredientController.share.ingredients = CabinetController.shared.myCabinet.sampleIngredients
-            CabinetController.shared.saveMyCabinetToUserDefaults()
-        }
-        setUpSearchController()
-        if let showTutorial = UserDefaults.standard.object(forKey: "showTutorialMyCabinet") as? Bool {
-            self.showTutorial = showTutorial
-            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
-        } else {
-            self.showTutorial = true
-            UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 40, right: 0)
-        self.collectionView?.frame = self.view.superview!.bounds
-        self.collectionView?.frame.inset(by: insets)
+        nc.addObserver(self,
+                       selector: #selector(self.didUpdateMyCabinet),
+                       name: notification,
+                       object: nil)
+        self.setupNavigationBar()
+        self.setupCollectionView()
+        self.setUpSearchController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,84 +29,62 @@ final class MyCabinetCollectionViewController: UICollectionViewController, UISea
             cellSize.height = cellSize.width + 30
             layout.itemSize = cellSize
         }
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.collectionView?.reloadData()
-        if self.showTutorial {
-//            TutorialController.shared.drinksTutorial(viewController: self, title: TutorialController.shared.myCabinetTitle, message: TutorialController.shared.myCabinetMessage, alertActionTitle: "OK!", completion: {
-//                self.showTutorial = false
-//                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialMyCabinet")
-//            })
-        }
+        guard self.myCabinetCollectionViewModel.tutorialState?.isActive ?? true else { return }
+        self.showTutorial(viewController: self,
+                          title: TutorialState.myCabinetTitle,
+                          message: TutorialState.myCabinetMessage,
+                          alertActionTitle: "OK!",
+                          completion: self.myCabinetCollectionViewModel.toggleTutorialStateClosure)
     }
 }
 
 // MARK: - Setup functions
 extension MyCabinetCollectionViewController {
+    private func setupNavigationBar() {
+        self.navigationController?.view.backgroundColor = AppFeatures.backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isOpaque = true
+    }
+
+    private func setupCollectionView() {
+        self.collectionView.backgroundColor = .clear
+        MyCabinetCollectionViewCell.register(with: self.collectionView)
+    }
+
     private func setUpSearchController() {
-        let resultsController = UIStoryboard(name: "MyCabinet", bundle: nil)
-            .instantiateViewController(withIdentifier: "ingredentSearchResultsTVC")
-        searchController = UISearchController(searchResultsController: resultsController)
-        searchController?.searchResultsUpdater = self
-        searchController?.searchBar.sizeToFit()
-        searchController?.hidesNavigationBarDuringPresentation = true
-        definesPresentationContext = true
-    }
-
-    func deleteAlertController(indexPath: IndexPath, ingredient: Ingredient) {
-        let alertControler = UIAlertController(title: "Delete!", message: "Would you like to delete this item (\(IngredientController.share.ingredients[indexPath.row].name))?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-            IngredientController.share.delete(ingredient: ingredient)
-            self.collectionView?.reloadData()
-            self.collectionView?.reloadInputViews()
-            CabinetController.shared.cabinetHasBeenUpdated = true
-            CabinetController.shared.saveMyCabinetToUserDefaults()
-        }
-        alertControler.addAction(cancelAction)
-        alertControler.addAction(deleteAction)
-        self.present(alertControler, animated: true) {
-        }
-    }
-}
-
-// MARK: - SearchControllerDelegate
-extension MyCabinetCollectionViewController {
-    func updateSearchResults(for searchController: UISearchController) {
-        searchIngredients(searchController: searchController) { (resultsViewController) in
-            resultsViewController.tableView.reloadData()
-        }
-    }
-
-    func searchIngredients(searchController: UISearchController,
-                           completion: (_ resultsViewController: UITableViewController ) -> Void) {
-        if let resultsViewController = searchController.searchResultsController as? IngredientSearchResultsTVC,
-            let searchTerm = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) {
-            let ingredients = IngredientController.share.ingredientDictionary.keys
-            var matchingIngredients: [Ingredient] = []
-            for ingredient in ingredients {
-                if ingredient.lowercased().contains(searchTerm) {
-                    guard let ingArray = IngredientController.share.ingredientDictionary[ingredient] else { return }
-                    for ing in ingArray {
-                        let ingObj = Ingredient(name: ing)
-                        if !IngredientController.share.ingredients.contains(ingObj) {
-                            matchingIngredients.append(ingObj)
-                        }
-                    }
-                }
-            }
-            resultsViewController.resultsArray = matchingIngredients
-            CabinetController.shared.myCabinet.myIngredients = IngredientController.share.ingredients
-            CabinetController.shared.saveMyCabinetToUserDefaults()
-        }
+        self.searchController = UISearchController(searchResultsController: IngredientSearchResultsTVC())
+        self.searchController?.searchResultsUpdater = self
+        self.searchController?.obscuresBackgroundDuringPresentation = false
+        self.searchController?.searchBar.placeholder = "Search"
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
     }
 
     @objc func didUpdateMyCabinet() {
         self.collectionView?.reloadData()
         self.collectionView?.reloadInputViews()
+    }
+
+    func deleteAlertController(indexPath: IndexPath, ingredient: Ingredient) {
+        let alertControler = UIAlertController(title: "Delete!", message: "Would you like to delete this item (\(IngredientController.shared.ingredients[indexPath.row].name))?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
+            IngredientController.shared.delete(ingredient: ingredient)
+            self?.collectionView?.reloadData()
+            self?.collectionView?.reloadInputViews()
+            CabinetController.shared.cabinetHasBeenUpdated = true
+            CabinetController.shared.saveMyCabinetToUserDefaults()
+        }
+        alertControler.addAction(cancelAction)
+        alertControler.addAction(deleteAction)
+        self.present(alertControler, animated: true)
     }
 }
 
@@ -140,14 +96,13 @@ extension MyCabinetCollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return IngredientController.share.ingredients.count
+        return IngredientController.shared.ingredients.count
     }
 
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCabinetCell", for: indexPath) as? MyCabinetCollectionViewCell else { return UICollectionViewCell() }
-        let ingredient = IngredientController.share.ingredients[indexPath.row]
-        cell.ingredient = ingredient
+        let cell = MyCabinetCollectionViewCell.dequeue(from: collectionView, for: indexPath)
+        cell.configure(with: IngredientController.shared.ingredients[indexPath.row])
         return cell
     }
 
@@ -155,10 +110,10 @@ extension MyCabinetCollectionViewController {
                                  viewForSupplementaryElementOfKind kind: String,
                                  at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "searchHeader", for: indexPath)
-            if let searchController = searchController {
-                view.addSubview(searchController.searchBar)
-            }
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                       withReuseIdentifier: "searchHeader",
+                                                                       for: indexPath)
+            if let searchController = searchController { view.addSubview(searchController.searchBar) }
             return view
         } else {
             return UICollectionReusableView()
@@ -170,7 +125,7 @@ extension MyCabinetCollectionViewController {
 extension MyCabinetCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  didSelectItemAt indexPath: IndexPath) {
-        deleteAlertController(indexPath: indexPath, ingredient: IngredientController.share.ingredients[indexPath.row])
+        deleteAlertController(indexPath: indexPath, ingredient: IngredientController.shared.ingredients[indexPath.row])
     }
 
     override func collectionView(_ collectionView: UICollectionView,
@@ -183,5 +138,20 @@ extension MyCabinetCollectionViewController {
                                  forItemAt indexPath: IndexPath,
                                  withSender sender: Any?) -> Bool {
         return false
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+extension MyCabinetCollectionViewController: UISearchResultsUpdating {
+    var isSearchBarEmpty: Bool {
+        return self.searchController?.searchBar.text?.isEmpty ?? true
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        self.myCabinetCollectionViewModel.filterContentFor(searchController) { (view) in
+            DispatchQueue.main.async {
+                view?.tableView.reloadData()
+            }
+        }
     }
 }

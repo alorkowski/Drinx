@@ -6,15 +6,16 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         self.title = "Search"
+        self.view.backgroundColor = AppFeatures.backgroundColor
+        self.setupNavigationBar()
         self.setupTableView()
         self.setupSearchController()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.async { self.tableView.reloadData() }
+        self.tableView.reloadData()
         guard self.searchTableViewModel.tutorialState?.isActive ?? true else { return }
         self.showTutorial(viewController: self,
                           title: TutorialState.searchDrinksTitle,
@@ -26,17 +27,26 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
 
 // MARK: - Setup functions
 extension SearchTableViewController {
+    private func setupNavigationBar() {
+        self.navigationController?.view.backgroundColor = AppFeatures.backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isOpaque = true
+    }
+
     private func setupSearchController() {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "Search"
-        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
     }
 
     private func setupTableView() {
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.backgroundColor = .clear
         DrinkTableViewCell.register(with: self.tableView)
     }
 }
@@ -54,7 +64,7 @@ extension SearchTableViewController {
         let cell = DrinkTableViewCell.dequeue(from: self.tableView, for: indexPath)
         let cocktail = self.isFiltering ?
             self.searchTableViewModel.filteredCocktails[indexPath.row] : self.searchTableViewModel.cocktails[indexPath.row]
-        cell.update(cocktail: cocktail)
+        cell.configure(with: cocktail)
         return cell
     }
 }
@@ -94,8 +104,8 @@ extension SearchTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        DispatchQueue.main.async { [weak self] in
-            self?.searchTableViewModel.filterContentForSearchText(searchBar.text!) {
+        self.searchTableViewModel.filterContentForSearchText(searchBar.text!) {
+            DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
             }
         }

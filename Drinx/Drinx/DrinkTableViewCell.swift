@@ -4,15 +4,9 @@ class DrinkTableViewCell: UITableViewCell, ProgrammaticView {
     let drinkImageView = UIImageView()
     let drinkLabelView = UILabel()
 
-    var cocktail: Cocktail? {
-        didSet {
-            guard let cocktail = cocktail else { return }
-            update(cocktail: cocktail)
-        }
-    }
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .clear
         self.setupImageView()
         self.setupLabelView()
     }
@@ -46,12 +40,8 @@ extension DrinkTableViewCell {
 
 // MARK: - Utility Functions
 extension DrinkTableViewCell {
-    func update(cocktail: Cocktail) {
-        if let image = cocktail.image {
-            drinkImageView.image = image
-        } else {
-            drinkImageView.image = UIImage(named: cocktail.ingredients[0])
-        }
+    func configure(with cocktail: Cocktail) {
+        drinkImageView.image = cocktail.image ?? UIImage(named: cocktail.ingredients[0])
         drinkLabelView.text = cocktail.name
     }
 }

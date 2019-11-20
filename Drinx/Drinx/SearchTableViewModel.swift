@@ -31,10 +31,12 @@ extension SearchTableViewModel {
 
 // MARK: - SearchController utility functions
 extension SearchTableViewModel {
-    func filterContentForSearchText(_ searchText: String, completion: () -> Void) {
-        self.filteredCocktails = cocktails.filter { (cocktail: Cocktail) -> Bool in
-            return cocktail.name.lowercased().contains(searchText.lowercased())
+    func filterContentForSearchText(_ searchText: String, completion: @escaping () -> Void) {
+        DispatchQueue.global().async { [weak self] in
+            self?.filteredCocktails = self?.cocktails.filter { (cocktail: Cocktail) -> Bool in
+                return cocktail.name.lowercased().contains(searchText.lowercased())
+            } ?? []
+            completion()
         }
-        completion()
     }
 }
