@@ -5,6 +5,7 @@ final class CocktailDetailTableViewController: UITableViewController, TutorialDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = AppData.backgroundColor
         self.setNavigationBar()
         self.setupTableView()
     }
@@ -121,6 +122,7 @@ extension CocktailDetailTableViewController {
         case 0:
             let cell = CocktailDetailImageTableViewCell.dequeue(from: tableView, for: indexPath)
             cell.cocktail = self.cocktailDetailTableViewModel.cocktail
+            cell.backgroundColor = .clear
             return cell
         case 1:
             let cell = CocktailDetailIngredientTableViewCell.dequeue(from: tableView, for: indexPath)
@@ -129,6 +131,7 @@ extension CocktailDetailTableViewController {
                 let amount = self.cocktailDetailTableViewModel.cocktail?.ingredientProportions[indexPath.row] {
                 cell.textLabel?.text = "\(ingredient) - \(amount)"
             }
+            cell.backgroundColor = .clear
             return cell
         case 2:
             let cell = CocktailDetailInstructionTableViewCell.dequeue(from: tableView, for: indexPath)
@@ -136,6 +139,7 @@ extension CocktailDetailTableViewController {
             if let instructions = self.cocktailDetailTableViewModel.cocktail?.instructions { cell.textLabel?.text = instructions }
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.sizeToFit()
+            cell.backgroundColor = .clear
             return cell
         default:
             return UITableViewCell()

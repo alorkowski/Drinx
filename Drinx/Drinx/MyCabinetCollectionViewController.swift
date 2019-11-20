@@ -6,13 +6,15 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.title = "My Cabinet"
+        self.view.backgroundColor = AppData.backgroundColor
         let nc = NotificationCenter.default
         let notification = Notification.Name(rawValue: "updateMyCabinet")
         nc.addObserver(self,
                        selector: #selector(self.didUpdateMyCabinet),
                        name: notification,
                        object: nil)
+        self.setupNavigationBar()
         self.setupCollectionView()
         self.setUpSearchController()
     }
@@ -51,8 +53,15 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
 
 // MARK: - Setup functions
 extension MyCabinetCollectionViewController {
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isOpaque = true
+    }
+
     private func setupCollectionView() {
-        self.collectionView.backgroundColor = .white
+        self.collectionView.backgroundColor = .clear
         MyCabinetCollectionViewCell.register(with: self.collectionView)
     }
 

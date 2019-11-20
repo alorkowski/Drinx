@@ -6,8 +6,9 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         self.title = "Search"
+        self.view.backgroundColor = AppData.backgroundColor
+        self.setupNavigationBar()
         self.setupTableView()
         self.setupSearchController()
     }
@@ -26,6 +27,14 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
 
 // MARK: - Setup functions
 extension SearchTableViewController {
+    private func setupNavigationBar() {
+        self.navigationController?.view.backgroundColor = AppData.backgroundColor
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isOpaque = true
+    }
+
     private func setupSearchController() {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -37,6 +46,7 @@ extension SearchTableViewController {
     private func setupTableView() {
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.backgroundColor = .clear
         DrinkTableViewCell.register(with: self.tableView)
     }
 }

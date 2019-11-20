@@ -6,6 +6,8 @@ final class SavedDrinksTableViewController: UITableViewController, TutorialDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Favorites"
+        self.view.backgroundColor = AppData.backgroundColor
+        self.setupNavigationBar()
         self.setupTableView()
     }
 
@@ -34,7 +36,15 @@ final class SavedDrinksTableViewController: UITableViewController, TutorialDeleg
 
 // MARK: - Setup Functions
 extension SavedDrinksTableViewController {
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isOpaque = true
+    }
+
     private func setupTableView() {
+        self.tableView.backgroundColor = .clear
         DrinkTableViewCell.register(with: self.tableView)
     }
 }

@@ -28,6 +28,7 @@
 		5CBDED7C1EA915CB00680547 /* JSONController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBDED7B1EA915CB00680547 /* JSONController.swift */; };
 		7341A1A72384F028002AD714 /* SavedDrinksTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341A1A62384F028002AD714 /* SavedDrinksTableViewModel.swift */; };
 		7341A1A92384F5E0002AD714 /* MyCabinetCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341A1A82384F5E0002AD714 /* MyCabinetCollectionViewModel.swift */; };
+		7341A1AC238526E3002AD714 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341A1AB238526E3002AD714 /* AppData.swift */; };
 		73FB5019237B5343009561F0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5018237B5342009561F0 /* TabBarController.swift */; };
 		73FB501B237B53E9009561F0 /* SuggestedDrinksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB501A237B53E9009561F0 /* SuggestedDrinksViewModel.swift */; };
 		73FB501D237B83E0009561F0 /* TutorialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB501C237B83E0009561F0 /* TutorialDelegate.swift */; };
@@ -72,6 +73,7 @@
 		5CBDED7B1EA915CB00680547 /* JSONController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONController.swift; sourceTree = "<group>"; };
 		7341A1A62384F028002AD714 /* SavedDrinksTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDrinksTableViewModel.swift; sourceTree = "<group>"; };
 		7341A1A82384F5E0002AD714 /* MyCabinetCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCabinetCollectionViewModel.swift; sourceTree = "<group>"; };
+		7341A1AB238526E3002AD714 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		73FB5018237B5342009561F0 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		73FB501A237B53E9009561F0 /* SuggestedDrinksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedDrinksViewModel.swift; sourceTree = "<group>"; };
 		73FB501C237B83E0009561F0 /* TutorialDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				7341A1AA2384FE1C002AD714 /* Protocols */,
 				5CA46BCC1E9D96EB00245AD9 /* Resources */,
 				5CA46BCB1E9D96DD00245AD9 /* Services */,
+				7341A1AD238527DC002AD714 /* SupportingFiles */,
 			);
 			path = Drinx;
 			sourceTree = "<group>";
@@ -171,9 +174,7 @@
 				5C46EF551EA1709300378487 /* CocktailRecipes.json */,
 				4A3E7A721EA12C530035F8B9 /* CocktailTestRecipes.json */,
 				5CAB298C1E9FD004000E2B34 /* ingredients.json */,
-				5CA46BBA1E9D963200245AD9 /* Info.plist */,
 				5CA46BB51E9D963200245AD9 /* Assets.xcassets */,
-				5CA46BB71E9D963200245AD9 /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -217,6 +218,16 @@
 				73FB501C237B83E0009561F0 /* TutorialDelegate.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		7341A1AD238527DC002AD714 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5CA46BBA1E9D963200245AD9 /* Info.plist */,
+				7341A1AB238526E3002AD714 /* AppData.swift */,
+				5CA46BB71E9D963200245AD9 /* LaunchScreen.storyboard */,
+			);
+			name = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		A8297B651E9E7E8A000D30A5 /* MyCabinet */ = {
@@ -386,6 +397,7 @@
 				7341A1A92384F5E0002AD714 /* MyCabinetCollectionViewModel.swift in Sources */,
 				A8297B781E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift in Sources */,
 				5CA46BAF1E9D963200245AD9 /* AppDelegate.swift in Sources */,
+				7341A1AC238526E3002AD714 /* AppData.swift in Sources */,
 				7341A1A72384F028002AD714 /* SavedDrinksTableViewModel.swift in Sources */,
 				5CA46BC11E9D968D00245AD9 /* Cocktail.swift in Sources */,
 				73FB5019237B5343009561F0 /* TabBarController.swift in Sources */,

@@ -4,15 +4,12 @@ class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
     let tableView = UITableView()
     let suggestedDrinksViewModel = SuggestedDrinksViewModel()
 
-    override func loadView() {
-        super.loadView()
-        self.setupTableView()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         self.title = "Suggested"
+        self.view.backgroundColor = AppData.backgroundColor
+        self.setupNavigationBar()
+        self.setupTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +36,13 @@ class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
 
 // MARK: - Setup Functions
 extension SuggestedDrinksTableViewController {
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isOpaque = true
+    }
+
     private func setupTableView() {
         self.view.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,19 +54,18 @@ extension SuggestedDrinksTableViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.backgroundColor = .clear
         DrinkTableViewCell.register(with: self.tableView)
     }
 }
 
 // MARK: - UITableViewDataSource
 extension SuggestedDrinksTableViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.suggestedDrinksViewModel.numberOfSuggestedCocktails
     }
 
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = DrinkTableViewCell.dequeue(from: tableView, for: indexPath)
         let cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
         cell.configure(with: cocktail)
