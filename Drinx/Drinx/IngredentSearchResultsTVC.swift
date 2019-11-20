@@ -12,7 +12,7 @@ final class IngredientSearchResultsTVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = AppData.backgroundColor
+        self.view.backgroundColor = AppFeatures.backgroundColor
         self.setupTableView()
     }
 

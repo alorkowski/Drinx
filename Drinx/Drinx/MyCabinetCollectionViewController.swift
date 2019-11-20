@@ -7,7 +7,7 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Cabinet"
-        self.view.backgroundColor = AppData.backgroundColor
+        self.view.backgroundColor = AppFeatures.backgroundColor
         let nc = NotificationCenter.default
         let notification = Notification.Name(rawValue: "updateMyCabinet")
         nc.addObserver(self,
@@ -17,14 +17,6 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
         self.setupNavigationBar()
         self.setupCollectionView()
         self.setUpSearchController()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 40, right: 0)
-        self.collectionView?.frame = self.view.superview!.bounds
-        self.collectionView?.frame.inset(by: insets)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +46,7 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
 // MARK: - Setup functions
 extension MyCabinetCollectionViewController {
     private func setupNavigationBar() {
+        self.navigationController?.view.backgroundColor = AppFeatures.backgroundColor
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.barTintColor = .white
         self.navigationController?.navigationBar.isTranslucent = false

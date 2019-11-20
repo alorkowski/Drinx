@@ -7,7 +7,7 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Search"
-        self.view.backgroundColor = AppData.backgroundColor
+        self.view.backgroundColor = AppFeatures.backgroundColor
         self.setupNavigationBar()
         self.setupTableView()
         self.setupSearchController()
@@ -15,7 +15,7 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.async { self.tableView.reloadData() }
+        self.tableView.reloadData()
         guard self.searchTableViewModel.tutorialState?.isActive ?? true else { return }
         self.showTutorial(viewController: self,
                           title: TutorialState.searchDrinksTitle,
@@ -28,7 +28,7 @@ final class SearchTableViewController: UITableViewController, TutorialDelegate {
 // MARK: - Setup functions
 extension SearchTableViewController {
     private func setupNavigationBar() {
-        self.navigationController?.view.backgroundColor = AppData.backgroundColor
+        self.navigationController?.view.backgroundColor = AppFeatures.backgroundColor
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.barTintColor = .white
         self.navigationController?.navigationBar.isTranslucent = false

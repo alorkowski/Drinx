@@ -6,16 +6,9 @@ final class SavedDrinksTableViewController: UITableViewController, TutorialDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Saved"
-        self.view.backgroundColor = AppData.backgroundColor
+        self.view.backgroundColor = AppFeatures.backgroundColor
         self.setupNavigationBar()
         self.setupTableView()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
-        self.view.frame = self.view.superview!.bounds
-        self.view.frame.inset(by: UIEdgeInsets(top: 20, left: 0, bottom: 44, right: 0))
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +30,7 @@ final class SavedDrinksTableViewController: UITableViewController, TutorialDeleg
 // MARK: - Setup Functions
 extension SavedDrinksTableViewController {
     private func setupNavigationBar() {
+        self.navigationController?.view.backgroundColor = AppFeatures.backgroundColor
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.barTintColor = .white
         self.navigationController?.navigationBar.isTranslucent = false

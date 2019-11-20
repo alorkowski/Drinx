@@ -5,7 +5,7 @@ final class CocktailDetailTableViewController: UITableViewController, TutorialDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = AppData.backgroundColor
+        self.view.backgroundColor = AppFeatures.backgroundColor
         self.setNavigationBar()
         self.setupTableView()
     }

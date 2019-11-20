@@ -7,7 +7,7 @@ class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Suggested"
-        self.view.backgroundColor = AppData.backgroundColor
+        self.view.backgroundColor = AppFeatures.backgroundColor
         self.setupNavigationBar()
         self.setupTableView()
     }
@@ -37,6 +37,7 @@ class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
 // MARK: - Setup Functions
 extension SuggestedDrinksTableViewController {
     private func setupNavigationBar() {
+        self.navigationController?.view.backgroundColor = AppFeatures.backgroundColor
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.barTintColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
