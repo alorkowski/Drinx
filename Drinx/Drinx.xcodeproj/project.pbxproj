@@ -42,7 +42,7 @@
 		A8297B781E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */; };
 		A8297B7A1E9E850E000D30A5 /* CocktailDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */; };
 		A85216E21EA7F51B0064404D /* DrinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85216E11EA7F51B0064404D /* DrinkTableViewCell.swift */; };
-		C336DEB11EA7BC6A00E3B3B4 /* IngredentSearchResultsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C336DEB01EA7BC6A00E3B3B4 /* IngredentSearchResultsTVC.swift */; };
+		C336DEB11EA7BC6A00E3B3B4 /* IngredientSearchResultsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C336DEB01EA7BC6A00E3B3B4 /* IngredientSearchResultsTVC.swift */; };
 		C336DEB31EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */; };
 		C39A9FB01E9EA05200EA5F30 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */; };
 		C39A9FB21E9EA06700EA5F30 /* Cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */; };
@@ -87,7 +87,7 @@
 		A8297B771E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailInstructionTableViewCell.swift; sourceTree = "<group>"; };
 		A8297B791E9E850E000D30A5 /* CocktailDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailDetailTableViewController.swift; sourceTree = "<group>"; };
 		A85216E11EA7F51B0064404D /* DrinkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTableViewCell.swift; sourceTree = "<group>"; };
-		C336DEB01EA7BC6A00E3B3B4 /* IngredentSearchResultsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredentSearchResultsTVC.swift; sourceTree = "<group>"; };
+		C336DEB01EA7BC6A00E3B3B4 /* IngredientSearchResultsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientSearchResultsTVC.swift; sourceTree = "<group>"; };
 		C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsSearchResultsTableViewCell.swift; sourceTree = "<group>"; };
 		C39A9FAF1E9EA05200EA5F30 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		C39A9FB11E9EA06700EA5F30 /* Cabinet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cabinet.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 		A8297B651E9E7E8A000D30A5 /* MyCabinet */ = {
 			isa = PBXGroup;
 			children = (
-				C336DEB01EA7BC6A00E3B3B4 /* IngredentSearchResultsTVC.swift */,
+				C336DEB01EA7BC6A00E3B3B4 /* IngredientSearchResultsTVC.swift */,
 				C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */,
 				A8297B711E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift */,
 				A8297B6F1E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift */,
@@ -403,7 +403,7 @@
 				73FB5019237B5343009561F0 /* TabBarController.swift in Sources */,
 				73FB5023237BC151009561F0 /* SearchTableViewModel.swift in Sources */,
 				A8297B761E9E84B1000D30A5 /* CocktailDetailIngredientTableViewCell.swift in Sources */,
-				C336DEB11EA7BC6A00E3B3B4 /* IngredentSearchResultsTVC.swift in Sources */,
+				C336DEB11EA7BC6A00E3B3B4 /* IngredientSearchResultsTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

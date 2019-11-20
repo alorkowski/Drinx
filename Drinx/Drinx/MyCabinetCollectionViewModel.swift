@@ -36,22 +36,20 @@ extension MyCabinetCollectionViewModel {
         guard let resultsViewController = searchController.searchResultsController as? IngredientSearchResultsTVC,
             let searchTerm = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
             else { return }
-        DispatchQueue.global().async {
-            let ingredients = self.ingredientController.ingredientDictionary.keys
-            var matchingIngredients: [Ingredient] = []
-            for ingredient in ingredients {
-                guard ingredient.lowercased().contains(searchTerm) else { continue }
-                guard let ingredientArray = self.ingredientController.ingredientDictionary[ingredient] else { return }
-                for ingredientName in ingredientArray {
-                    let ingredientObject = Ingredient(name: ingredientName)
-                    if !self.ingredientController.ingredients.contains(ingredientObject) {
-                        matchingIngredients.append(ingredientObject)
-                    }
+        let ingredients = self.ingredientController.ingredientDictionary.keys
+        var matchingIngredients: [Ingredient] = []
+        for ingredient in ingredients {
+            guard ingredient.lowercased().contains(searchTerm) else { continue }
+            guard let ingredientArray = self.ingredientController.ingredientDictionary[ingredient] else { return }
+            for ingredientName in ingredientArray {
+                let ingredientObject = Ingredient(name: ingredientName)
+                if !self.ingredientController.ingredients.contains(ingredientObject) {
+                    matchingIngredients.append(ingredientObject)
                 }
             }
-            resultsViewController.resultsArray = matchingIngredients
-            self.cabinetController.myCabinet.myIngredients = self.ingredientController.ingredients
-            self.cabinetController.saveMyCabinetToUserDefaults()
         }
+        resultsViewController.resultsArray = matchingIngredients
+        self.cabinetController.myCabinet.myIngredients = self.ingredientController.ingredients
+        self.cabinetController.saveMyCabinetToUserDefaults()
     }
 }
