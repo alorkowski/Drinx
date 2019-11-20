@@ -45,3 +45,8 @@ extension SuggestedDrinksViewModel {
         completion()
     }
 }
+
+// MARK: - Navigation Functions
+extension SuggestedDrinksViewModel {
+
+}

@@ -59,6 +59,11 @@ extension SavedDrinksTableViewController {
 // MARK: UITableViewDelegate
 extension SavedDrinksTableViewController {
     override func tableView(_ tableView: UITableView,
+                            heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
+    override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
