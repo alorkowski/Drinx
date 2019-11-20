@@ -32,7 +32,7 @@ extension IngredientSearchResultsTVC {
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientSearchResultCell",
+        let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientSearchResultCell",
                                                  for: indexPath) as! IngredientsSearchResultsTableViewCell
         let ingredientString = resultsArray[indexPath.row]
         cell.ingredient = ingredientString

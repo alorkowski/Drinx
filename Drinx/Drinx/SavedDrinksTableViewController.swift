@@ -1,17 +1,12 @@
 import UIKit
 
-final class SavedDrinksTableViewController: UITableViewController {
-    var showTutorial = true
+final class SavedDrinksTableViewController: UITableViewController, TutorialDelegate {
+    let savedDrinksTableViewModel = SavedDrinksTableViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .none
-        CocktailController.shared.fetchMyFavoriteCocktailsFromUserDefaults()
-        if CocktailController.shared.savedCocktails.isEmpty {
-            CocktailController.shared.savedCocktails = CocktailController.shared.sampleSavedCocktails
-        }
-        self.showTutorial = ( UserDefaults.standard.object(forKey: "showTutorialSaved") as? Bool ) ?? true
-        UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
+        self.title = "Favorites"
+        self.setupTableView()
     }
 
     override func viewDidLayoutSubviews() {
@@ -28,15 +23,20 @@ final class SavedDrinksTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if self.showTutorial {
-//            TutorialController.shared.drinksTutorial(viewController: self,
-//                                                     title: TutorialController.shared.favoriteDrinksTitle,
-//                                                     message: TutorialController.shared.favoriteDrinksMessage,
-//                                                     alertActionTitle: "OK!") {
-//                self.showTutorial = false
-//                UserDefaults.standard.set(self.showTutorial, forKey: "showTutorialSaved")
-//            }
-        }
+        guard self.savedDrinksTableViewModel.tutorialState?.isActive ?? true else { return }
+        self.showTutorial(viewController: self,
+                          title: TutorialState.favoriteDrinksTitle,
+                          message: TutorialState.favoriteDrinksMessage,
+                          alertActionTitle: "OK!",
+                          completion: self.savedDrinksTableViewModel.toggleTutorialStateClosure)
+    }
+}
+
+// MARK: - Setup Functions
+extension SavedDrinksTableViewController {
+    private func setupTableView() {
+        self.tableView.separatorStyle = .none
+        DrinkTableViewCell.register(with: self.tableView)
     }
 }
 
@@ -49,9 +49,9 @@ extension SavedDrinksTableViewController {
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "savedDrinkCell",
-                                                 for: indexPath) as! SavedDrinksTableViewCell
-        cell.cocktail = CocktailController.shared.savedCocktails[indexPath.row]
+        let cell = DrinkTableViewCell.dequeue(from: self.tableView, for: indexPath)
+        let cocktail = CocktailController.shared.savedCocktails[indexPath.row]
+        cell.update(cocktail: cocktail)
         return cell
     }
 }
@@ -67,17 +67,18 @@ extension SavedDrinksTableViewController {
         self.tableView.reloadData()
         CocktailController.shared.saveMyFavoriteCocktailsToUserDefaults()
     }
-}
 
-// MARK: - Navigation
-extension SavedDrinksTableViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let indexPath = tableView.indexPathForSelectedRow,
-//            let dvc = segue.destination as? CocktailDetailTableViewController
-//            else { return }
-//        if let transitionStyle = UIModalTransitionStyle(rawValue: 2) {
-//            dvc.modalTransitionStyle = transitionStyle
-//        }
-//        dvc.cocktail = CocktailController.shared.savedCocktails[indexPath.row]
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+
+        let cocktailDetailTableViewModel = CocktailDetailTableViewModel()
+        cocktailDetailTableViewModel.cocktail = CocktailController.shared.savedCocktails[indexPath.row]
+
+        let cocktailDetailTableViewController = CocktailDetailTableViewController()
+        cocktailDetailTableViewController.cocktailDetailTableViewModel = cocktailDetailTableViewModel
+        cocktailDetailTableViewController.title = CocktailController.shared.savedCocktails[indexPath.row].name
+
+        self.navigationController?.pushViewController(cocktailDetailTableViewController, animated: true)
     }
 }
