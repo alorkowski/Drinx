@@ -35,6 +35,7 @@ extension SearchTableViewModel {
         DispatchQueue.global().async { [weak self] in
             self?.filteredCocktails = self?.cocktails.filter { (cocktail: Cocktail) -> Bool in
                 return cocktail.name.lowercased().contains(searchText.lowercased())
+                    || cocktail.ingredients.joined(separator: " ").lowercased().contains(searchText.lowercased())
             } ?? []
             completion()
         }
