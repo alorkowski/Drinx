@@ -54,7 +54,7 @@ extension SearchTableViewController {
         let cell = DrinkTableViewCell.dequeue(from: self.tableView, for: indexPath)
         let cocktail = self.isFiltering ?
             self.searchTableViewModel.filteredCocktails[indexPath.row] : self.searchTableViewModel.cocktails[indexPath.row]
-        cell.update(cocktail: cocktail)
+        cell.configure(with: cocktail)
         return cell
     }
 }

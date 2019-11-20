@@ -12,6 +12,8 @@ final class IngredientSearchResultsTVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        self.setupTableView()
     }
 
     override func viewDidLayoutSubviews() {
@@ -20,6 +22,13 @@ final class IngredientSearchResultsTVC: UITableViewController {
         self.view.superview!.backgroundColor = UIColor(red: 0/255, green: 165/255, blue: 156/255, alpha: 1.0)
         self.view.frame = self.view.superview!.bounds
         self.view.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 44, right: 0))
+    }
+}
+
+// MARK: - Setup Functions
+extension IngredientSearchResultsTVC {
+    private func setupTableView() {
+        IngredientsSearchResultsTableViewCell.register(with: self.tableView)
     }
 }
 
@@ -32,11 +41,8 @@ extension IngredientSearchResultsTVC {
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientSearchResultCell",
-                                                 for: indexPath) as! IngredientsSearchResultsTableViewCell
-        let ingredientString = resultsArray[indexPath.row]
-        cell.ingredient = ingredientString
-        cell.imageLabel?.isHidden = false
+        let cell = IngredientsSearchResultsTableViewCell.dequeue(from: tableView, for: indexPath)
+        cell.configure(with: resultsArray[indexPath.row])
         return cell
     }
 }
@@ -46,7 +52,7 @@ extension IngredientSearchResultsTVC {
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
         let ingredientString = resultsArray[indexPath.row].name
-        IngredientController.share.add(item: ingredientString)
+        IngredientController.shared.add(item: ingredientString)
         CabinetController.shared.saveMyCabinetToUserDefaults()
         CabinetController.shared.cabinetHasBeenUpdated = true
         let nc = NotificationCenter.default

@@ -19,3 +19,13 @@ public extension ProgrammaticView where Self: UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: Self.identifier, for: indexPath) as! Self
     }
 }
+
+public extension ProgrammaticView where Self: UICollectionViewCell {
+    static func register(with collectionView: UICollectionView) {
+        collectionView.register(Self.self, forCellWithReuseIdentifier: Self.identifier)
+    }
+
+    static func dequeue(from collectionView: UICollectionView, for indexPath: IndexPath) -> Self {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: Self.identifier, for: indexPath) as! Self
+    }
+}

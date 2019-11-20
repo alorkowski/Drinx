@@ -12,8 +12,12 @@ class TabBarController: UITabBarController {
         let searchTableViewController = SearchTableViewController()
         searchTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
 
+        let myCabinetTableViewController = MyCabinetCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        myCabinetTableViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 3)
+
         self.viewControllers = [ UINavigationController(rootViewController: suggestedDrinksTableViewController),
                                  UINavigationController(rootViewController: savedDrinksTableViewController),
-                                 UINavigationController(rootViewController: searchTableViewController) ]
+                                 UINavigationController(rootViewController: searchTableViewController),
+                                 UINavigationController(rootViewController: myCabinetTableViewController) ]
     }
 }

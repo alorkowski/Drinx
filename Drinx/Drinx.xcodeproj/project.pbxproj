@@ -27,10 +27,10 @@
 		5CAB298D1E9FD004000E2B34 /* ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 5CAB298C1E9FD004000E2B34 /* ingredients.json */; };
 		5CBDED7C1EA915CB00680547 /* JSONController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBDED7B1EA915CB00680547 /* JSONController.swift */; };
 		7341A1A72384F028002AD714 /* SavedDrinksTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341A1A62384F028002AD714 /* SavedDrinksTableViewModel.swift */; };
+		7341A1A92384F5E0002AD714 /* MyCabinetCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341A1A82384F5E0002AD714 /* MyCabinetCollectionViewModel.swift */; };
 		73FB5019237B5343009561F0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5018237B5342009561F0 /* TabBarController.swift */; };
 		73FB501B237B53E9009561F0 /* SuggestedDrinksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB501A237B53E9009561F0 /* SuggestedDrinksViewModel.swift */; };
 		73FB501D237B83E0009561F0 /* TutorialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB501C237B83E0009561F0 /* TutorialDelegate.swift */; };
-		73FB501F237B8C1B009561F0 /* NibRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB501E237B8C1B009561F0 /* NibRepresentedView.swift */; };
 		73FB5021237BB388009561F0 /* ProgrammaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5020237BB388009561F0 /* ProgrammaticView.swift */; };
 		73FB5023237BC151009561F0 /* SearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5022237BC151009561F0 /* SearchTableViewModel.swift */; };
 		73FB5025237C7450009561F0 /* CocktailDetailTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB5024237C7450009561F0 /* CocktailDetailTableViewModel.swift */; };
@@ -71,10 +71,10 @@
 		5CAB298C1E9FD004000E2B34 /* ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ingredients.json; sourceTree = "<group>"; };
 		5CBDED7B1EA915CB00680547 /* JSONController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONController.swift; sourceTree = "<group>"; };
 		7341A1A62384F028002AD714 /* SavedDrinksTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDrinksTableViewModel.swift; sourceTree = "<group>"; };
+		7341A1A82384F5E0002AD714 /* MyCabinetCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCabinetCollectionViewModel.swift; sourceTree = "<group>"; };
 		73FB5018237B5342009561F0 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		73FB501A237B53E9009561F0 /* SuggestedDrinksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedDrinksViewModel.swift; sourceTree = "<group>"; };
 		73FB501C237B83E0009561F0 /* TutorialDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialDelegate.swift; sourceTree = "<group>"; };
-		73FB501E237B8C1B009561F0 /* NibRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibRepresentedView.swift; sourceTree = "<group>"; };
 		73FB5020237BB388009561F0 /* ProgrammaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammaticView.swift; sourceTree = "<group>"; };
 		73FB5022237BC151009561F0 /* SearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewModel.swift; sourceTree = "<group>"; };
 		73FB5024237C7450009561F0 /* CocktailDetailTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailTableViewModel.swift; sourceTree = "<group>"; };
@@ -133,12 +133,11 @@
 			children = (
 				5C46EF511EA126DE00378487 /* Drinx.entitlements */,
 				5CA46BAE1E9D963200245AD9 /* AppDelegate.swift */,
-				73FB501E237B8C1B009561F0 /* NibRepresentedView.swift */,
-				73FB5020237BB388009561F0 /* ProgrammaticView.swift */,
 				5CA46BD01E9D973900245AD9 /* Features */,
 				5CA46BCD1E9D970400245AD9 /* ModelControllers */,
 				5CA46BCA1E9D96D300245AD9 /* Models */,
 				5CA46BCE1E9D971E00245AD9 /* Navigation */,
+				7341A1AA2384FE1C002AD714 /* Protocols */,
 				5CA46BCC1E9D96EB00245AD9 /* Resources */,
 				5CA46BCB1E9D96DD00245AD9 /* Services */,
 			);
@@ -161,7 +160,6 @@
 				5CA46BC61E9D96B900245AD9 /* ImageController.swift */,
 				5CBDED7B1EA915CB00680547 /* JSONController.swift */,
 				5CA46BC41E9D96AD00245AD9 /* NetworkController.swift */,
-				73FB501C237B83E0009561F0 /* TutorialDelegate.swift */,
 				5C3FCF9E1EAD935100C0A5F6 /* TutorialState.swift */,
 			);
 			name = Services;
@@ -212,13 +210,23 @@
 			name = Features;
 			sourceTree = "<group>";
 		};
+		7341A1AA2384FE1C002AD714 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				73FB5020237BB388009561F0 /* ProgrammaticView.swift */,
+				73FB501C237B83E0009561F0 /* TutorialDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		A8297B651E9E7E8A000D30A5 /* MyCabinet */ = {
 			isa = PBXGroup;
 			children = (
-				A8297B6F1E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift */,
-				A8297B711E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift */,
-				C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */,
 				C336DEB01EA7BC6A00E3B3B4 /* IngredentSearchResultsTVC.swift */,
+				C336DEB21EA7CBFA00E3B3B4 /* IngredientsSearchResultsTableViewCell.swift */,
+				A8297B711E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift */,
+				A8297B6F1E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift */,
+				7341A1A82384F5E0002AD714 /* MyCabinetCollectionViewModel.swift */,
 			);
 			name = MyCabinet;
 			sourceTree = "<group>";
@@ -360,7 +368,6 @@
 				C39A9FB01E9EA05200EA5F30 /* Ingredient.swift in Sources */,
 				5CA46BC51E9D96AD00245AD9 /* NetworkController.swift in Sources */,
 				A8297B701E9E82C4000D30A5 /* MyCabinetCollectionViewController.swift in Sources */,
-				73FB501F237B8C1B009561F0 /* NibRepresentedView.swift in Sources */,
 				A8297B721E9E8337000D30A5 /* MyCabinetCollectionViewCell.swift in Sources */,
 				5CBDED7C1EA915CB00680547 /* JSONController.swift in Sources */,
 				5CA46BDA1E9D97B700245AD9 /* SuggestedDrinksTableViewController.swift in Sources */,
@@ -376,6 +383,7 @@
 				5CA46BE01E9D97E100245AD9 /* SavedDrinksTableViewController.swift in Sources */,
 				73FB501B237B53E9009561F0 /* SuggestedDrinksViewModel.swift in Sources */,
 				5CA46BDC1E9D97C300245AD9 /* SearchTableViewController.swift in Sources */,
+				7341A1A92384F5E0002AD714 /* MyCabinetCollectionViewModel.swift in Sources */,
 				A8297B781E9E84DF000D30A5 /* CocktailDetailInstructionTableViewCell.swift in Sources */,
 				5CA46BAF1E9D963200245AD9 /* AppDelegate.swift in Sources */,
 				7341A1A72384F028002AD714 /* SavedDrinksTableViewModel.swift in Sources */,

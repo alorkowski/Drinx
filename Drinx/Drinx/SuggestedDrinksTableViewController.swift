@@ -65,7 +65,7 @@ extension SuggestedDrinksTableViewController: UITableViewDataSource {
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = DrinkTableViewCell.dequeue(from: tableView, for: indexPath)
         let cocktail = self.suggestedDrinksViewModel.suggestedCocktails[indexPath.row]
-        cell.update(cocktail: cocktail)
+        cell.configure(with: cocktail)
         return cell
     }
 }

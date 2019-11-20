@@ -51,7 +51,7 @@ extension SavedDrinksTableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = DrinkTableViewCell.dequeue(from: self.tableView, for: indexPath)
         let cocktail = CocktailController.shared.savedCocktails[indexPath.row]
-        cell.update(cocktail: cocktail)
+        cell.configure(with: cocktail)
         return cell
     }
 }
