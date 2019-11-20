@@ -1,13 +1,7 @@
 import UIKit
 
 final class CocktailDetailImageTableViewCell: UITableViewCell, ProgrammaticView {
-    var drinkImageView = UIImageView()
-
-    var cocktail: Cocktail? {
-        didSet {
-            updateCell()
-        }
-    }
+    let drinkImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,14 +28,16 @@ extension CocktailDetailImageTableViewCell {
 
 // MARK: - Utility functions
 extension CocktailDetailImageTableViewCell {
-    private func updateCell() {
+    func configure(with cocktail: Cocktail?) {
         guard let cocktail = cocktail else { return }
         if let image = cocktail.image {
             self.drinkImageView.image = image
         } else {
-            if let image = UIImage(named: cocktail.ingredients[0]) {
+            if cocktail.ingredients.count > 0,
+                let image = UIImage(named: cocktail.ingredients[0]) {
                 self.drinkImageView.image = image
-            } else if let image = UIImage(named: cocktail.ingredients[1]) {
+            } else if cocktail.ingredients.count > 1,
+                let image = UIImage(named: cocktail.ingredients[1]) {
                 self.drinkImageView.image = image
             }
         }

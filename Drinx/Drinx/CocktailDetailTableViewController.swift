@@ -121,12 +121,11 @@ extension CocktailDetailTableViewController {
         switch indexPath.section {
         case 0:
             let cell = CocktailDetailImageTableViewCell.dequeue(from: tableView, for: indexPath)
-            cell.cocktail = self.cocktailDetailTableViewModel.cocktail
+            cell.configure(with: self.cocktailDetailTableViewModel.cocktail)
             cell.backgroundColor = .clear
             return cell
         case 1:
             let cell = CocktailDetailIngredientTableViewCell.dequeue(from: tableView, for: indexPath)
-            cell.cocktail = self.cocktailDetailTableViewModel.cocktail
             if let ingredient = self.cocktailDetailTableViewModel.cocktail?.ingredients[indexPath.row],
                 let amount = self.cocktailDetailTableViewModel.cocktail?.ingredientProportions[indexPath.row] {
                 cell.textLabel?.text = "\(ingredient) - \(amount)"
@@ -135,7 +134,6 @@ extension CocktailDetailTableViewController {
             return cell
         case 2:
             let cell = CocktailDetailInstructionTableViewCell.dequeue(from: tableView, for: indexPath)
-            cell.cocktail = self.cocktailDetailTableViewModel.cocktail
             if let instructions = self.cocktailDetailTableViewModel.cocktail?.instructions { cell.textLabel?.text = instructions }
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.sizeToFit()
