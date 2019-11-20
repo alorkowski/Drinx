@@ -43,6 +43,6 @@ extension IngredientsSearchResultsTableViewCell {
         defer { self.reloadInputViews() }
         guard let ingredient = ingredient else { return }
         self.ingredientLabelView.text = ingredient.name.trimmingCharacters(in: .whitespacesAndNewlines)
-        DispatchQueue.main.async { self.ingredientImageView.image = ingredient.photoImage }
+        self.ingredientImageView.image = ingredient.photoImage
     }
 }
