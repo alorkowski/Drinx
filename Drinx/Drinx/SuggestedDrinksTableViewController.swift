@@ -21,7 +21,7 @@ class SuggestedDrinksTableViewController: UIViewController, TutorialDelegate {
         guard CabinetController.shared.cabinetHasBeenUpdated else { return }
         self.suggestedDrinksViewModel.findMatches { [weak self] in
             CabinetController.shared.cabinetHasBeenUpdated = false
-            self?.tableView.reloadData()
+            DispatchQueue.main.async { self?.tableView.reloadData() }
         }
     }
 

@@ -30,7 +30,7 @@ extension SearchTableViewController {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "Search"
-        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
     }
 
@@ -94,8 +94,8 @@ extension SearchTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        DispatchQueue.main.async { [weak self] in
-            self?.searchTableViewModel.filterContentForSearchText(searchBar.text!) {
+        self.searchTableViewModel.filterContentForSearchText(searchBar.text!) {
+            DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
             }
         }

@@ -1,7 +1,5 @@
 import UIKit
 
-typealias ResultsViewControllerHandler = (_ resultsViewController: UITableViewController ) -> Void
-
 final class MyCabinetCollectionViewController: UICollectionViewController, TutorialDelegate {
     let myCabinetCollectionViewModel = MyCabinetCollectionViewModel()
     var searchController: UISearchController?
@@ -12,7 +10,7 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
         let nc = NotificationCenter.default
         let notification = Notification.Name(rawValue: "updateMyCabinet")
         nc.addObserver(self,
-                       selector: #selector(MyCabinetCollectionViewController.didUpdateMyCabinet),
+                       selector: #selector(self.didUpdateMyCabinet),
                        name: notification,
                        object: nil)
         self.setupCollectionView()
@@ -54,6 +52,7 @@ final class MyCabinetCollectionViewController: UICollectionViewController, Tutor
 // MARK: - Setup functions
 extension MyCabinetCollectionViewController {
     private func setupCollectionView() {
+        self.collectionView.backgroundColor = .white
         MyCabinetCollectionViewCell.register(with: self.collectionView)
     }
 
@@ -140,30 +139,17 @@ extension MyCabinetCollectionViewController {
     }
 }
 
-// MARK: - SearchControllerDelegate
+// MARK: - UISearchResultsUpdating
 extension MyCabinetCollectionViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        self.searchIngredients(searchController: searchController){ $0.tableView.reloadData() }
+    var isSearchBarEmpty: Bool {
+        return self.searchController?.searchBar.text?.isEmpty ?? true
     }
 
-    func searchIngredients(searchController: UISearchController, completion: ResultsViewControllerHandler) {
-        guard let resultsViewController = searchController.searchResultsController as? IngredientSearchResultsTVC,
-            let searchTerm = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-            else { return }
-        let ingredients = IngredientController.shared.ingredientDictionary.keys
-        var matchingIngredients: [Ingredient] = []
-        for ingredient in ingredients {
-            guard ingredient.lowercased().contains(searchTerm) else { continue }
-            guard let ingredientArray = IngredientController.shared.ingredientDictionary[ingredient] else { return }
-            for ingredientName in ingredientArray {
-                let ingredientObject = Ingredient(name: ingredientName)
-                if !IngredientController.shared.ingredients.contains(ingredientObject) {
-                    matchingIngredients.append(ingredientObject)
-                }
+    func updateSearchResults(for searchController: UISearchController) {
+        self.myCabinetCollectionViewModel.filterContentFor(searchController) { (view) in
+            DispatchQueue.main.async {
+                view?.tableView.reloadData()
             }
         }
-        resultsViewController.resultsArray = matchingIngredients
-        CabinetController.shared.myCabinet.myIngredients = IngredientController.shared.ingredients
-        CabinetController.shared.saveMyCabinetToUserDefaults()
     }
 }

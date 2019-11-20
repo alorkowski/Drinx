@@ -52,24 +52,6 @@ class CocktailController {
             completion()
         }
     }
-
-    func searchCocktails(for searchTerm: String,
-                         perRecordCompletion: @escaping (Cocktail) -> Void,
-                         completion: (() -> Void)) {
-        for cocktail in self.cocktails {
-            let lowercasedCocktailIngredients = cocktail.ingredients.joined(separator: " ")
-            if cocktail.name.lowercased().contains(searchTerm.lowercased()) {
-                DispatchQueue.main.async {
-                    perRecordCompletion(cocktail)
-                }
-            } else if lowercasedCocktailIngredients.contains(searchTerm.lowercased()) {
-                DispatchQueue.main.async {
-                    perRecordCompletion(cocktail)
-                }
-            }
-        }
-        completion()
-    }
 }
 
 extension CocktailController {

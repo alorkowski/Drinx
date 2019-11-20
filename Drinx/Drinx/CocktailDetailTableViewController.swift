@@ -44,8 +44,7 @@ extension CocktailDetailTableViewController {
     @objc func saveCocktailToFavorites() {
         self.cocktailDetailTableViewModel.saveCocktailToFavorites()
         self.resignFirstResponder()
-        self.dismiss(animated: true) { self.tabBarController?.selectedIndex = 1 }
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc func done() {

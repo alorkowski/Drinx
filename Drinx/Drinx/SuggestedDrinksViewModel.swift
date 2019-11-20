@@ -35,18 +35,15 @@ extension SuggestedDrinksViewModel {
 // MARK: - Setup utility functions
 extension SuggestedDrinksViewModel {
     func findMatches(completion: @escaping () -> Void) {
-        var suggestedCocktails = [Cocktail]()
-        for cocktail in self.cocktails {
-            if Set(cocktail.ingredients).isSubset(of: IngredientController.shared.myCabinetIngredientStrings) {
-                suggestedCocktails.append(cocktail)
+        DispatchQueue.global().async {
+            var suggestedCocktails = [Cocktail]()
+            for cocktail in self.cocktails {
+                if Set(cocktail.ingredients).isSubset(of: IngredientController.shared.myCabinetIngredientStrings) {
+                    suggestedCocktails.append(cocktail)
+                }
             }
+            self.suggestedCocktails = suggestedCocktails
+            completion()
         }
-        self.suggestedCocktails = suggestedCocktails
-        completion()
     }
-}
-
-// MARK: - Navigation Functions
-extension SuggestedDrinksViewModel {
-
 }

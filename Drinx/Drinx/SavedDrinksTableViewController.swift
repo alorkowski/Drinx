@@ -35,7 +35,6 @@ final class SavedDrinksTableViewController: UITableViewController, TutorialDeleg
 // MARK: - Setup Functions
 extension SavedDrinksTableViewController {
     private func setupTableView() {
-        self.tableView.separatorStyle = .none
         DrinkTableViewCell.register(with: self.tableView)
     }
 }
